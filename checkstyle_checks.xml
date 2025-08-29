@@ -7,7 +7,7 @@
   <module name="LineLength">
     <property name="max" value="100"/>
   </module>
-</module>
+
   <module name="SuppressWarningsFilter"/>
 
   <property name="charset" value="UTF-8"/>
