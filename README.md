@@ -12,4 +12,8 @@ Enter value for b:
 Number of consecutive primes starting from n = 0 :  40    
 
 
-![<Diagram for APIs>](https://github.com/kevmill29/project-starter-code-kevmill29/blob/main//KevinEmileDiagram.png>?raw=true)
+![<Diagram for APIs>](https://github.com/kevmill29/project-starter-code-kevmill29/blob/main//KevinEmileDiagram.png?raw=true)
+
+![<Alt text for image>](https://github.com/<repo
+owner username>/<repo name>/blob/main/<path to image
+file>/<name of image file>?raw=true)
