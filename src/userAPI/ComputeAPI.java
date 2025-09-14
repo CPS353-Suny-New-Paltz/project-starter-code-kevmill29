@@ -1,5 +1,12 @@
 package userAPI;
 
-public class ComputeAPI {
+import project.annotations.NetworkAPI;
+
+@NetworkAPI
+public interface ComputeAPI {
+
+	
+
+	ComputeResponse run(ComputeRequest request);
 
 }

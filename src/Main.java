@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import userAPI.ComputeAPIPrototype;
+
 public class Main {
 	public static void main(String[]args) {
 		
@@ -28,6 +30,9 @@ public class Main {
 
 		while(primeCount((n *n)+valueA*n + valueB)){
 			n++;}
+		
+//		ComputeAPIPrototype proto=new ComputeAPIPrototype();
+//		proto.prototype(compute, valueA, valueB);
 	
 System.out.println("Number of consective primes starting from n = 0 :     "+ n);
 input.close();
@@ -44,5 +49,7 @@ input.close();
 		}
 		return true; 
 	}
+	
+	
 
 }
