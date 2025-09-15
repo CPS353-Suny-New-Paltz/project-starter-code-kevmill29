@@ -1,7 +1,14 @@
 package processapi;
 
+import project.annotations.ProcessAPIPrototype;
+
 public class ProcessapiPrototype {
+	@ProcessAPIPrototype
 			public void process(Processapi process) {
-				ProcessResponse response  = process.run(new RunDataStream());
+				DefaultProcessResponse response  = process.run(new RunDataStream());
+				
+			if(response.success()) {
+				return;
+			}
 		}
 }
