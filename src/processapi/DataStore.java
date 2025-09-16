@@ -1,5 +1,5 @@
 package processapi;
 
 public interface DataStore {
-	DataStore InsertRequest(DataRequest dataRequest);
+	DataStore insertrequest(DataRequest dataRequest);
 }
