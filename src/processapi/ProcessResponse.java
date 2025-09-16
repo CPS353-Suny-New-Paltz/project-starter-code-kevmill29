@@ -2,6 +2,6 @@ package processapi;
 
 public interface ProcessResponse {
 
-	boolean success();
+ProcessResponseSuccessCode getResult();
 	
 }

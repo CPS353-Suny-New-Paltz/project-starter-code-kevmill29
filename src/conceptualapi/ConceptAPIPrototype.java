@@ -16,5 +16,7 @@ public class ConceptAPIPrototype {
 	
 //Computation Component
 	ComputeComponent compute = component.compute(user);
+	
+	
 }
 }

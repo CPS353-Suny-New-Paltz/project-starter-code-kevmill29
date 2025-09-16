@@ -1,23 +1,17 @@
 package userapi;
 
-public class UserDataSource implements DataSource {
-private final int valueA;
-private final int valueB;
+public class UserDataSource {
+private String input;
 
-public UserDataSource(int valueA, int valueB) {
+
+
+public UserDataSource(String input) {
 	super();
-	this.valueA = valueA;
-	this.valueB = valueB;
+	this.input = input;
 }
 
-public int getValueA() {
-	return valueA;
+public String getInput() {
+	return input;
 }
-
-public int getValueB() {
-	return valueB;
-}
-
-
 
 }

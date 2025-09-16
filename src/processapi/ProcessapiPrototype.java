@@ -5,10 +5,12 @@ import project.annotations.ProcessAPIPrototype;
 public class ProcessapiPrototype {
 	@ProcessAPIPrototype
 			public void process(Processapi process) {
-				DefaultProcessResponse response  = process.run(new RunDataStream());
+				ProcessResponse response  = process.run(new RunDataStream());
 				
-			if(response.success()) {
+			if(response.getResult().success()) {
 				return;
+			}else {
+				System.out.println("Error! Process not started!");
 			}
 		}
 }

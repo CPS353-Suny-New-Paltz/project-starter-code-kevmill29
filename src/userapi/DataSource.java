@@ -1,7 +1,6 @@
 package userapi;
 
 public interface DataSource {
-	int getValueA();
-	int getValueB();
+UserDataSource source(UserInput input);
 
 }
