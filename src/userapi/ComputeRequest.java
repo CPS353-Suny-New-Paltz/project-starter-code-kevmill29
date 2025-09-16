@@ -11,8 +11,7 @@ public ComputeRequest(UserDataSource source, String delimiter) {
 	if(delimiter == null || delimiter.isBlank()) {
 		//default
 		this.delimiter = ",";
-	}
-	else if(delimiter.equals(",")|| delimiter.equals("|")) {
+	}else if(delimiter.equals(",")|| delimiter.equals("|")) {
 		this.delimiter = delimiter;
 	}
 }
