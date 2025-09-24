@@ -1,20 +1,47 @@
 package userapi;
 
 public class ComputeRequest {
-private UserDataSource source;
-private String delimiter;
 
-
-public ComputeRequest(UserDataSource source, String delimiter) {
+public ComputeRequest( String delimiter, UserInput input) {
 	super();
-	this.source = source;
+	
 	if(delimiter == null || delimiter.isBlank()) {
 		//default
 		this.delimiter = ",";
-	}else if(delimiter.equals(",")|| delimiter.equals("|")) {
+	}else if(delimiter.matches("\\p{Punct}+")) {
 		this.delimiter = delimiter;
 	}
+	this.input = input;
 }
+
+
+
+private String delimiter;
+private UserInput input;
+
+
+
+
+public UserInput getInput() {
+	return input;
+}
+
+
+
+public void setInput(UserInput input) {
+	this.input = input;
+}
+
+
+
+public void setDelimiter(String delimiter) {
+	this.delimiter = delimiter;
+}
+
+
+
+
+
 
 
 

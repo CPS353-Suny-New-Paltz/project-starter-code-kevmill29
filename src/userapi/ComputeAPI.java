@@ -6,7 +6,7 @@ import project.annotations.NetworkAPI;
 public interface ComputeAPI {
 
 	
-
+	
 	ComputeResponse run(ComputeRequest request);
 
 }

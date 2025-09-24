@@ -4,24 +4,34 @@ public class UserInput {
 
 
 
-
-	private String input;
+	
+	private int input1;
+	private int input2;
 
 	
 	
-	public UserInput(String input) {
+	public int getInput2() {
+		return input2;
+	}
+
+	public void setInput2(int input2) {
+		this.input2 = input2;
+	}
+
+	public UserInput(int input1, int input2) {
 		super();
-		this.input = input;
+		this.input1 = input1;
+		this.input2 = input2;
 	}
 	
-	public String getInput() {
-		return input;
+	public int getInput1() {
+		return input1;
 	}
 
 
 
-	public void setInput(String input) {
-		this.input = input;
+	public void setInput(int input) {
+		this.input1 = input1;
 	}
 
 }
