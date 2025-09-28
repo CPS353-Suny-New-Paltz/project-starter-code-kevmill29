@@ -18,7 +18,7 @@ public class ConceptAPIPrototype {
 	try {
 		UserInterface userComponent = new UserComponent();
 		values = userComponent.getValues(jobID);
-		
+
 		ComputeComponent computation = new ComputeValues();
 		int result=computation.computeValues(values, jobID);
 		System.out.println("Computation result is: "+ result);

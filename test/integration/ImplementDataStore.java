@@ -30,7 +30,7 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 	public InputConfig<Integer> getInputConfig() {
 		return inputConfig;
 	}
-	
+
 	public void output(List<Integer>data){
 		outputConfig.writer(data);
 	}

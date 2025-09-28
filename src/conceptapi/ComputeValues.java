@@ -42,6 +42,7 @@ public class ComputeValues implements ComputeComponent {
 
 
 
+@Override
 public int computeValues(List<Integer>list) {
 		//Used Problem 27 from Project EuleR
 		UserInputHandler handler = new UserInputHandler();

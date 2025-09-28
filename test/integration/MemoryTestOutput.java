@@ -14,11 +14,11 @@ public class MemoryTestOutput implements OutputConfig {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public void write(int value) {
 		output.add(value);
 	}
-	
+
 	public List<Integer> getOutput(){
 		return output;
 	}
