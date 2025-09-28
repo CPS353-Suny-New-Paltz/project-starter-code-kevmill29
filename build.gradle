@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-eclipse.project.name = 'FillThisIn' 
+eclipse.project.name = 'project-starter-code-kevmill29' 
 
 sourceSets {
 	main {
@@ -22,15 +22,14 @@ repositories {
 
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
-	testImplementation('org.mockito:mockito-core:5.+' )
+	testImplementation('org.mockito:mockito-core:5.+')
 	implementation('com.google.code.gson:gson:2.13.1')
-	implementation ('com.google.code.gson:gson:2.10.1')
 }
 
 tasks.withType(Test) {
-    exclude ('**/ProcessSmokeTest.java')
-    exclude ('**/NetworkSmokeTest.java')
-    exclude ('**/ConceptSmokeTest.java')
+    exclude ('**/ProcessSmokeTest.class')
+    exclude ('**/NetworkSmokeTest.class')
+    exclude ('**/ConceptSmokeTest.class')
     exclude('**/TestStatusCheckPR.class')
 }
 
