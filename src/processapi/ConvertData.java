@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 
-//Method to convert data within file back to hashmap 
+//Method to convert data within file back to hashmap
 public class ConvertData {
     public static HashMap<Integer, String> convertData() {
         File file = new File("src/Output/output.txt");

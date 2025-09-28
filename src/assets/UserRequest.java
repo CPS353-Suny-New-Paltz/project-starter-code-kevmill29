@@ -1,10 +1,10 @@
 package assets;
 
 public class UserRequest {
-    private String inputSource;
-    private String outputDestination;
-    private String delimiter;
-    private boolean useDefaultDelimiter;
+    private final String inputSource;
+    private final String outputDestination;
+    private final String delimiter;
+    private final boolean useDefaultDelimiter;
 
     // Private constructor
     private UserRequest(Builder builder) {

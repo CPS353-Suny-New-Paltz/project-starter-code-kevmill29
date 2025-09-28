@@ -11,8 +11,6 @@ import org.mockito.MockedConstruction;
 
 import assets.UserRequest;
 import assets.UserRequest.Builder;
-import networkapi.NetworkInterfaceAPI;
-import networkapi.NetworkPrototype;
 
 public class NetworkSmokeTest {
 	@Test

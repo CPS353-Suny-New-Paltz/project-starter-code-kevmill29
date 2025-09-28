@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInputHandler {
-	private HashMap<Integer, String> inputMap;
-	private Scanner input;
+	private final HashMap<Integer, String> inputMap;
+	private final Scanner input;
 	private int valueA;
 	private String delimiter;
 	private UserRequest request;

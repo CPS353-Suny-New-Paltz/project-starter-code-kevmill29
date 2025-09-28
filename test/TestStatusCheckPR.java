@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -20,18 +21,18 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class TestStatusCheckPR {
-    
+
     private static final String COMPLETED = "completed";
     private static final int NUM_CHECKS = 2;
     private static final String SUCCESS = "success";
     private static final String APPROVED = "APPROVED";
-    
+
     @Test
     public void testPullRequest() throws Exception {
         String baseApiPath = getBaseApiPath();
         String toCurl = baseApiPath + "pulls?state=all";
         String pullRequests = curl(toCurl);
-        
+
         boolean foundPullRequest = false;
         // check each pull request to see if one meets assignment requirements
         for (JsonElement pr : JsonParser.parseString(pullRequests).getAsJsonArray().asList()) {
@@ -45,7 +46,7 @@ public class TestStatusCheckPR {
         }
         Assertions.assertTrue(foundPullRequest, "No pull request with required status checks (failure, then success) and reviewer approval found");
     }
-    
+
     // query the git remote to find the repo URL
     private String getBaseApiPath() throws Exception {
         Process getRemote = new ProcessBuilder("git", "remote",  "get-url", "origin", "--push").start();
@@ -57,15 +58,15 @@ public class TestStatusCheckPR {
             removeTrailingGit = ownerRepo.length() - 1;
         }
         ownerRepo = ownerRepo.substring(0, removeTrailingGit);
-        
+
         return "https://api.github.com/repos/" + ownerRepo + "/";
-                
+
     }
 
     private boolean hasReviewerApproval(String baseApiPath, String prNumber) throws Exception {
         String getReviews = baseApiPath + "pulls/" + prNumber + "/reviews";
         String reviewResult = curl(getReviews);
-        
+
         for (JsonElement review : JsonParser.parseString(reviewResult).getAsJsonArray().asList()) {
             if (review.getAsJsonObject().get("state").getAsString().equals(APPROVED)) {
                 return true;
@@ -81,17 +82,17 @@ public class TestStatusCheckPR {
     private boolean hasStatusChecks(String baseApiPath, String prNumber) throws Exception {
         String getCommits = baseApiPath + "pulls/" + prNumber + "/commits";
         String commitResult = curl(getCommits);
-        
+
         List<JsonElement> commits = JsonParser.parseString(commitResult).getAsJsonArray().asList();
         if (commits.isEmpty()) { // weird, but don't crash
             return false;
         }
         sortCommits(commits);
-        
+
         // check that the latest commit is successful
         JsonElement firstCommit = commits.get(0);
         Map<String, String> firstCommitStatus = getStatusCheckResult(baseApiPath, firstCommit);
-       
+
         if (firstCommitStatus.size() != NUM_CHECKS) {
             return false;
         }
@@ -100,7 +101,7 @@ public class TestStatusCheckPR {
                 return false;
             }
         }
-        
+
         // check that an earlier commit failed
         Set<String> failuresFound = new HashSet<>();
         for (JsonElement commit : commits) {
@@ -111,7 +112,7 @@ public class TestStatusCheckPR {
                 }
             });
         }
-        
+
         return failuresFound.size() == NUM_CHECKS;
     }
 
@@ -146,7 +147,7 @@ public class TestStatusCheckPR {
                 checkToStatus.put(name, result);
             }
         }
-        
+
         return checkToStatus;
     }
 
@@ -154,8 +155,8 @@ public class TestStatusCheckPR {
         URL url = new URI(toCurl).toURL();
 
         String result = "";
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-            String line; 
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 result += line + "\n";
             }
