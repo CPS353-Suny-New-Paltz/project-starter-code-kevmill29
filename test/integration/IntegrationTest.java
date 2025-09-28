@@ -29,11 +29,12 @@ public class IntegrationTest {
 		UserInterface userInput = new UserComponent();
 		ComputeComponent computation = new ComputeValues();
 		
+		List<Integer>data = datastore.input();
 		
-		
-		for(int i = 0; i<datastore.input().size();i++) {
-			int result = computation.computeValues(List.of(i));
-			
+		for(int i = 0; i<data.size();i++) {
+			int num = data.get(i);
+			int result= computation.computeValues(data);
+			output.write(result);
 			
 		}
 		List<Integer>expectedValues = Arrays.asList(0,0,0);
