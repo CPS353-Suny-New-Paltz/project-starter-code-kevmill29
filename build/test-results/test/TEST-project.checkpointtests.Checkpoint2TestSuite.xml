@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="project.checkpointtests.Checkpoint2TestSuite" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-09-28T04:20:18" hostname="DESKTOP-BJ784BH" time="0.057">
+  <properties/>
+  <testcase name="interface project.annotations.ConceptualAPI, interface project.annotations.ConceptualAPIPrototype" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.029"/>
+  <testcase name="interface project.annotations.ProcessAPI, interface project.annotations.ProcessAPIPrototype" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.005"/>
+  <testcase name="interface project.annotations.NetworkAPI, interface project.annotations.NetworkAPIPrototype" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.004"/>
+  <testcase name="interface project.annotations.NetworkAPI" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.005"/>
+  <testcase name="interface project.annotations.ProcessAPI" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.004"/>
+  <testcase name="interface project.annotations.ConceptualAPI" classname="project.checkpointtests.Checkpoint2TestSuite" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
