@@ -31,7 +31,7 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 		return inputConfig;
 	}
 	
-	public void output(List<String>data) {
+	public void output(List<Integer>data){
 		outputConfig.writer(data);
 	}
 }
