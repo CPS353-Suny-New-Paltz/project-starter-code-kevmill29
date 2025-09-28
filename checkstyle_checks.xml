@@ -22,6 +22,9 @@
            default="checkstyle-suppressions.xml" />
     <property name="optional" value="true"/>
   </module>
+  <module name="LineLength">
+  <property name="max" value="1000"/> <!-- or whatever limit you prefer -->
+</module>
 
   <module name="TreeWalker">
     <module name="IllegalCatch"/>	
