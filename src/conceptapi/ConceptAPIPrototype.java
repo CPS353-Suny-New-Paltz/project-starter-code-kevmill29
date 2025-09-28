@@ -20,7 +20,7 @@ public class ConceptAPIPrototype {
 		ComputeComponent computation = new ComputeValues();
 		int result=computation.computeValues(values, jobID);
 		System.out.println("Computation result is: "+ result);
-	} catch (Exception e) {
+	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}//creates hashmap with valueB generated along with jobID assigned

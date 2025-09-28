@@ -11,9 +11,5 @@ public class DataStorePrototype {
 		HashMap<Integer, String> map = new HashMap<>();//ConvertData.convertData();
 		//checks if map is empty if not sends insert request to the dataStore
 		//Will return to this later for now just storing data into file through processor prototype
-		if(!map.isEmpty()) {
-
-		}
-
 	}
 }
