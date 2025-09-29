@@ -29,6 +29,7 @@ testImplementation 'org.junit.platform:junit-platform-engine:1.10.2'
 	testImplementation 'org.mockito:mockito-core:5.12.0' // Use the latest stable version
     // If using JUnit Jupiter (JUnit 5) with Mockito, also add:
     testImplementation 'org.mockito:mockito-junit-jupiter:5.12.0' 
+	implementation 'fr.inria.gforge.spoon:spoon-core:11.2.0'
 }
 
 tasks.withType(Test) {
