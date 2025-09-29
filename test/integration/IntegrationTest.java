@@ -26,16 +26,23 @@ public class IntegrationTest {
 
 		List<Integer>data = datastore.input();
 
-		for (Integer num : data) {
-			int result= computation.computeValues(data);
-			output.write(result);
 
-		}
-		List<Integer>expectedValues = Arrays.asList(0,0,0);
-		List<Integer> actualValues = output.getOutput();
+		 // Process input in pairs
+		    for (int i = 0; i < data.size() - 1; i++) {
+		        List<Integer> pair = Arrays.asList(data.get(i), data.get(i + 1));
+		        int result = computation.computeValues(pair);
+		        output.write(Integer.toString(result));
+		    }
 
+		    // Expected values as strings
+		    List<String> expectedValues = Arrays.asList(
+		        Integer.toString(computation.computeValues(Arrays.asList(1, 10))),
+		        Integer.toString(computation.computeValues(Arrays.asList(10, 25)))
+		    );
 
-		//assertion
-		assertEquals(expectedValues, actualValues);
+		    List<String> actualValues = output.getOutput();
+
+		    assertEquals(expectedValues, actualValues);
+
 	}
 }
