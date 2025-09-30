@@ -13,29 +13,19 @@ import assets.UserRequest;
 import assets.UserRequest.Builder;
 
 public class NetworkSmokeTest {
-	@Test
+		@Test
+		public void smokeTest() {
+		    // Explicit constructor call for Spoon to detect
+		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
 
-	public void smokeTest() {
-		//Create classes
-		NetworkInterfaceAPI mockAPI = mock(NetworkInterfaceAPI.class);
+		    // You can still mock other behavior if needed
+		    UserRequest mockRequest = mock(UserRequest.class);
+		    when(mockRequest.isValid()).thenReturn(true);
 
-
-		//Mock user request to make it return a valid request
-		UserRequest mockRequest = mock(UserRequest.class);
-		when(mockRequest.isValid()).thenReturn(true);
-
-		   try (MockedConstruction<Builder> mockedBuilder = mockConstruction(Builder.class,
-		            (builderMock, context) -> {
-		                when(builderMock.inputSource(anyString())).thenReturn(builderMock);
-		                when(builderMock.outputDestination(anyString())).thenReturn(builderMock);
-		                when(builderMock.delimiter(anyString())).thenReturn(builderMock);
-		                when(builderMock.useDefaultDelimiter(anyBoolean())).thenReturn(builderMock);
-		                when(builderMock.build()).thenReturn(mockRequest);
-		            })) {
-
-		NetworkPrototype prototype = new NetworkPrototype();
-		prototype.prototype(mockAPI);
-	}
+		    // Proceed with your test logic
+		    NetworkPrototype prototype = new NetworkPrototype();
+		    prototype.prototype(realAPI);
+		}
 
 }
-}
+
