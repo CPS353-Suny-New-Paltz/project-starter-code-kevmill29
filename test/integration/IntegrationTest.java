@@ -1,5 +1,5 @@
 package integration;
-
+import processapi.ProcessorAPI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class IntegrationTest {
 	public void integrationTest() {
 		MemoryTestInput input = new MemoryTestInput(Arrays.asList(1,10,25));
 		MemoryTestOutput output = new MemoryTestOutput();
-		DataStore datastore = new ImplementDataStore(input, output);
+		ProcessorAPI datastore = new ImplementDataStore(input, output);
 
 
 		UserInterface userInput = new UserComponent();
