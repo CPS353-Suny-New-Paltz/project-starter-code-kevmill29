@@ -102,6 +102,9 @@ public class Checkpoint2TestSuite {
 
 	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 }
 =======
 }
