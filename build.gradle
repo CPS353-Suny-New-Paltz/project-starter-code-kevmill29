@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-eclipse.project.name = 'KevinCheckPoint' 
+eclipse.project.name = 'FillThisIn' 
 
 sourceSets {
 	main {
@@ -21,18 +21,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.13.1'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testImplementation 'org.mockito:mockito-core:5.10.0'
-
-    // Add this line for runtime support
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
+	testImplementation('org.mockito:mockito-core:5.10.0')
+	implementation('com.google.code.gson:gson:2.13.1')
+     	implementation 'fr.inria.gforge.spoon:spoon-core:11.2.0'
 }
 
 test {
     useJUnitPlatform()
-    exclude '**/*NetworkSmokeTest.class'
-    exclude '**/*ConceptSmokeTest.class'
-    exclude '**/*ProcessSmokeTest.class'
 }
