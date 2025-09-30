@@ -38,9 +38,19 @@ tasks.withType(Test) {
     exclude ('**/ConceptSmokeTest.class')
     exclude('**/TestStatusCheckPR.class')
     exclude('**/IntegrationTest.class')
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }
 
 test {
     useJUnitPlatform()
 
 }
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
