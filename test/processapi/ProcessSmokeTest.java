@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 
 import assets.UserInputHandler;
 
-
 public class ProcessSmokeTest {
     @Test
     public void smokeTest() throws IOException {

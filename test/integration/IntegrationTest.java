@@ -1,4 +1,3 @@
-
 package integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +14,7 @@ import conceptapi.ComputeValues;
 import conceptapi.UserComponent;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
-
+import processapi.ImplementProcessorAPI;
 import processapi.ProcessorAPI;
 import processapi.TestDataStore;
 
@@ -60,9 +59,9 @@ public class IntegrationTest {
     @Test
     public void constructorSanityCheck() {
         new ImplementNetworkAPI();
-        new ImplementConceptAPI();      
+        new ImplementConceptAPI();
+        new ImplementProcessorAPI();
         new TestDataStore(Arrays.asList(1, 2), new TestOutputCollector());
     }
 
 }
-
