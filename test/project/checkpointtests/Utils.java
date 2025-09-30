@@ -13,7 +13,11 @@ public class Utils {
         }
         return result;
     }
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
     public static List<Class<?>> loadAllTestClasses() throws Exception {
         File rootDir = new File("test");
         List<Class<?>> result = new ArrayList<>();
