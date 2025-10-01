@@ -1,10 +1,14 @@
-package processapi;
+package integration;
 
 import java.util.List;
 
 import assets.UserInputHandler;
+import processapi.ConvertData;
+import processapi.InputConfig;
+import processapi.OutputConfig;
+import processapi.WriteData;
 
-public class ImplementDataStore {
+public class ImplementDataStore implements processapi.ProcessorAPI {
 private final InputConfig<Integer> inputConfig;
 private final OutputConfig<String> outputConfig;
 
