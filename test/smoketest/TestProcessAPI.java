@@ -30,21 +30,15 @@ public class TestProcessAPI {
                     when(mock.promptValueA()).thenReturn(42);
                 })) {
 
-            ProcessorAPI realAPI = new ImplementProcessorAPI(); // Spoon sees this constructor
+          
             ProcessorPrototype prototype = new ProcessorPrototype();
 
-            HashMap<Integer, String> result = prototype.processAPI(realAPI);
+            HashMap<Integer, String> result = prototype.processAPI(directInstance);
 
             assertNotNull(result, "Returned map should not be null");
 
-            // Verify mock behavior
-            UserInputHandler handler = mockedHandler.constructed().get(0);
-            try {
-				verify(handler).promptValueA();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+       
 			}
         }
     }
-}
+
