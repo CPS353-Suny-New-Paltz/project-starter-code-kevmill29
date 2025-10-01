@@ -20,7 +20,7 @@ import processapi.ProcessorAPI;
 public class TestProcessAPI {
 
     @Test
-    public void smokeTest() throws IOException {
+    public void smokeTest() {
         // Direct instantiation for Spoon
         ImplementProcessorAPI directInstance = new ImplementProcessorAPI();
 
@@ -39,7 +39,12 @@ public class TestProcessAPI {
 
             // Verify mock behavior
             UserInputHandler handler = mockedHandler.constructed().get(0);
-            verify(handler).promptValueA();
+            try {
+				verify(handler).promptValueA();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 }
