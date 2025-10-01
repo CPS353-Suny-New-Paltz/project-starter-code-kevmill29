@@ -15,7 +15,7 @@ public class TestConceptAPI {
     @Test
     void conceptSmokeTest() {
         
-        ImplementConceptAPI realComponent = new ImplementConceptAPI();
+        ConceptAPI realComponent = new ImplementConceptAPI();
 
         // Assertion
    assertNotNull(realComponent);

@@ -22,7 +22,7 @@ public class TestProcessAPI {
     @Test
     public void smokeTest() {
         // Direct instantiation for Spoon
-        ImplementProcessorAPI directInstance = new ImplementProcessorAPI();
+        ProcessorAPI directInstance = new ImplementProcessorAPI();
 
         // Use Mockito to mock UserInputHandler
         try (MockedConstruction<UserInputHandler> mockedHandler =

@@ -20,7 +20,7 @@ public class TestNetworkAPI {
 		@Test
 		public void smokeTest() {
 		    // Explicit constructor call for Spoon to detect
-		    ImplementNetworkAPI realAPI = new ImplementNetworkAPI();
+		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
 
 		    // You can still mock other behavior if needed
 		    UserRequest mockRequest = mock(UserRequest.class);
