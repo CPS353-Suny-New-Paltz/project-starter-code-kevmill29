@@ -16,6 +16,7 @@ import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import processapi.ProcessorAPI;
 import processapi.TestDataStore;
+import processapi.TestOutputCollector;
 
 public class ComputeEngineIntegrationTest {
 
@@ -26,7 +27,7 @@ public class ComputeEngineIntegrationTest {
         TestOutputCollector output = new TestOutputCollector();
 
         // Test-only data store
-        ProcessorAPI datastore = new TestDataStore(inputData, output);
+        TestDataStore datastore = new TestDataStore(inputData, output);
 
         // Empty implementations
         NetworkInterfaceAPI userInterface = new ImplementNetworkAPI();
