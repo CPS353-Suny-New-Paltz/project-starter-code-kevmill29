@@ -11,14 +11,14 @@ import conceptapi.ComputeComponent;
 import conceptapi.ComputeValues;
 import conceptapi.UserComponent;
 import conceptapi.UserInterface;
-import processapi.DataStore;
+
 
 public class IntegrationTest {
 	@Test
 	public void integrationTest() {
 		MemoryTestInput input = new MemoryTestInput(Arrays.asList(1,10,25));
 		MemoryTestOutput output = new MemoryTestOutput();
-		DataStore datastore = new ImplementDataStore(input, output);
+		ImplementDataStore datastore = new ImplementDataStore(input, output);
 
 
 		UserInterface userInput = new UserComponent();
