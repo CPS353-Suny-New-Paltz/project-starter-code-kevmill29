@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import infrastructure.TestDataStore;
+import infrastructure.TestOutputCollector;
 import conceptapi.ConceptAPI;
 import conceptapi.ImplementConceptAPI;
 import conceptapi.ComputeComponent;
@@ -52,10 +54,4 @@ public class ComputeEngineIntegrationTest {
         assertEquals(expected, output.getOutput());
     }
 
-    @Test
-    public void constructorSanityCheck() {
-        new ImplementNetworkAPI();
-        new ImplementConceptAPI();
-        new TestDataStore(Arrays.asList(1, 2), new TestOutputCollector());
-    }
 }

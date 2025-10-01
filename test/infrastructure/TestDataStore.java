@@ -1,4 +1,5 @@
-package integration;
+package infrastructure;
+
 import java.util.List;
 
 import assets.UserInputHandler;

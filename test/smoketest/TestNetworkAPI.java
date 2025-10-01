@@ -1,5 +1,6 @@
 package smoketest;
 
+
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -19,7 +20,7 @@ public class TestNetworkAPI {
 		@Test
 		public void smokeTest() {
 		    // Explicit constructor call for Spoon to detect
-		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
+		    ImplementNetworkAPI realAPI = new ImplementNetworkAPI();
 
 		    // You can still mock other behavior if needed
 		    UserRequest mockRequest = mock(UserRequest.class);
