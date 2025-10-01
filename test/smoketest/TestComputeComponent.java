@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import conceptapi.ConceptAPI;
+import conceptapi.ComputeComponent;
 import conceptapi.ConceptAPIPrototype;
 import conceptapi.ImplementConceptAPI;
 
-public class TestConceptAPI {
+public class TestComputeComponent {
     @Test
     void conceptSmokeTest() {
         
-        ConceptAPI realComponent = new ImplementConceptAPI();
+        ComputeComponent realComponent = new ImplementConceptAPI();
 
         // Assertion
    assertNotNull(realComponent);

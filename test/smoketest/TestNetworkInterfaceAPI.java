@@ -16,7 +16,7 @@ import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import networkapi.NetworkPrototype;
 
-public class TestNetworkAPI {
+public class TestNetworkInterfaceAPI {
 		@Test
 		public void smokeTest() {
 		    // Explicit constructor call for Spoon to detect

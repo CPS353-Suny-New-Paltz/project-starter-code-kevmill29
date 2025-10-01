@@ -17,11 +17,11 @@ import processapi.ImplementProcessorAPI;
 import processapi.ProcessorPrototype;
 import processapi.ProcessorAPI;
 
-public class TestProcessAPI {
+public class TestProcessorAPI {
 
     @Test
     public void smokeTest() {
-        // Direct instantiation for Spoon
+       
         ProcessorAPI directInstance = new ImplementProcessorAPI();
 
         // Use Mockito to mock UserInputHandler

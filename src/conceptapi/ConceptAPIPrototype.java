@@ -9,7 +9,7 @@ import project.annotations.ConceptualAPIPrototype;
 
 public class ConceptAPIPrototype {
 @ConceptualAPIPrototype
-	public void prototype(ConceptAPI component) {
+	public void prototype(ComputeComponent component) {
 //User Component user component will take in the processAPI and the userRequest as parameters and
 //create readable data for the Computation component to complete the computation
 	int rand = (int) ((Math.random() * 2000) + 1);// create random jobID between 1 -2000
