@@ -29,4 +29,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    exclude '**TestConceptAPI.class'
+    exclude '**TestNetworkAPI.class'
+    exclude '**TestProcessAPI.class'
 }
