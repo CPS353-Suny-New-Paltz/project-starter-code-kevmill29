@@ -1,6 +1,6 @@
-package main.networkapi;
+package networkapi;
 
-import main.assets.UserRequest;
+import assets.UserRequest;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 

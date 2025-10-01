@@ -1,7 +1,7 @@
-package main.networkapi;
+package networkapi;
 
-import main.assets.UserRequest;
-import main.project.annotations.NetworkAPI;
+import assets.UserRequest;
+import project.annotations.NetworkAPI;
 
 
 @NetworkAPI

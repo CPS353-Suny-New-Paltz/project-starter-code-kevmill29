@@ -1,9 +1,10 @@
-package main.networkapi;
+package networkapi;
 
 
-import main.assets.ResponseCode;
-import main.assets.UserRequest;
-import main.project.annotations.NetworkAPIPrototype;
+import assets.ResponseCode;
+import assets.UserRequest;
+import project.annotations.NetworkAPIPrototype;
+
 
 	public class NetworkPrototype {
 	@NetworkAPIPrototype

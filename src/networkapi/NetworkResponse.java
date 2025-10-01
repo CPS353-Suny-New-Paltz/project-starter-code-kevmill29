@@ -1,7 +1,6 @@
 package networkapi;
 
-import main.assets.ResponseCode;
-
+import assets.ResponseCode;
 
 public interface NetworkResponse {
 
