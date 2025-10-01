@@ -1,7 +1,9 @@
-package processapi;
+package integration;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import processapi.InputConfig;
 
 public class MemoryTestInput implements InputConfig {
 private final List<Integer> data;

@@ -1,7 +1,10 @@
-package processapi;
+package integration;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import processapi.OutputConfig;
+import processapi.WriteData;
 
 public class MemoryTestOutput implements OutputConfig {
 	private final List<String> output = new ArrayList<>();
