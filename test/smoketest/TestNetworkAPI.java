@@ -1,4 +1,4 @@
-package networkapi;
+package smoketest;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -11,6 +11,9 @@ import org.mockito.MockedConstruction;
 
 import assets.UserRequest;
 import assets.UserRequest.Builder;
+import networkapi.ImplementNetworkAPI;
+import networkapi.NetworkInterfaceAPI;
+import networkapi.NetworkPrototype;
 
 public class TestNetworkAPI {
 		@Test

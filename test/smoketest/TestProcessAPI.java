@@ -1,4 +1,4 @@
-package processapi;
+package smoketest;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
@@ -12,6 +12,9 @@ import org.mockito.MockedConstruction;
 import org.mockito.Mockito;
 
 import assets.UserInputHandler;
+import processapi.ImplementProcessorAPI;
+import processapi.ProcessorPrototype;
+import processapi.ProcessorAPI;
 
 public class TestProcessAPI {
 
