@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import infrastructure.TestDataStore;
-import infrastructure.TestOutputCollector;
 import conceptapi.ConceptAPI;
 import conceptapi.ImplementConceptAPI;
 import conceptapi.ComputeComponent;
@@ -17,6 +15,7 @@ import conceptapi.UserComponent;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import processapi.ProcessorAPI;
+import processapi.TestDataStore;
 
 public class ComputeEngineIntegrationTest {
 
