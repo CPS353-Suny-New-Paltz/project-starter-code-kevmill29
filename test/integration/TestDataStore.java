@@ -1,11 +1,12 @@
-package processapi;
+package integration;
 import java.util.List;
 import processapi.ProcessorAPI;
+import processapi.TestOutputCollector;
 import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
 import processapi.ConvertData;  // adjust if your interface defines this type
 
 
-public class TestDataStore {
+public class TestDataStore implements ProcessorAPI{
 	
 	 private final List<Integer> inputData;
 	    private final TestOutputCollector output;

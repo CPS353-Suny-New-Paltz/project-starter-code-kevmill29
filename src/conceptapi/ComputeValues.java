@@ -6,9 +6,8 @@ import java.util.List;
 import assets.UserInputHandler;
 
 
-public class ComputeValues implements ComputeComponent {
+public class ComputeValues  {
 	//will finish this later but this will return a new hashMap again that includes the answer to be written into a file to be accessed later
-	@Override
 	public int computeValues(HashMap<Integer, String>map, int jobID) {
 			//Used Problem 27 from Project EuleR
 			UserInputHandler handler = new UserInputHandler();
@@ -42,7 +41,6 @@ public class ComputeValues implements ComputeComponent {
 
 
 
-@Override
 public int computeValues(List<Integer>list) {
 		//Used Problem 27 from Project EuleR
 		UserInputHandler handler = new UserInputHandler();
@@ -55,5 +53,14 @@ public int computeValues(List<Integer>list) {
 
 		}
 		return n;
+}
+
+
+
+
+
+public int computeValues(UserComponent userComponent) {
+	// TODO Auto-generated method stub
+	return 0;
 }
 }

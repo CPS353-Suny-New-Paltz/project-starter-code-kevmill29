@@ -8,5 +8,6 @@ import project.annotations.ConceptualAPI;
 public interface ComputeComponent {
 int computeValues(HashMap<Integer, String>map, int jobID);
 
-int computeValues(List<Integer> of);
+int computeValues(UserComponent userComponent);
+int computeValues(List<Integer> list);
 }

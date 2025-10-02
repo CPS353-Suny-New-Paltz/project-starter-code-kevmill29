@@ -7,45 +7,50 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import conceptapi.ComputeComponent;
-
 import conceptapi.ImplementConceptAPI;
-
+import conceptapi.ComputeComponent;
+import conceptapi.ComputeValues;
+import conceptapi.UserComponent;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
-
+import processapi.ProcessorAPI;
+import processapi.TestOutputCollector;
 
 public class ComputeEngineIntegrationTest {
-	@Test
-	public void integrationTest() {
-		MemoryTestInput input = new MemoryTestInput(Arrays.asList(1,10,25));
-		MemoryTestOutput output = new MemoryTestOutput();
-		ImplementDataStore datastore = new ImplementDataStore(input, output); //datastore implentation
-		NetworkInterfaceAPI network = new ImplementNetworkAPI(); //networkapi implementation
-		ComputeComponent computation = new ImplementConceptAPI(); //concept api implementation
 
-		
-		
+    @Test
+    public void computeEngineIntegrationTest() {
+        // Initial input: [1, 10, 25]
+        List<Integer> inputData = Arrays.asList(1, 10, 25);
+        TestOutputCollector output = new TestOutputCollector();
 
-		List<Integer>data = datastore.input();
+        // Test-only data store
+        ProcessorAPI datastore = new TestDataStore(inputData, output);
 
+        // Empty implementations
+        NetworkInterfaceAPI userInterface = new ImplementNetworkAPI();
+       
+        ComputeComponent concept = new ImplementConceptAPI();
 
-		 // Process input in pairs
-		    for (int i = 0; i < data.size() - 1; i++) {
-		        List<Integer> pair = Arrays.asList(data.get(i), data.get(i + 1));
-		        int result = computation.computeValues(pair);
-		        output.write(Integer.toString(result));
-		    }
+        // Get compute engine
+        
 
-		    // Expected values as strings
-		    List<String> expectedValues = Arrays.asList(
-		        Integer.toString(computation.computeValues(Arrays.asList(1, 10))),
-		        Integer.toString(computation.computeValues(Arrays.asList(10, 25)))
-		    );
+        // Simulate integration flow
+        List<Integer> data = datastore.input();
+        for (int i = 0; i < data.size() - 1; i++) {
+            List<Integer> pair = Arrays.asList(data.get(i), data.get(i + 1));
+            int result = concept.computeValues(pair);
+            output.write(Integer.toString(result));
+        }
 
-		    List<String> actualValues = output.getOutput();
+        // Expected output
+        List<String> expected = Arrays.asList(
+            Integer.toString(concept.computeValues(Arrays.asList(1, 10))),
+            Integer.toString(concept.computeValues(Arrays.asList(10, 25)))
+        );
 
-		    assertEquals(expectedValues, actualValues);
+        assertEquals(expected, output.getOutput());
+    }
 
-	}
+   
 }
