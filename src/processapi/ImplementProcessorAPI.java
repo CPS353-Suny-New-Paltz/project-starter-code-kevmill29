@@ -13,12 +13,6 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	}
 
 	@Override
-	public WriteData writer(List<String> data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Integer> input() {
 		// TODO Auto-generated method stub
 		return null;

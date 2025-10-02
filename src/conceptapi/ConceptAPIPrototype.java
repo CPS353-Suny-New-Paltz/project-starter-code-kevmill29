@@ -9,7 +9,7 @@ import project.annotations.ConceptualAPIPrototype;
 
 public class ConceptAPIPrototype {
 @ConceptualAPIPrototype
-	public void prototype(ConceptAPI component) {
+	public void prototype(ComputeComponent component) {
 //User Component user component will take in the processAPI and the userRequest as parameters and
 //create readable data for the Computation component to complete the computation
 	int rand = (int) ((Math.random() * 2000) + 1);// create random jobID between 1 -2000
@@ -19,7 +19,7 @@ public class ConceptAPIPrototype {
 		UserInterface userComponent = new UserComponent();
 		values = userComponent.getValues(jobID);
 
-		ComputeComponent computation = new ComputeValues();
+		ComputeValues computation = new ComputeValues();
 		int result=computation.computeValues(values, jobID);
 		System.out.println("Computation result is: "+ result);
 	} catch (IOException e) {

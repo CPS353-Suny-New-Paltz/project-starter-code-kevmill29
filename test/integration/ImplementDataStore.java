@@ -2,15 +2,12 @@ package integration;
 
 import java.util.List;
 
-import assets.UserInputHandler;
-import processapi.ConvertData;
 import processapi.DataStore;
 import processapi.InputConfig;
 import processapi.OutputConfig;
-import processapi.ProcessorAPI;
 import processapi.WriteData;
 
-public class ImplementDataStore implements ProcessorAPI {
+public class ImplementDataStore implements DataStore {
 private final InputConfig<Integer> inputConfig;
 private final OutputConfig<String> outputConfig;
 
@@ -25,6 +22,7 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
 	public List<Integer> input() {
 		// TODO Auto-generated method stub
 		return inputConfig.getInput();
@@ -38,16 +36,10 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 	}
 
 
+	@Override
 	public WriteData writer(List<String> data) {
 		// TODO Auto-generated method stub
 		return new WriteData();
-	}
-
-
-	@Override
-	public ConvertData read(UserInputHandler handler) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

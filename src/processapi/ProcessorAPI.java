@@ -6,7 +6,7 @@ import project.annotations.ProcessAPI;
 @ProcessAPI
 public interface ProcessorAPI {
 ConvertData read(UserInputHandler handler);
-WriteData writer(List<String> data);
+
 List<Integer> input();
 
 }

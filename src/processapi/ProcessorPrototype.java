@@ -18,13 +18,13 @@ public class ProcessorPrototype {
 		//ProcessAPI needs to have a method that prompts the user to input data
 		//and also needs to write a method that creates a file
 		//Step 1: processor calls userInputHandler and prompts user for input;
-		UserInputHandler handler = new UserInputHandler();
+		//UserInputHandler handler = new UserInputHandler();
 		System.out.println("Please enter an integer: ");
-		try {
-		int valueA = handler.promptValueA();
-		}catch(IOException e){
-			System.out.println("Input could not be entered");
-		}
+//		try {
+//		//int valueA = handler.promptValueA();
+//		}catch(IOException e){
+//			System.out.println("Input could not be entered");
+//		}
 		HashMap<Integer, String>newMap = new HashMap<>();// supposed to return fully processed hashmap with answers from computation
 		//Create a file that holds valueA to be fully processed later
 		//Step 2: ConceptualAPI takes valueA file and creates hashMap with new data
