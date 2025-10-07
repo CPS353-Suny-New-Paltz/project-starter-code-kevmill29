@@ -161,6 +161,10 @@
                value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF,
                       RECORD_DEF, COMPACT_CTOR_DEF"/>
     </module>
+     <module name="LineLength">
+  <property name="max" value="1000"/> <!-- or whatever limit you prefer -->
+</module>
+    
     <module name="AnnotationLocation">
       <property name="id" value="AnnotationLocationVariables"/>
       <property name="tokens" value="VARIABLE_DEF"/>
@@ -194,8 +198,6 @@
       <property name="influenceFormat" value="1"/>
     </module>
 
-  <module name="LineLength">
-  <property name="max" value="1000"/> <!-- or whatever limit you prefer -->
-</module>
+ 
   </module>
 </module>
