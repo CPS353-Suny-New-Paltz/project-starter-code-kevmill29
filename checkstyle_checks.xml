@@ -196,10 +196,6 @@
 
   <module name="LineLength">
   <property name="max" value="1000"/> <!-- or whatever limit you prefer -->
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 </module>
   </module>
 </module>
