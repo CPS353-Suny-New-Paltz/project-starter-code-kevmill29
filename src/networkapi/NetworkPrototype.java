@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import assets.ResponseCode;
 import assets.UserRequest;
+import assets.UserRequestCode;
 import project.annotations.NetworkAPIPrototype;
 
 	public class NetworkPrototype {
@@ -28,7 +29,8 @@ import project.annotations.NetworkAPIPrototype;
 
 			// Step 2: Respond to user using enum
 			//simulate response
-			
+			UserRequestCode code = request.validation();
+			System.out.println(code);
 
 			//Step 3: start initialization of process
 			//this is where the processAPI will be implemented and called to start the processing of the request

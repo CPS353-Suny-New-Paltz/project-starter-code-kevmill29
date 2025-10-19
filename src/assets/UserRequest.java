@@ -11,10 +11,12 @@ public class UserRequest {
     private final String outputDestination;
     private final String delimiter;
     private final int jobID;
+    private static UserRequest instance;
    
 
     // Private constructor
     private UserRequest(Builder builder) {
+    
         this.inputSource = builder.inputSource;
         this.outputDestination = builder.outputDestination;
         this.delimiter = builder.delimiter;
@@ -37,6 +39,15 @@ public class UserRequest {
     public int getJobId() {
     	return jobID;
     }
+    
+    public static UserRequest getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(UserRequest userRequest) {
+        instance = userRequest;
+    }
+
 
     //This will check if the userRequest is valid
     public UserRequestCode validation() {
@@ -67,19 +78,23 @@ public class UserRequest {
         		this.inputSource = inputSource;	
         	}else {
         		UserInputHandler handler = new UserInputHandler();
+        		handler.setInputMap(jobID, getInstance().getJobId());
         	}
             this.inputSource = inputSource;
             return this;
         }
 
-        public Builder outputDestination(String outputDestination) throws IOException {
-        	outputDestination = reader.readLine();
+        public Builder outputDestination() throws IOException {
+        	String outputDestination = reader.readLine();
             this.outputDestination = outputDestination;
             return this;
         }
 
-        public Builder delimiter(String delimiter) {
+        public Builder delimiter() throws IOException {
         	String[] allowedLimiters = {",",".","/","-","|","*"};
+        	System.out.println("Please enter a valid delimiter from the following list: "+Arrays.toString(allowedLimiters));
+        	String delimiter = reader.readLine();
+        	
         	boolean contains = Arrays.stream(allowedLimiters).anyMatch(delimiter::contains);
         	if(contains) {
         		this.delimiter = delimiter;

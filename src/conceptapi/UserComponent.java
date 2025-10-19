@@ -13,7 +13,7 @@ import assets.UserInputHandler;
 
 public class UserComponent implements UserInterface{
 	@Override
-	public HashMap<Integer, String> getValues() throws IOException {
+	public HashMap<Integer, String> getValues(int jobID) throws IOException {
 		File file= new File("Output/valueA.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 

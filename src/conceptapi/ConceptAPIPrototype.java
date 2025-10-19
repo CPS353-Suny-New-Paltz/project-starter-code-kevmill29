@@ -3,6 +3,7 @@ package conceptapi;
 import java.io.IOException;
 import java.util.HashMap;
 
+import assets.UserRequest;
 import project.annotations.ConceptualAPIPrototype;
 
 
@@ -12,14 +13,14 @@ public class ConceptAPIPrototype {
 	public void prototype(ComputeComponent component) {
 //User Component user component will take in the processAPI and the userRequest as parameters and
 //create readable data for the Computation component to complete the computation
-	
+	UserRequest request = UserRequest.getInstance();
 	HashMap<Integer, String> values ;
 	try {
 		UserInterface userComponent = new UserComponent();
-		values = userComponent.getValues(jobID);
+		values = userComponent.getValues(request.getJobId());
 
 		ComputeValues computation = new ComputeValues();
-		int result=computation.computeValues(values, jobID);
+		int result=computation.computeValues(values, request.getJobId());
 		System.out.println("Computation result is: "+ result);
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
