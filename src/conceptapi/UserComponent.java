@@ -1,7 +1,10 @@
 package conceptapi;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -10,18 +13,18 @@ import assets.UserInputHandler;
 
 public class UserComponent implements UserInterface{
 	@Override
-	public HashMap<Integer, String> getValues(int jobID) throws IOException {
+	public HashMap<Integer, String> getValues() throws IOException {
 		File file= new File("Output/valueA.txt");
-		Scanner input = new Scanner(file);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
 
 		int valueA = 0;
-		while(input.hasNext()) {
-			String values = input.next();
-			valueA = Integer.parseInt(values);
+		String line;
+		while((line = reader.readLine())!= null) {
+			valueA = Integer.parseInt(line);
 		}
 		UserInputHandler handler = new UserInputHandler();
 
-		return handler.setInputMap(valueA, jobID);
+		return handler.setInputMap();
 
 
 	}

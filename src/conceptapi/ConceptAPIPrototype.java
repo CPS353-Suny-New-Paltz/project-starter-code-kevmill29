@@ -12,8 +12,7 @@ public class ConceptAPIPrototype {
 	public void prototype(ComputeComponent component) {
 //User Component user component will take in the processAPI and the userRequest as parameters and
 //create readable data for the Computation component to complete the computation
-	int rand = (int) ((Math.random() * 2000) + 1);// create random jobID between 1 -2000
-	int jobID = rand;
+	
 	HashMap<Integer, String> values ;
 	try {
 		UserInterface userComponent = new UserComponent();
