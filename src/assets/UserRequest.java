@@ -10,7 +10,6 @@ public class UserRequest {
     private final String inputSource;
     private final String outputDestination;
     private final String delimiter;
-    private final int jobID;
     private static UserRequest instance;
    
 
@@ -20,7 +19,7 @@ public class UserRequest {
         this.inputSource = builder.inputSource;
         this.outputDestination = builder.outputDestination;
         this.delimiter = builder.delimiter;
-        this.jobID = builder.jobID;
+     
     }
 
     // Getters
@@ -36,17 +35,16 @@ public class UserRequest {
         return delimiter;
     }
     
-    public int getJobId() {
-    	return jobID;
+
+    public static void setInstance(UserRequest userRequest) {
+        instance = userRequest;
     }
     
     public static UserRequest getInstance() {
         return instance;
     }
 
-    public static void setInstance(UserRequest userRequest) {
-        instance = userRequest;
-    }
+    
 
 
     //This will check if the userRequest is valid
@@ -70,21 +68,9 @@ public class UserRequest {
         private int jobID;
         private BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
 
-        public Builder inputSource() throws IOException{
-        	System.out.println("Please enter an input source else if left blank or invalid file path, you will be prompted to enter a value instead.");
-        	inputSource = reader.readLine();
-        	File file = new File(inputSource);
-        	if(file.exists() && file.canRead()) {
-        		this.inputSource = inputSource;	
-        	}else {
-        		UserInputHandler handler = new UserInputHandler();
-        		handler.setInputMap(jobID, getInstance().getJobId());
-        	}
-            this.inputSource = inputSource;
-            return this;
-        }
-
+        
         public Builder outputDestination() throws IOException {
+        	System.out.println("Please enter a valid output destination. If no valid output destination is selected then a default destination will be selected");
         	String outputDestination = reader.readLine();
             this.outputDestination = outputDestination;
             return this;
@@ -105,11 +91,27 @@ public class UserRequest {
             return this;
         }
         
-        public Builder jobID(int jobID) {
-        	this.jobID= (int) ((Math.random() * 2000) + 1);
-        	return this;
+    
+
+        public Builder inputSource() throws IOException{
+        	System.out.println("Please enter an input source else if left blank or invalid file path, you will be prompted to enter a value instead.");
+        	inputSource = reader.readLine();
+        	File file = new File(inputSource);
+        	if(file.exists() && file.canRead()) {
+        		this.inputSource = inputSource;	
+        	}else {
+        		UserInputHandler handler = new UserInputHandler();
+        		System.out.println("Enter a value to be computed:");
+        		String valueA = reader.readLine();
+        		handler.setInputMap(valueA);
+        		int value = Integer.parseInt(valueA);
+        		handler.writeValueA(value, "Output/ValueA.txt");
+        	}
+            this.inputSource = inputSource;
+            return this;
         }
 
+        
 
         public UserRequest build() {
             return new UserRequest(this);

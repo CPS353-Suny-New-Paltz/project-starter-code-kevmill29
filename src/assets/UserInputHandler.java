@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class UserInputHandler {
 	private final HashMap<Integer, String> inputMap;
-	private final Scanner input;
 	private int valueA;
 	private String delimiter;
 	private UserRequest request;
@@ -24,15 +23,16 @@ public class UserInputHandler {
 		return request.getDelimiter();
 	}
 
+	
 
 
 	public UserInputHandler() {
-		input = new Scanner(System.in);
 		inputMap = new HashMap<>();
+		this.request = request;
 	}
 
 	public HashMap<Integer, String> setInputMap() {
-		int jobID= request.getJobId();
+		int jobID= (int) ((Math.random() * 2000) + 1);
 		int valueA=0;
 		try {
 			valueA = promptValueA();
@@ -50,9 +50,9 @@ public class UserInputHandler {
 
 		return inputMap;
 	}
-	
-	public HashMap<Integer, String> setInputMap(int valueA, int jobID) {
-		jobID = request.getJobId();
+	//overloaded method for if the user does not enter a input location
+	public HashMap<Integer, String> setInputMap(String valueA) {
+		int jobID = (int) ((Math.random() * 2000) + 1);
 		
 		int valueB = (int) ((Math.random() * 2001) - 1000) / 2; // creates random second value
 		String input = valueA + delimiter + valueB;
