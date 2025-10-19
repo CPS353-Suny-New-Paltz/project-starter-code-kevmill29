@@ -1,29 +1,34 @@
 package assets;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInputHandler {
+<<<<<<< Updated upstream
 	private HashMap<Integer, String> inputMap;
 	private Scanner input;
+=======
+	private final HashMap<Integer, String> inputMap;
+	
+>>>>>>> Stashed changes
 	private int valueA;
-	private String delimiter;
 	private UserRequest request;
+	private String delimiter = Character.toString(request.getDelimiter());
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
 
 
 
-	public String getDelimiter() {
-		return delimiter;
-	}
-
+	
 
 
 	public UserInputHandler() {
-		input = new Scanner(System.in);
+		
 		inputMap = new HashMap<>();
 	}
 
@@ -42,16 +47,17 @@ public class UserInputHandler {
 
 
 	public int promptValueA() throws IOException {
-		System.out.println("Select a delimiter, this has to be a punctuation mark! EX: !,/?");
-		this.delimiter = request.getDelimiter(); //gets delimiter from userRequest
+
 		System.out.println("Enter value for a: \n");
-		valueA = input.nextInt();
+		String value = reader.readLine()
+;		valueA = Integer.parseInt(value);
 		// For euler project 27 user cannot enter an integer value higher than 1000 or
 		// lower than -1000
 		if (valueA > 1000 || valueA < -1000 || valueA == 0) {
 			System.out.println("Invalid input please try again!");
 			System.out.println("Enter value for a: \n");
-			valueA = input.nextInt();
+			value = reader.readLine();		
+			valueA = Integer.parseInt(value);
 		}
 
 		writeValueA(valueA, "Output/valueA.txt");//creates file that just stores valueA to be used later
