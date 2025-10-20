@@ -14,6 +14,8 @@ public class UserInputHandler {
 	private String delimiter;
 	private UserRequest request;
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private int jobID;
+	private int lastJobID;
 
 
 
@@ -32,7 +34,7 @@ public class UserInputHandler {
 	}
 
 	public HashMap<Integer, String> setInputMap() {
-		int jobID= (int) ((Math.random() * 2000) + 1);
+		int jobID= getJobID();;
 		int valueA=0;
 		try {
 			valueA = promptValueA();
@@ -44,28 +46,32 @@ public class UserInputHandler {
 		String input = valueA + delimiter + valueB;
 		// place inputs into hashmap with a jobID assigned to it
 		if(inputMap.containsKey(jobID)) {
-			jobID = (int) ((Math.random() * 2000) + 1); //randomizes jobID again if same jobID is created
+			jobID = getJobID();; //randomizes jobID again if same jobID is created
 		}
+		lastJobID = jobID;
 		inputMap.put(jobID, input);
 
 		return inputMap;
 	}
 	//overloaded method for if the user does not enter a input location
 	public HashMap<Integer, String> setInputMap(String valueA) {
-		int jobID = (int) ((Math.random() * 2000) + 1);
+		int jobID = getJobID();
 		
 		int valueB = (int) ((Math.random() * 2001) - 1000) / 2; // creates random second value
 		String input = valueA + delimiter + valueB;
 		// place inputs into hashmap with a jobID assigned to it
 		if(inputMap.containsKey(jobID)) {
-			jobID = (int) ((Math.random() * 2000) + 1); //randomizes jobID again if same jobID is created
+			jobID = getJobID()); //randomizes jobID again if same jobID is created
 		}
 		inputMap.put(jobID, input);
+		lastJobID = jobID;
 
 		return inputMap;
 	}
 
-
+	public int getJobID() {
+		return (int)(Math.random()*2000);
+	}
 
 	public int promptValueA() throws IOException {
 	
@@ -88,18 +94,18 @@ public class UserInputHandler {
 
 	}
 
-	public int getValueA(HashMap<Integer, String> map, int jobID) {
+	public int getValueA(HashMap<Integer, String> map) {
 
-		String values = map.get(jobID);
+		String values = map.get(lastJobID);
 		String[]splitter = values.split(delimiter);
 		valueA = Integer.parseInt(splitter[0]);
 		return valueA;
 
 	}
 
-	public int getValueB(HashMap<Integer, String> map, int jobID) {
+	public int getValueB(HashMap<Integer, String> map) {
 
-		String values = map.get(jobID);
+		String values = map.get(lastJobID);
 		String[]splitter = values.split(delimiter);
 		int valueB = Integer.parseInt(splitter[1]);
 		return valueB;
