@@ -38,19 +38,9 @@ public class ProcessorPrototype {
 
 
 		//Lastly Check if file exists
-		ResponseCode code = ResponseCode.FAILURE;
+		
 		File file = new File("Output/answers.txt");
-	    if (!file.exists()) {
-	        System.out.println("File write failed: No file was created.");
-
-	        System.out.println(code);
-
-	    } else {
-	        System.out.println("Conversion successful: " + newMap.size() + " entries added.");
-	        code.isSuccess();
-	    }
-
-
+	
 
 
 			 return newMap;

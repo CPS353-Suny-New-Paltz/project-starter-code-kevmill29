@@ -1,17 +1,25 @@
 package assets;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
 public class UserRequest {
     private final String inputSource;
     private final String outputDestination;
     private final String delimiter;
-    private final boolean useDefaultDelimiter;
+    private static UserRequest instance;
+   
 
     // Private constructor
     private UserRequest(Builder builder) {
+    
         this.inputSource = builder.inputSource;
         this.outputDestination = builder.outputDestination;
         this.delimiter = builder.delimiter;
-        this.useDefaultDelimiter = builder.useDefaultDelimiter;
+     
     }
 
     // Getters
@@ -26,15 +34,30 @@ public class UserRequest {
     public String getDelimiter() {
         return delimiter;
     }
+    
 
-    public boolean isUseDefaultDelimiter() {
-        return useDefaultDelimiter;
+    public static void setInstance(UserRequest userRequest) {
+        instance = userRequest;
     }
+    
+    public static UserRequest getInstance() {
+        return instance;
+    }
+
+    
+
+
     //This will check if the userRequest is valid
-    public boolean isValid() {
-        return inputSource != null && !inputSource.isEmpty()
-            && outputDestination != null && !outputDestination.isEmpty()
-            && delimiter != null && !delimiter.isEmpty();
+    public UserRequestCode validation() {
+    	if(getInputSource() == null) {
+    		return UserRequestCode.NULL_INPUT;
+    	}
+    	if(getOutputDestination()==null) {
+    		return UserRequestCode.NULL_OUTPUT;
+    	}
+    	
+    	
+    	return UserRequestCode.SUCCESS_RESPONSE;
     }
 
     // ✅ Builder Class
@@ -42,27 +65,53 @@ public class UserRequest {
         private String inputSource;
         private String outputDestination;
         private String delimiter;
-        private boolean useDefaultDelimiter = false; // default to false
+        private int jobID;
+        private BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
 
-        public Builder inputSource(String inputSource) {
-            this.inputSource = inputSource;
-            return this;
-        }
-
-        public Builder outputDestination(String outputDestination) {
+        
+        public Builder outputDestination() throws IOException {
+        	System.out.println("Please enter a valid output destination. If no valid output destination is selected then a default destination will be selected");
+        	String outputDestination = reader.readLine();
             this.outputDestination = outputDestination;
             return this;
         }
 
-        public Builder delimiter(String delimiter) {
-            this.delimiter = delimiter;
+        public Builder delimiter() throws IOException {
+        	String[] allowedLimiters = {",",".","/","-","|","*"};
+        	System.out.println("Please enter a valid delimiter from the following list: "+Arrays.toString(allowedLimiters));
+        	String delimiter = reader.readLine();
+        	
+        	boolean contains = Arrays.stream(allowedLimiters).anyMatch(delimiter::contains);
+        	if(contains) {
+        		this.delimiter = delimiter;
+        	}else {
+        		System.out.println("Cannot use this delimiter or no delimiter was selected. Using default delimiter");
+        		this.delimiter = ",";
+        	}
+            return this;
+        }
+        
+    
+
+        public Builder inputSource() throws IOException{
+        	System.out.println("Please enter an input source else if left blank or invalid file path, you will be prompted to enter a value instead.");
+        	inputSource = reader.readLine();
+        	File file = new File(inputSource);
+        	if(file.exists() && file.canRead()) {
+        		this.inputSource = inputSource;	
+        	}else {
+        		UserInputHandler handler = new UserInputHandler();
+        		System.out.println("Enter a value to be computed:");
+        		String valueA = reader.readLine();
+        		handler.setInputMap(valueA);
+        		int value = Integer.parseInt(valueA);
+        		handler.writeValueA(value, "Output/ValueA.txt");
+        	}
+            this.inputSource = inputSource;
             return this;
         }
 
-        public Builder useDefaultDelimiter(boolean useDefaultDelimiter) {
-            this.useDefaultDelimiter = useDefaultDelimiter;
-            return this;
-        }
+        
 
         public UserRequest build() {
             return new UserRequest(this);

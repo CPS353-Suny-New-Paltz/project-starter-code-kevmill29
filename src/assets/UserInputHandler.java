@@ -1,58 +1,91 @@
 package assets;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserInputHandler {
 	private final HashMap<Integer, String> inputMap;
-	private final Scanner input;
 	private int valueA;
 	private String delimiter;
 	private UserRequest request;
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private int jobID;
+	private int lastJobID;
 
 
 
 
 
 	public String getDelimiter() {
-		return delimiter;
+		return request.getDelimiter();
 	}
 
+	
 
 
 	public UserInputHandler() {
-		input = new Scanner(System.in);
 		inputMap = new HashMap<>();
+		this.request = request;
 	}
 
-	public HashMap<Integer, String> setInputMap(int valueA, int jobID) {
-
+	public HashMap<Integer, String> setInputMap() {
+		int jobID= getJobID();;
+		int valueA=0;
+		try {
+			valueA = promptValueA();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int valueB = (int) ((Math.random() * 2001) - 1000) / 2; // creates random second value
 		String input = valueA + delimiter + valueB;
 		// place inputs into hashmap with a jobID assigned to it
 		if(inputMap.containsKey(jobID)) {
-			jobID = (int) ((Math.random() * 2000) + 1); //randomizes jobID again if same jobID is created
+			jobID = getJobID();; //randomizes jobID again if same jobID is created
 		}
+		lastJobID = jobID;
 		inputMap.put(jobID, input);
 
 		return inputMap;
 	}
+	//overloaded method for if the user does not enter a input location
+	public HashMap<Integer, String> setInputMap(String valueA) {
+		int jobID = getJobID();
+		
+		int valueB = (int) ((Math.random() * 2001) - 1000) / 2; // creates random second value
+		String input = valueA + delimiter + valueB;
+		// place inputs into hashmap with a jobID assigned to it
+		if(inputMap.containsKey(jobID)) {
+			jobID = getJobID(); //randomizes jobID again if same jobID is created
+		}
+		inputMap.put(jobID, input);
+		lastJobID = jobID;
 
+		return inputMap;
+	}
+
+	public int getJobID() {
+		return (int)(Math.random()*2000);
+	}
 
 	public int promptValueA() throws IOException {
-		System.out.println("Select a delimiter, this has to be a punctuation mark! EX: !,/?");
-		this.delimiter = request.getDelimiter(); //gets delimiter from userRequest
+	
+		 //gets delimiter from userRequest
 		System.out.println("Enter value for a: \n");
-		valueA = input.nextInt();
+		String value = reader.readLine();
+		valueA = Integer.parseInt(value);
 		// For euler project 27 user cannot enter an integer value higher than 1000 or
 		// lower than -1000
-		if (valueA > 1000 || valueA < -1000 || valueA == 0) {
+		while (valueA > 1000 || valueA < -1000 || valueA == 0) {
 			System.out.println("Invalid input please try again!");
 			System.out.println("Enter value for a: \n");
-			valueA = input.nextInt();
+		     value = reader.readLine();
+			valueA = Integer.parseInt(value);
 		}
 
 		writeValueA(valueA, "Output/valueA.txt");//creates file that just stores valueA to be used later
@@ -61,18 +94,18 @@ public class UserInputHandler {
 
 	}
 
-	public int getValueA(HashMap<Integer, String> map, int jobID) {
+	public int getValueA(HashMap<Integer, String> map) {
 
-		String values = map.get(jobID);
+		String values = map.get(lastJobID);
 		String[]splitter = values.split(delimiter);
 		valueA = Integer.parseInt(splitter[0]);
 		return valueA;
 
 	}
 
-	public int getValueB(HashMap<Integer, String> map, int jobID) {
+	public int getValueB(HashMap<Integer, String> map) {
 
-		String values = map.get(jobID);
+		String values = map.get(lastJobID);
 		String[]splitter = values.split(delimiter);
 		int valueB = Integer.parseInt(splitter[1]);
 		return valueB;
@@ -104,3 +137,4 @@ public void writeValueA(int valueA,String filePath) throws IOException {
 
 
 }
+
