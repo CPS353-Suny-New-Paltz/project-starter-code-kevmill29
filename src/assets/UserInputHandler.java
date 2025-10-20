@@ -61,7 +61,7 @@ public class UserInputHandler {
 		String input = valueA + delimiter + valueB;
 		// place inputs into hashmap with a jobID assigned to it
 		if(inputMap.containsKey(jobID)) {
-			jobID = getJobID()); //randomizes jobID again if same jobID is created
+			jobID = getJobID(); //randomizes jobID again if same jobID is created
 		}
 		inputMap.put(jobID, input);
 		lastJobID = jobID;
@@ -137,3 +137,4 @@ public void writeValueA(int valueA,String filePath) throws IOException {
 
 
 }
+
