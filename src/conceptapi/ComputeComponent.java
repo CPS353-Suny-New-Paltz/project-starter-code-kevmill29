@@ -6,8 +6,11 @@ import java.util.List;
 import project.annotations.ConceptualAPI;
 @ConceptualAPI
 public interface ComputeComponent {
-int computeValues(HashMap<Integer, String>map, int jobID);
 
-int computeValues(UserComponent userComponent);
-int computeValues(List<Integer> list);
+
+int computeValues(List<Integer> pair);
+//int computeValues(HashMap<Integer, String>map, int jobID); will be used later
+
+
+
 }

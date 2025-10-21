@@ -3,7 +3,10 @@ package assets;
 public enum ResponseCode {
 
 	   SUCCESS(true),
-	    FAILURE(false);
+	    NULL_RESPONSE(false),
+	    NULL_INPUT(false),
+	    NULL_OUTPUT(false),
+	    ;
 
 	    private final boolean status;
 

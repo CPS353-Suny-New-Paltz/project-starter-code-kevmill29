@@ -8,11 +8,11 @@ import assets.UserInputHandler;
 
 public class ComputeValues  {
 	//will finish this later but this will return a new hashMap again that includes the answer to be written into a file to be accessed later
-	public int computeValues(HashMap<Integer, String>map, int jobID) {
+	public int computeValues(HashMap<Integer, String>map) {
 			//Used Problem 27 from Project EuleR
 			UserInputHandler handler = new UserInputHandler();
-			int valueA = handler.getValueA(map, jobID);
-			int valueB = handler.getValueB(map, jobID);
+			int valueA = handler.getValueA(map);
+			int valueB = handler.getValueB(map);
 
 			int n = 0;
 			while(primeCount((n *n)+(valueA*n) + valueB)){
