@@ -38,16 +38,13 @@ public class ComputeEngineIntegrationTest {
         // Simulate integration flow
         List<Integer> data = datastore.input();
         for (int i = 0; i < data.size() - 1; i++) {
-            List<Integer> pair = Arrays.asList(data.get(i), data.get(i + 1));
-            int result = concept.computeValues(pair);
+            int valueA = inputData.get(i);
+            int result = concept.computeValues(valueA);
             output.write(Integer.toString(result));
         }
 
         // Expected output
-        List<String> expected = Arrays.asList(
-            Integer.toString(concept.computeValues(Arrays.asList(1, 10))),
-            Integer.toString(concept.computeValues(Arrays.asList(10, 25)))
-        );
+        int expected = concept.computeValues(0)
 
         assertEquals(expected, output.getOutput());
     }

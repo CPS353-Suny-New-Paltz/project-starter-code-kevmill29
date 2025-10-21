@@ -27,5 +27,19 @@ public class UserComponent implements UserInterface{
 
 
 	}
+	public int getValue(String inputSource) throws NumberFormatException, IOException {
+		File file= new File(inputSource);
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+
+		int valueA = 0;
+		String line;
+		while((line = reader.readLine())!= null) {
+			valueA = Integer.parseInt(line);
+		}
+		UserInputHandler handler = new UserInputHandler();
+
+		return valueA;
+
+	}
 
 }
