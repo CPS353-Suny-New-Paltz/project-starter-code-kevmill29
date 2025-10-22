@@ -99,15 +99,8 @@ public class UserRequest {
         	File file = new File(inputSource);
         	if(file.exists() && file.canRead()) {
         		this.inputSource = inputSource;	
-        	}else {
-        		UserInputHandler handler = new UserInputHandler();
-        		System.out.println("Enter a value to be computed:");
-        		String valueA = reader.readLine();
-        		handler.setInputMap(valueA);
-        		int value = Integer.parseInt(valueA);
-        		handler.writeValueA(value, "Output/ValueA.txt");
         	}
-            this.inputSource = inputSource;
+         
             return this;
         }
 

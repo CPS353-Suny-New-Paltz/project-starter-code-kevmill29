@@ -12,6 +12,7 @@ import org.mockito.MockedConstruction;
 
 import assets.UserRequest;
 import assets.UserRequest.Builder;
+import assets.UserRequestCode;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import networkapi.NetworkPrototype;
@@ -21,10 +22,10 @@ public class TestNetworkInterfaceAPI {
 		public void smokeTest() {
 		    // Explicit constructor call for Spoon to detect
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-
+		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
 		    // You can still mock other behavior if needed
 		    UserRequest mockRequest = mock(UserRequest.class);
-		    when(mockRequest.isValid()).thenReturn(true);
+		    when(mockRequest.validation()).thenReturn(code);
 
 		    // Proceed with your test logic
 		    NetworkPrototype prototype = new NetworkPrototype();

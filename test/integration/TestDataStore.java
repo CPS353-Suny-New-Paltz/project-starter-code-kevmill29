@@ -2,7 +2,9 @@ package integration;
 import java.util.List;
 import processapi.ProcessorAPI;
 import processapi.TestOutputCollector;
+import processapi.WriteData;
 import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
+import assets.UserRequest;
 import processapi.ConvertData;  // adjust if your interface defines this type
 
 
@@ -30,4 +32,16 @@ public class TestDataStore implements ProcessorAPI{
 	    public void write(String value) {
 	        output.write(value);
 	    }
+
+		@Override
+		public ConvertData read(UserRequest input) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public WriteData write(UserRequest output) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }
