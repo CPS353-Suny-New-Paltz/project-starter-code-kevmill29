@@ -1,6 +1,7 @@
 package assets;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -112,8 +113,10 @@ public class UserInputHandler {
 	}
 
 
-public void writeInputToFile(String filePath) {
-    try (FileWriter writer = new FileWriter(filePath)) {
+public File writeInputToFile(String filePath) {
+	File directory = new File("directory");
+	File file = new File(directory, filePath);
+    try (FileWriter writer = new FileWriter(file)) {
         for (Integer jobID : inputMap.keySet()) {
             String inputLine = jobID + ": " + inputMap.get(jobID) + "\n";
             writer.write(inputLine);
@@ -122,7 +125,7 @@ public void writeInputToFile(String filePath) {
     } catch (IOException e) {
         System.out.println("Error writing to file: " + e.getMessage());
     }
-
+return file;
 }
 
 
