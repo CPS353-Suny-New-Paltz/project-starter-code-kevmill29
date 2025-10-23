@@ -16,13 +16,14 @@ import project.annotations.NetworkAPIPrototype;
 
 			try {
 				 request = new UserRequest.Builder()
-						.inputSource() // placeholder
-						.outputDestination().
-						delimiter() // or prompt user later
+						.inputSource("input") // placeholder
+						.outputDestination("output").
+						delimiter(",") // or prompt user later
 						.build();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				request = null;
 			}
 
 

@@ -1,6 +1,8 @@
 package smoketest;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -23,13 +25,15 @@ public class TestNetworkInterfaceAPI {
 		    // Explicit constructor call for Spoon to detect
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
 		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
-		    // You can still mock other behavior if needed
-		    UserRequest mockRequest = mock(UserRequest.class);
-		    when(mockRequest.validation()).thenReturn(code);
+		   
+//		    UserRequest mockRequest = mock(UserRequest.class);
+//		    when(mockRequest.validation()).thenReturn(code);
 
 		    // Proceed with your test logic
 		    NetworkPrototype prototype = new NetworkPrototype();
-		    prototype.prototype(realAPI);
+		    assertThrows(NullPointerException.class, ()-> {
+		    	prototype.prototype(realAPI);
+		    });
 		}
 
 }

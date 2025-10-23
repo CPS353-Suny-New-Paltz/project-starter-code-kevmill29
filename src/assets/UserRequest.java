@@ -69,17 +69,17 @@ public class UserRequest {
         private BufferedReader reader= new BufferedReader(new InputStreamReader(System.in));
 
         
-        public Builder outputDestination() throws IOException {
+        public Builder outputDestination(String outputSource) throws IOException {
         	System.out.println("Please enter a valid output destination. If no valid output destination is selected then a default destination will be selected");
         	String outputDestination = reader.readLine();
             this.outputDestination = outputDestination;
             return this;
         }
 
-        public Builder delimiter() throws IOException {
+        public Builder delimiter(String delimiter) throws IOException {
         	String[] allowedLimiters = {",",".","/","-","|","*"};
         	System.out.println("Please enter a valid delimiter from the following list: "+Arrays.toString(allowedLimiters));
-        	String delimiter = reader.readLine();
+            delimiter = reader.readLine();
         	
         	boolean contains = Arrays.stream(allowedLimiters).anyMatch(delimiter::contains);
         	if(contains) {
@@ -93,14 +93,13 @@ public class UserRequest {
         
     
 
-        public Builder inputSource() throws IOException{
+        public Builder inputSource(String inputSource) throws IOException{
         	System.out.println("Please enter an input source else if left blank or invalid file path, you will be prompted to enter a value instead.");
         	inputSource = reader.readLine();
         	File file = new File(inputSource);
         	if(file.exists() && file.canRead()) {
         		this.inputSource = inputSource;	
         	}
-         
             return this;
         }
 
