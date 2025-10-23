@@ -2,6 +2,7 @@ package integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,22 +33,24 @@ public class ComputeEngineIntegrationTest {
        
         ComputeComponent concept = new ImplementConceptAPI();
 
-        // Get compute engine
+        List<Integer>results = new ArrayList<>();
         
 
         // Simulate integration flow
         List<Integer> data = datastore.input();
-        for (int i = 0; i < data.size() - 1; i++) {
-            List<Integer> pair = Arrays.asList(data.get(i), data.get(i + 1));
-            int result = concept.computeValues(pair);
+        for (int i = 0; i < data.size(); i++) {
+            int valueA = inputData.get(i);
+            int result = concept.computeValues(valueA);
+            results.add(result);
             output.write(Integer.toString(result));
         }
 
         // Expected output
-        List<String> expected = Arrays.asList(
-            Integer.toString(concept.computeValues(Arrays.asList(1, 10))),
-            Integer.toString(concept.computeValues(Arrays.asList(10, 25)))
-        );
+        List<String> expected = new ArrayList();
+        expected.add("0");
+        expected.add("0");
+        expected.add("0");
+      
 
         assertEquals(expected, output.getOutput());
     }

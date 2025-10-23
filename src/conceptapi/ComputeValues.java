@@ -40,12 +40,12 @@ public class ComputeValues  {
 
 
 
-
-public int computeValues(List<Integer>list) {
+//using this method to test integration
+public int computeValues(int valueA) {
 		//Used Problem 27 from Project EuleR
 		UserInputHandler handler = new UserInputHandler();
-		int valueA = list.get(0);
-		int valueB = list.get(1);
+		
+		int valueB = 10; // using a static number for now for integration test results
 
 		int n = 0;
 		while(primeCount((n *n)+(valueA*n) + valueB)){

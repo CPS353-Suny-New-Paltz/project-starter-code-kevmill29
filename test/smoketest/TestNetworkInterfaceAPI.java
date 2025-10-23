@@ -2,18 +2,18 @@ package smoketest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
+
+
+
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockConstruction;
+
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
+
 
 import assets.UserRequest;
-import assets.UserRequest.Builder;
+
 import assets.UserRequestCode;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
