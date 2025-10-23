@@ -26,14 +26,13 @@ public class TestNetworkInterfaceAPI {
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
 		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
 		   
-//		    UserRequest mockRequest = mock(UserRequest.class);
-//		    when(mockRequest.validation()).thenReturn(code);
+	    UserRequest mockRequest = mock(UserRequest.class);
+	    when(mockRequest.validation()).thenReturn(UserRequestCode.SUCCESS_RESPONSE);
 
 		    // Proceed with your test logic
 		    NetworkPrototype prototype = new NetworkPrototype();
-		    assertThrows(NullPointerException.class, ()-> {
-		    	prototype.prototype(realAPI);
-		    });
+		    prototype.prototype(realAPI);
+		   assertEquals(code, mockRequest.validation());
 		}
 
 }
