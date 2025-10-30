@@ -14,6 +14,7 @@ public class ImplementConceptAPI implements ComputeComponent {
 	@Override
 	public int computeValues(int valueA) {
 		// TODO Auto-generated method stub
+	
 		return 0;
 	}
 
