@@ -4,8 +4,6 @@ package smoketest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +16,15 @@ public class TestComputeComponent {
     @Test
     void conceptSmokeTestFail() {
 
+    ConceptAPIPrototype prototype = new ConceptAPIPrototype();
+    prototype.prototype(realComponent);
         // Assertion purposefully failing test 
-   assertNotEquals(realComponent.computeValues(92), 0);
+   assertEquals(realComponent.computeValues(92), 0);
     }
     @Test
 	void conceptSmokeTestPass() {
+    	ConceptAPIPrototype prototype = new ConceptAPIPrototype();
+    	prototype.prototype(realComponent);
     	assertEquals(realComponent.computeValues(0), 0);
     	
     }
