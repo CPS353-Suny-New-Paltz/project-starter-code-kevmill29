@@ -10,7 +10,7 @@ import assets.UserRequest;
 
 
 public class WriteData {
-	public static void writeData(HashMap<Integer, String>map) {
+	public static void writeData(List<Integer> newList) {
 		String path = "Output/answers.txt";
 		UserInputHandler handler= new UserInputHandler();
 		handler.writeInputToFile(path);

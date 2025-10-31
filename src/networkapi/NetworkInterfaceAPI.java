@@ -1,12 +1,13 @@
 package networkapi;
 
-import assets.UserRequest;
+import assets.UserRequestCode;
+import conceptapi.ComputeComponent;
 import project.annotations.NetworkAPI;
 
 
 @NetworkAPI
 public interface NetworkInterfaceAPI {
 
-	void initalize(UserRequest request);
-	void respond();
+	boolean initialize(UserRequestCode code);
+	int respond(boolean isInit, int valueA, ComputeComponent concept);
 }

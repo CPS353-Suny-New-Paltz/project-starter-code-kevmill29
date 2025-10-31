@@ -21,18 +21,28 @@ import networkapi.NetworkPrototype;
 
 public class TestNetworkInterfaceAPI {
 		@Test
-		public void smokeTest() {
-		    // Explicit constructor call for Spoon to detect
+		public void smokeTestFail() {
+		    
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
-		   
-	    UserRequest mockRequest = mock(UserRequest.class);
-	    when(mockRequest.validation()).thenReturn(UserRequestCode.SUCCESS_RESPONSE);
+		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE; //create a success response
+	
 
-		    // Proceed with your test logic
+		 
 		    NetworkPrototype prototype = new NetworkPrototype();
 		    prototype.prototype(realAPI);
-		   assertEquals(code, mockRequest.validation());
+		   assertEquals(true, realAPI.initialize(code)); // since there is no actual implementation initialize should be false 
+		}
+		@Test
+		public void smokeTestPass() {
+			  NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
+			    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
+			   
+		   
+
+			   
+			    NetworkPrototype prototype = new NetworkPrototype();
+			    prototype.prototype(realAPI);
+			   assertEquals(false, realAPI.initialize(code));
 		}
 
 }
