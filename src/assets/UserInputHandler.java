@@ -109,8 +109,9 @@ public class UserInputHandler {
 
 		String values = request.getInputSource();
 		String line;
-		while((line = reader.readLine()) != null)
+		while((line = reader.readLine())!= null) {
 		valueA = Integer.parseInt(line);
+		}
 		return valueA;
 
 	}

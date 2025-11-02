@@ -14,10 +14,10 @@ import project.annotations.NetworkAPI;
 @NetworkAPI
 public interface NetworkInterfaceAPI {
 	
-	boolean initialize (UserRequest request);
-	List<Integer> respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values);
+	boolean initialize(UserRequest request);
+	List<Integer>respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values);
 	int respond(boolean isInit, int valueA, ComputeComponent concept);
-	List<Integer> readRequest(ProcessorAPI storage, UserRequest request);
+	List<Integer>readRequest(ProcessorAPI storage, UserRequest request);
 	void writeRequest(ProcessorAPI storage,List<Integer> results, UserRequest request) throws IOException;
 }
 

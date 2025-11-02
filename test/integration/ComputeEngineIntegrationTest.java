@@ -33,7 +33,7 @@ public class ComputeEngineIntegrationTest {
         UserRequest request = new UserRequest("here","outhere",",");
       
         NetworkInterfaceAPI userInterface = new ImplementNetworkAPI();
-        boolean isInit = userInterface.initialize (request); //checks if the enum is giving a true response 
+        boolean isInit = userInterface.initialize(request); //checks if the enum is giving a true response 
        ComputeComponent concept = new ImplementConceptAPI();
        	System.out.println(isInit);
         List<Integer>results = new ArrayList<>();
