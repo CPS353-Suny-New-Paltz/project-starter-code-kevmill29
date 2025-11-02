@@ -38,6 +38,14 @@ public class TestProcessorAPI {
     	String filePath = "./test/testFile.txt";
        File testFile = new File(filePath);
         ProcessorAPI testStorage = new ImplementProcessorAPI();
+        
+        //issues with this is that there is only one format that is accepted at the moment for this to read a file
+        // the file needs to have lines that only contain one integer if there are more that are listed like 1,2,3,4,5 it will send a number format exception
+        //has to be listed like: 
+        //1
+        //2
+        //3
+        //4
      
 
 

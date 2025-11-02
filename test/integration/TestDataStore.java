@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
-import processapi.ConvertData;  // adjust if your interface defines this type
 import processapi.ProcessorAPI;
 import processapi.TestOutputCollector;
 
@@ -21,9 +20,9 @@ public class TestDataStore implements ProcessorAPI{
 	        this.output = output;
 	    }
 
-	    public ConvertData read(UserInputHandler handler) {
+	    public void read(UserInputHandler handler) {
 	        // Not needed for test-only implementation
-	        return null;
+	        
 	    }
 
 	    public List<Integer> input() {

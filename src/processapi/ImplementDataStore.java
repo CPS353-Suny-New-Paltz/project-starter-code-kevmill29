@@ -2,8 +2,6 @@ package processapi;
 
 import java.util.List;
 
-import assets.UserInputHandler;
-
 public class ImplementDataStore {
 private final InputConfig<Integer> inputConfig;
 private final OutputConfig<String> outputConfig;
@@ -28,11 +26,7 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 	}
 
 
-	public ConvertData read(UserInputHandler handler) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 
 	
 }

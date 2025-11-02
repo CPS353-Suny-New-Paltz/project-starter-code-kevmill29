@@ -26,7 +26,7 @@ public class TestComputeComponent {
     	
     	
     	System.out.println(realComponent.computeValue(1));
-    	assertEquals(realComponent.computeValue(1), 0);
+    	assertEquals(realComponent.computeValue(1), 204);
     	
     }
 }

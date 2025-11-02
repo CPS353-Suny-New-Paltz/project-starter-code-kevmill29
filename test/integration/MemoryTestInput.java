@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import processapi.InputConfig;
-import processapi.ReadData;
 
 public class MemoryTestInput implements InputConfig {
 private final List<Integer> data;
@@ -20,9 +19,9 @@ public MemoryTestInput(List<Integer> data) {
 	}
 
 	@Override
-	public ReadData read(String inputSource) {
+	public void read(String inputSource) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 }
