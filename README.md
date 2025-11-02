@@ -1,5 +1,5 @@
 
-# Software Engineering Project Starter Code
+# Consecutive Quadratic Prime Number Calculator
 ## TABLE OF CONTENTS
 -[Features](#features)
 -[Installation](#installation)
