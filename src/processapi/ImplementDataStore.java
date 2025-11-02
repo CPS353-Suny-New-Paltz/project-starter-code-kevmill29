@@ -15,10 +15,6 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 }
 	
 	
-	private WriteData writeData() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public List<Integer> input() {
 		// TODO Auto-generated method stub
 		return inputConfig.getInput();
@@ -31,11 +27,6 @@ public ImplementDataStore(InputConfig<Integer> inputConfig, OutputConfig<String>
 		outputConfig.writer(data);
 	}
 
-
-	public WriteData writer(List<String> data) {
-		// TODO Auto-generated method stub
-		return new WriteData();
-	}
 
 	public ConvertData read(UserInputHandler handler) {
 		// TODO Auto-generated method stub

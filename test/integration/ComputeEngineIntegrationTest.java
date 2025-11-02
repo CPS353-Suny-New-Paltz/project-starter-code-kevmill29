@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import assets.UserRequest;
 import assets.UserRequestCode;
 import conceptapi.ComputeComponent;
 import conceptapi.ImplementConceptAPI;
@@ -29,9 +30,10 @@ public class ComputeEngineIntegrationTest {
 
         // Empty implementations
         //create a static code response for initialize method in userInterface
-        UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;//creating user request code to be true so that calculation returns correct numbers
+        UserRequest request = new UserRequest("here","outhere",",");
+      
         NetworkInterfaceAPI userInterface = new ImplementNetworkAPI();
-        boolean isInit = userInterface.initialize(code); //checks if the enum is giving a true response 
+        boolean isInit = userInterface.initialize (request); //checks if the enum is giving a true response 
        ComputeComponent concept = new ImplementConceptAPI();
        	System.out.println(isInit);
         List<Integer>results = new ArrayList<>();

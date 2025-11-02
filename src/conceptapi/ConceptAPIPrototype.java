@@ -20,8 +20,8 @@ public class ConceptAPIPrototype {
 		values = userComponent.getValues();
 
 		ComputeValues computation = new ComputeValues();
-		int result=computation.computeValues(values);
-		System.out.println("Computation result is: "+ result);
+//		int result=computation.computeValues(values);
+//		System.out.println("Computation result is: "+ result);
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

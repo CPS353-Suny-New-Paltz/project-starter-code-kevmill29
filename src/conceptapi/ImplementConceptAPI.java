@@ -12,10 +12,10 @@ public class ImplementConceptAPI implements ComputeComponent {
 //	}
 
 	@Override
-	public int computeValues(int valueA) {
+	public int computeValue(int valueA) {
 		// TODO Auto-generated method stub
 	
-		return 0;
+		return ComputeValues.computeValues(valueA);
 	}
 
 }

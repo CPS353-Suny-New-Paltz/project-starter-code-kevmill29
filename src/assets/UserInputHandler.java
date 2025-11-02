@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import com.opencsv.CSVWriter;
 
 public class UserInputHandler {
 	private final HashMap<Integer, String> inputMap;
@@ -103,6 +104,17 @@ public class UserInputHandler {
 		return valueA;
 
 	}
+	
+	public int getValueA(UserRequest request) throws NumberFormatException, IOException {
+
+		String values = request.getInputSource();
+		String line;
+		while((line = reader.readLine()) != null)
+		valueA = Integer.parseInt(line);
+		return valueA;
+
+	}
+
 
 	public int getValueB(HashMap<Integer, String> map) {
 
@@ -113,20 +125,20 @@ public class UserInputHandler {
 	}
 
 
-public File writeInputToFile(String filePath) {
-	File directory = new File("directory");
-	File file = new File(directory, filePath);
-    try (FileWriter writer = new FileWriter(file)) {
-        for (Integer jobID : inputMap.keySet()) {
-            String inputLine = jobID + ": " + inputMap.get(jobID) + "\n";
-            writer.write(inputLine);
-        }
-        System.out.println("Input data successfully written to " + filePath);
-    } catch (IOException e) {
-        System.out.println("Error writing to file: " + e.getMessage());
-    }
-return file;
+
+
+
+
+
+
+
+
+
+private void writeText(String filePath, String string) {
+	// TODO Auto-generated method stub
+	
 }
+
 
 
 

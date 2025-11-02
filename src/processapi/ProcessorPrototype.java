@@ -17,7 +17,7 @@ public class ProcessorPrototype {
 //		
 		List<Integer>newList = new ArrayList<>();
 
-		WriteData.writeData(newList);
+		
 
 
 

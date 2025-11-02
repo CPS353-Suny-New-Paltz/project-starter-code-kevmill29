@@ -5,7 +5,7 @@ import project.annotations.ConceptualAPI;
 public interface ComputeComponent {
 
 
-int computeValues(int valueA);
+int computeValue(int valueA);
 //int computeValues(HashMap<Integer, String>map, int jobID); will be used later
 
 

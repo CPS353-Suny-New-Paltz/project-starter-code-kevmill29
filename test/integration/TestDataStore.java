@@ -1,11 +1,14 @@
 package integration;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
+import processapi.ConvertData;  // adjust if your interface defines this type
 import processapi.ProcessorAPI;
 import processapi.TestOutputCollector;
-import processapi.WriteData;
-import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
-import assets.UserRequest;
-import processapi.ConvertData;  // adjust if your interface defines this type
 
 
 public class TestDataStore implements ProcessorAPI{
@@ -33,15 +36,22 @@ public class TestDataStore implements ProcessorAPI{
 	        output.write(value);
 	    }
 
-		@Override
-		public ConvertData read(UserRequest input) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 
 		@Override
-		public WriteData write(UserRequest output) {
+		public List<Integer> read(String filePath) throws IOException {
+			
+			return Files.readAllLines(Paths.get(filePath)).stream()//streams through the strings within the file
+					.map(String::trim) // shortens the string if there are empty spaces in the line
+					.filter(s->!s.isEmpty())// checks if line is empty and will skip if the line is not
+					.map(Integer::parseInt)// converts String into integer
+					.collect(Collectors.toList()); // creates new list and collects all found integers
+		}
+
+	
+
+		@Override
+		public void write(String output, List<Integer> data, String delimiter) throws IOException {
 			// TODO Auto-generated method stub
-			return null;
+			
 		}
 }

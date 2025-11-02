@@ -2,19 +2,11 @@ package smoketest;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-
-import static org.mockito.Mockito.mock;
-
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-
 import assets.UserRequest;
-
-import assets.UserRequestCode;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import networkapi.NetworkPrototype;
@@ -24,25 +16,27 @@ public class TestNetworkInterfaceAPI {
 		public void smokeTestFail() {
 		    
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-		    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE; //create a success response
-	
+		   
+		    UserRequest request = new UserRequest("here",null,",");
 
 		 
 		    NetworkPrototype prototype = new NetworkPrototype();
 		    prototype.prototype(realAPI);
-		   assertEquals(true, realAPI.initialize(code)); // since there is no actual implementation initialize should be false 
+		   assertNotEquals(true, realAPI.initialize(request)); // since there is no actual implementation initialize should be false 
 		}
 		@Test
 		public void smokeTestPass() {
 			  NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-			    UserRequestCode code = UserRequestCode.SUCCESS_RESPONSE;
+
+			    UserRequest request = new UserRequest("here","outhere",",");
+
 			   
 		   
 
 			   
 			    NetworkPrototype prototype = new NetworkPrototype();
 			    prototype.prototype(realAPI);
-			   assertEquals(false, realAPI.initialize(code));
+			   assertEquals(true, realAPI.initialize(request));
 		}
 
 }

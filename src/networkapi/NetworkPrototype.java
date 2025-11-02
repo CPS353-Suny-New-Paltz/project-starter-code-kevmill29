@@ -12,19 +12,19 @@ import project.annotations.NetworkAPIPrototype;
 	@NetworkAPIPrototype
 		public void prototype(NetworkInterfaceAPI api) {
 			// Step 1: Build the user request
-		UserRequest request = null;
+		UserRequest request = new UserRequest("input", "output", ";");
 
-			try {
-				 request = new UserRequest.Builder()
-						.inputSource("input") // placeholder
-						.outputDestination("output").
-						delimiter(",") // or prompt user later
-						.build();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				request = null;
-			}
+//			try {
+//				 request = new UserRequest.Builder()
+//						.inputSource("input") // placeholder
+//						.outputDestination("output").
+//						delimiter(",") // or prompt user later
+//						.build();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				request = null;
+//			}
 
 
 
