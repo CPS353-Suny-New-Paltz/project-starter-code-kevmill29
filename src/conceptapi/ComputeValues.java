@@ -1,11 +1,5 @@
 package conceptapi;
 
-import java.util.HashMap;
-import java.util.List;
-
-import assets.UserInputHandler;
-
-
 public class ComputeValues  {
 	//will finish this later but this will return a new hashMap again that includes the answer to be written into a file to be accessed later
 //	public int computeValues(HashMap<Integer, String>map) {
@@ -43,7 +37,7 @@ public class ComputeValues  {
 //using this method to test integration
 public static int computeValues(int valueA) {
 		//Used Problem 27 from Project EuleR
-		UserInputHandler handler = new UserInputHandler();
+		
 		int b = 0;
 		
 		// using a static number for now for integration test results

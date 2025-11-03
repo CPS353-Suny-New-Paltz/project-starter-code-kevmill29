@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public interface UserInterface {
-HashMap<Integer, String>getValues() throws IOException;
+//HashMap<Integer, String>getValues() throws IOException;
 }

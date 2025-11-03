@@ -4,31 +4,28 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import assets.UserInputHandler;
 import assets.UserRequest;
 
 
 public class UserComponent implements UserInterface{
-	public HashMap<Integer, String> getValues() throws IOException {
-		File file= new File("Output/valueA.txt");
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-
-		int valueA = 0;
-		String line;
-		while((line = reader.readLine())!= null) {
-			valueA = Integer.parseInt(line);
-		}
-		UserInputHandler handler = new UserInputHandler();
-
-		return handler.setInputMap();
-
-
-	}
+//	public HashMap<Integer, String> getValues() throws IOException {
+//		File file= new File("Output/valueA.txt");
+//		BufferedReader reader = new BufferedReader(new FileReader(file));
+//
+//		int valueA = 0;
+//		String line;
+//		while((line = reader.readLine())!= null) {
+//			valueA = Integer.parseInt(line);
+//		}
+//		UserInputHandler handler = new UserInputHandler();
+//
+//		return handler.setInputMap();
+//
+//
+//	}
 	
 	public Queue<Integer> getValues(UserRequest request) throws IOException {
 		File file= new File(request.getInputSource());

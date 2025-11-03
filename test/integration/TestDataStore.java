@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import assets.UserInputHandler;  // keep this if ProcessorAPI requires it
 import processapi.ProcessorAPI;
 import processapi.TestOutputCollector;
 
@@ -20,10 +19,7 @@ public class TestDataStore implements ProcessorAPI{
 	        this.output = output;
 	    }
 
-	    public void read(UserInputHandler handler) {
-	        // Not needed for test-only implementation
-	        
-	    }
+	  
 
 	    public List<Integer> input() {
 	        // Return the test input directly

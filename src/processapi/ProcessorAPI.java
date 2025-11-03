@@ -2,8 +2,6 @@ package processapi;
 import java.io.IOException;
 import java.util.List;
 
-import assets.UserInputHandler;
-import assets.UserRequest;
 import project.annotations.ProcessAPI;
 @ProcessAPI
 public interface ProcessorAPI {
