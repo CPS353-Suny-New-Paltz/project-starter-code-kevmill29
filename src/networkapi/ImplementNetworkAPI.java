@@ -12,6 +12,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
 	public boolean initialize(UserRequest request) {
 		// TODO Auto-generated method stub
+		//will change
 		return false;
 	}
 
