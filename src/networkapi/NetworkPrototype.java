@@ -38,7 +38,7 @@ import project.annotations.NetworkAPIPrototype;
 		
 		}
 		System.out.println(request.validation());
-]
+
 			
 
 			//Step 3: start initialization of process
