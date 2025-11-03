@@ -22,7 +22,7 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	public List<Integer> read(String filePath) throws IOException {
 		Path path = Paths.get(filePath);
 		if(!Files.exists(path)) {
-			throw new FileNotFoundException("File not found: " +filePath);
+//			throw new FileNotFoundException("File not found: " +filePath); commenting this out for checkpoint 5
 		}
 		return Files.readAllLines(path).stream()//streams through the strings within the file
 				.map(String::trim) // shortens the string if there are empty spaces in the line

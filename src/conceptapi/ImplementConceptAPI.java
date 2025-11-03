@@ -10,7 +10,7 @@ public class ImplementConceptAPI implements ComputeComponent {
 
 	@Override
 	public int computeValue(int valueA) {
-		// TODO Auto-generated method stub
+		// This method will perform the computation using valueA from b = 10 -> b = 1000
 	
 		return ComputeValues.computeValues(valueA);
 	}

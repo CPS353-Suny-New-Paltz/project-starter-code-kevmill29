@@ -14,7 +14,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 
 	@Override
 	public List<Integer> respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values) {
-		// TODO Auto-generated method stub
+		
 		//may not be necessary but using boolean to check if initialization has started if it has then call conceptAPi to start calculation
 		int result = 0;
 		List<Integer> responses = new ArrayList<>();
@@ -27,6 +27,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 			
 		}else {
 			//if false will cause integration test to purposefully fail by giving wrong numbers
+			//could possibly add an exception instead if isInit is false or if the List is empty or null
 			result = valueA;
 		}
 return responses;
