@@ -13,4 +13,6 @@ public class TestOutputCollector {
     public List<String> getOutput() {
         return output;
     }
+    
+    
 }

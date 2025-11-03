@@ -1,8 +1,10 @@
 package conceptapi;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Queue;
+
+import assets.UserRequest;
 
 public interface UserInterface {
-HashMap<Integer, String>getValues() throws IOException;
+Queue<Integer>getValues(UserRequest request) throws IOException;
 }

@@ -34,6 +34,8 @@ public class Checkpoint2TestSuite {
 	@MethodSource("providePrototypeParams")
 	public void checkPrototypesExist(Class<? extends Annotation> apiAnnotation, 
 	        Class<? extends Annotation> prototypeAnnotation) throws Exception {
+		System.out.println("Working dir: " + new java.io.File(".").getAbsolutePath());
+		System.out.println("Classes loaded: " + Utils.loadAllClasses());
 		int numPrototypesFound = 0;
 		List<String> errors = new ArrayList<>();
 		for (Class<?> clazz : Utils.loadAllClasses()) {

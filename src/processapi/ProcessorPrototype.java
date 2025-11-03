@@ -11,13 +11,13 @@ import project.annotations.ProcessAPIPrototype;
 
 public class ProcessorPrototype {
 	@ProcessAPIPrototype
-			public List<Integer>processAPI(ProcessorAPI process) {
-		
+			public List<Integer>prototype(ProcessorAPI process) {
+		process = new ImplementProcessorAPI();
 		System.out.println("Please enter an integer: ");
 //		
 		List<Integer>newList = new ArrayList<>();
 
-		WriteData.writeData(newList);
+		
 
 
 
