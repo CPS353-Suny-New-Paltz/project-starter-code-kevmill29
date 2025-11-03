@@ -11,7 +11,6 @@ import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 
-
 	@Override
 	public List<Integer> respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values) {
 		
