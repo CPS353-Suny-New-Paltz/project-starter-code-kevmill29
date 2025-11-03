@@ -43,7 +43,7 @@ public class ComputeEngineIntegrationTest {
         List<Integer> data = datastore.input();
         for (int i = 0; i < data.size(); i++) {
             int valueA = inputData.get(i);
-            int result = userInterface.respond(isInit,valueA, concept); // if the enum is giving a true response it will use the implemented class conceptAPI method to calculate the answer
+            int result = concept.computeValue(valueA); // if the enum is giving a true response it will use the implemented class conceptAPI method to calculate the answer
             //if the conceptAPI is working properly and the network API is started up properly then it will perform the calculation and then will be added to the results list
             results.add(result);
             output.write(Integer.toString(result));
