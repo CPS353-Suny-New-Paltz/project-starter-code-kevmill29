@@ -11,8 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import processapi.ImplementProcessorAPI;
-import processapi.ProcessorAPI;
+import process.ImplementProcessorAPI;
+import process.ProcessorAPI;
+import process.ProcessorPrototype;
 
 public class TestProcessorAPI {
 
@@ -32,6 +33,7 @@ public class TestProcessorAPI {
     	String filePath = "./test/testFile.txt";
        File testFile = new File(filePath);
         ProcessorAPI testStorage = new ImplementProcessorAPI();
+        ProcessorPrototype prototype = new ProcessorPrototype();
         
         //issues with this is that there is only one format that is accepted at the moment for this to read a file
         // the file needs to have lines that only contain one integer if there are more that are listed like 1,2,3,4,5 it will send a number format exception
@@ -41,7 +43,7 @@ public class TestProcessorAPI {
         //3
         //4
      
-
+prototype.prototype(testStorage);
 
           
 

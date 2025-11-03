@@ -14,12 +14,8 @@ import networkapi.NetworkPrototype;
 public class TestNetworkInterfaceAPI {
 		@Test
 		public void smokeTestFail() {
-		    
 		    NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-		   
 		    UserRequest request = new UserRequest("here",null,",");
-
-		 
 		    NetworkPrototype prototype = new NetworkPrototype();
 		    prototype.prototype(realAPI);
 		   assertNotEquals(true, realAPI.initialize(request)); 
@@ -29,13 +25,7 @@ public class TestNetworkInterfaceAPI {
 		@Test
 		public void smokeTestPass() {
 			  NetworkInterfaceAPI realAPI = new ImplementNetworkAPI();
-
 			    UserRequest request = new UserRequest("here","outhere",",");
-
-			   
-		   
-
-			   
 			    NetworkPrototype prototype = new NetworkPrototype();
 			    prototype.prototype(realAPI);
 			   assertEquals(true, realAPI.initialize(request));

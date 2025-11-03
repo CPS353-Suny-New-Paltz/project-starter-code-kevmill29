@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import conceptapi.ComputeComponent;
-import conceptapi.ImplementConceptAPI;
+import concept.ComputeComponent;
+import concept.ImplementConceptAPI;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
-import processapi.ProcessorAPI;
-import processapi.TestOutputCollector;
+import process.ProcessorAPI;
+import process.TestOutputCollector;
 
 public class ComputeEngineIntegrationTest {
 
@@ -51,9 +51,9 @@ public class ComputeEngineIntegrationTest {
 
         // Expected output
         List<String> expected = new ArrayList();
-        expected.add("0");
-        expected.add("0");
-        expected.add("0");
+        expected.add("204");
+        expected.add("177");
+        expected.add("174");
       
 
         assertEquals(expected, output.getOutput());

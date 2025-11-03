@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import processapi.ProcessorAPI;
-import processapi.TestOutputCollector;
+import process.ProcessorAPI;
+import process.TestOutputCollector;
 
 
 public class TestDataStore implements ProcessorAPI{

@@ -6,10 +6,9 @@ import java.util.Queue;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import conceptapi.ComputeComponent;
-import processapi.ProcessorAPI;
+import concept.ComputeComponent;
+import process.ProcessorAPI;
 import project.annotations.NetworkAPI;
-
 
 @NetworkAPI
 public interface NetworkInterfaceAPI {

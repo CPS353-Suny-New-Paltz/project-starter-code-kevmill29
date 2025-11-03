@@ -7,15 +7,17 @@ import java.util.List;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import conceptapi.ComputeComponent;
-import conceptapi.ImplementConceptAPI;
-import processapi.ImplementProcessorAPI;
-import processapi.ProcessorAPI;
+import concept.ComputeComponent;
+import concept.ImplementConceptAPI;
+import process.ImplementProcessorAPI;
+import process.ProcessorAPI;
 import project.annotations.NetworkAPIPrototype;
 
 	public class NetworkPrototype {
-	@NetworkAPIPrototype
-		public List<Integer> prototype(NetworkInterfaceAPI api) {
+	
+		@NetworkAPIPrototype
+	
+		public List<Integer>prototype(NetworkInterfaceAPI api) {
 			// Step 1: Build the user request
 		UserRequest request = new UserRequest("input", "output", ";");
 		List<Integer>results = new ArrayList<>();
@@ -42,7 +44,7 @@ import project.annotations.NetworkAPIPrototype;
 			}
 		}
 		System.out.println(request.validation());
-		return results;
+	return results;
 
 			
 

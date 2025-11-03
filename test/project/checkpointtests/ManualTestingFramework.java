@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import assets.UserRequest;
-import conceptapi.ComputeComponent;
-import conceptapi.ImplementConceptAPI;
+import concept.ComputeComponent;
+import concept.ImplementConceptAPI;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
-import processapi.ImplementProcessorAPI;
-import processapi.ProcessorAPI;
+import process.ImplementProcessorAPI;
+import process.ProcessorAPI;
 
 public class ManualTestingFramework {
     

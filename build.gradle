@@ -30,6 +30,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    
-    exclude '**/*Test.class'
+
 }
