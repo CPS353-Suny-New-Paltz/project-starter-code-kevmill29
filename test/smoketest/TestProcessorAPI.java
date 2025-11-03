@@ -11,9 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import process.ImplementProcessorAPI;
-import process.ProcessorAPI;
-import process.ProcessorPrototype;
+import processapi.ImplementProcessorAPI;
+import processapi.ProcessorAPI;
+import processapi.ProcessorPrototype;
 
 public class TestProcessorAPI {
 

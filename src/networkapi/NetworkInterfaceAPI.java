@@ -6,8 +6,8 @@ import java.util.Queue;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import concept.ComputeComponent;
-import process.ProcessorAPI;
+import conceptapi.ComputeComponent;
+import processapi.ProcessorAPI;
 import project.annotations.NetworkAPI;
 
 @NetworkAPI

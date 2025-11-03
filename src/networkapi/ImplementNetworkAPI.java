@@ -6,8 +6,8 @@ import java.util.List;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import concept.ComputeComponent;
-import process.ProcessorAPI;
+import conceptapi.ComputeComponent;
+import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 

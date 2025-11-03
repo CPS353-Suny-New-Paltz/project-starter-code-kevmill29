@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import concept.ComputeComponent;
-import concept.ImplementConceptAPI;
+import conceptapi.ComputeComponent;
+import conceptapi.ImplementConceptAPI;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
-import process.ProcessorAPI;
-import process.TestOutputCollector;
+import processapi.ProcessorAPI;
+import processapi.TestOutputCollector;
 
 public class ComputeEngineIntegrationTest {
 

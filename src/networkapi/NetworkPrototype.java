@@ -7,10 +7,10 @@ import java.util.List;
 
 import assets.UserRequest;
 import assets.UserRequestCode;
-import concept.ComputeComponent;
-import concept.ImplementConceptAPI;
-import process.ImplementProcessorAPI;
-import process.ProcessorAPI;
+import conceptapi.ComputeComponent;
+import conceptapi.ImplementConceptAPI;
+import processapi.ImplementProcessorAPI;
+import processapi.ProcessorAPI;
 import project.annotations.NetworkAPIPrototype;
 
 	public class NetworkPrototype {

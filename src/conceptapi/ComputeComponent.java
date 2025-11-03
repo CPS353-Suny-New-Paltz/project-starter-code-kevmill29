@@ -1,4 +1,4 @@
-package concept;
+package conceptapi;
 
 import project.annotations.ConceptualAPI;
 @ConceptualAPI

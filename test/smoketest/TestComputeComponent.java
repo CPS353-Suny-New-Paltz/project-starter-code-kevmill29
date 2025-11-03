@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
-import concept.ComputeComponent;
-import concept.ConceptAPIPrototype;
-import concept.ImplementConceptAPI;
+import conceptapi.ComputeComponent;
+import conceptapi.ConceptAPIPrototype;
+import conceptapi.ImplementConceptAPI;
 
 public class TestComputeComponent {
 	ComputeComponent realComponent = new ImplementConceptAPI();
