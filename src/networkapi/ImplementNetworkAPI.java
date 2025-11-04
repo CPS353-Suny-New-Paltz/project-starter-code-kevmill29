@@ -26,17 +26,14 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		}else {
 			//if false will cause integration test to purposefully fail by giving wrong numbers
 			//could possibly add an exception instead if isInit is false or if the List is empty or null
-			result = valueA;
+			throw new IllegalArgumentException("User Request is invalid please try again!");
 		}
 return responses;
 	}
 
 	@Override
 	public boolean initialize(UserRequest request) {
-		if(request.validation()== UserRequestCode.SUCCESS_RESPONSE) {
-			return true;
-		}
-		return false;
+		return request.validation() == UserRequestCode.SUCCESS_RESPONSE;
 	}
 	
 //this method will request the processorAPI to read through the userrequest input location
