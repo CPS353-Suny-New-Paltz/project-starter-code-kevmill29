@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import conceptapi.ComputeComponent;
 import conceptapi.ImplementConceptAPI;
-import junit.framework.Assert;
 import networkapi.ImplementNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
 import processapi.ImplementProcessorAPI;
