@@ -8,16 +8,11 @@ public class ImplementConceptAPI implements ComputeComponent {
 //		return 0;
 //	}
 
-	
-//	public int computeValues(List<Integer> pair) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-
 	@Override
 	public int computeValue(int valueA) {
-		// TODO Auto-generated method stub
-		return 0;
+		// This method will perform the computation using valueA from b = 10 -> b = 1000
+	
+		return ComputeValues.computeValues(valueA);
 	}
 
 }
