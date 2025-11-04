@@ -32,7 +32,7 @@ import project.annotations.NetworkAPIPrototype;
 			//this list contains the data from the inputsource by user
 			List<Integer>data = api.readRequest(storage, request);
 			//this list contains the computation results
-			results = api.respond(api.initialize(request), 0, computer, data);
+			results = api.respond(api.initialize(request), computer, data);
 			//the respond method uses the init method to check if request is valid again to ensure validity
 			// compute component performs computation and storage component reads through file in request to pass to computecomponent
 			

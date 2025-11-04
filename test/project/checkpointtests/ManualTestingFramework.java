@@ -27,7 +27,7 @@ public class ManualTestingFramework {
         // TODO 2:
         // Run a computation with an input file of <root project dir>/manualTestInput.txt
         UserRequest request = new UserRequest(INPUT,OUTPUT, ",");
-        List<Integer> newData = netAPI.respond(netAPI.initialize(request), 0, computer, netAPI.readRequest(processor, request)); // create a list of integers from the data inside the request
+        List<Integer> newData = netAPI.respond(netAPI.initialize(request), computer, netAPI.readRequest(processor, request)); // create a list of integers from the data inside the request
         //next write new data to a file in designated location
         try {
             netAPI.writeRequest(processor, newData, request);
