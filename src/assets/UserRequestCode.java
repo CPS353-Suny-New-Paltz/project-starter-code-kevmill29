@@ -14,6 +14,9 @@ public enum UserRequestCode {
 			this.action = action;
 		}
 		
+		public Runnable getAction() {
+			return action;
+		}
 		
 		
 }

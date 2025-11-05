@@ -11,8 +11,8 @@ import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
-	public List<Integer> respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values) {
-		
+	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer>values) {
+		int valueA = 0;
 		//may not be necessary but using boolean to check if initialization has started if it has then call conceptAPi to start calculation
 		int result = 0;
 		List<Integer> responses = new ArrayList<>();
