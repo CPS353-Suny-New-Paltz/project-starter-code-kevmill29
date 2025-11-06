@@ -23,8 +23,9 @@ import project.annotations.NetworkAPIPrototype;
 		List<Integer>results = new ArrayList<>();
 		//Network API implementation
 		api = new ImplementNetworkAPI();
+		boolean isInit = api.initialize(request);
 		
-		if(api.initialize(request)) {
+		if(isInit) {
 			//Call the storage component
 			ProcessorAPI storage = new ImplementProcessorAPI();
 			//Call the Computation component if true
@@ -32,7 +33,7 @@ import project.annotations.NetworkAPIPrototype;
 			//this list contains the data from the inputsource by user
 			List<Integer>data = api.readRequest(storage, request);
 			//this list contains the computation results
-			results = api.respond(api.initialize(request), computer, data);
+			results = api.respond(isInit, computer, data);
 			//the respond method uses the init method to check if request is valid again to ensure validity
 			// compute component performs computation and storage component reads through file in request to pass to computecomponent
 			
@@ -53,4 +54,5 @@ return results;
 		}
 
 	}
+
 
