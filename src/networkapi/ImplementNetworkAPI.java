@@ -44,8 +44,13 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	}
 	
 //this method will request the processorAPI to read through the userrequest input location
-	public List<Integer> readRequest(ProcessorAPI storage, UserRequest request) throws InvalidRequestException {
+	public List<Integer> readRequest(ProcessorAPI storage, UserRequest request){
+		//check if storage component is initialized
+		if(storage == null) {
+			throw new IllegalArgumentException("Storage is empty or null!");
+		}
 		
+		//check if request input path is valid
 		String filePath = request.getInputSource();
 		if(filePath == null || filePath.isEmpty()) {
 			throw new InvalidRequestException("This request is invalid or empty.");
@@ -53,9 +58,10 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		List<Integer> values= new ArrayList<>();
 		try {
 			values = storage.read(filePath);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Could not read file from input location!");
+			throw new RuntimeException();
 		}
 		return values;
 	}
@@ -63,13 +69,23 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) {
 		String output = request.getOutputDestination(); //gets the output path from user request
 		
+		if(results == null || results.isEmpty()) {
+			throw new InvalidRequestException("Results is empty or null!");
+		}
+		
+		//check if storage component is init
+		if(storage == null) {
+			throw new IllegalArgumentException("Storage is empty or null!");
+		}
+		
+		//check if given output location is there
 		if(output == null || output.isEmpty()) {
 			throw new InvalidRequestException("Output location is invalid or null!");
 		}
 		
 		try {
 		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
-		}catch(IOException e) {
+		}catch(Exception e) {
 			System.err.println("Error writing request to output"+e.getMessage());
 			throw new RuntimeException("Failed to write to output");
 		}
