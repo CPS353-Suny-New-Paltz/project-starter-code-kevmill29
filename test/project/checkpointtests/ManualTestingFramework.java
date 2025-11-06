@@ -1,6 +1,5 @@
 package project.checkpointtests;
 
-import java.io.IOException;
 import java.util.List;
 
 import assets.InvalidRequestException;
@@ -17,7 +16,7 @@ public class ManualTestingFramework {
     public static final String INPUT = "manualTestInput.txt";
     public static final String OUTPUT = "manualTestOutput.txt";
 
-    public static void main(String[] args) throws InvalidRequestException {
+    public static void main(String[] args) {
         // TODO 1:
         // Instantiate a real (ie, class definition lives in the src/ folder) implementation
         // of all 3 APIs
@@ -30,13 +29,12 @@ public class ManualTestingFramework {
         UserRequest request = new UserRequest(INPUT,OUTPUT, ",");
         List<Integer> newData;
         //next write new data to a file in designated location
-        try {
+        
         	newData =  netAPI.respond(netAPI.initialize(request), computer, netAPI.readRequest(processor, request)); // create a list of integers from the data inside the request
             netAPI.writeRequest(processor, newData, request);
-        } catch (IOException e) {
+       
             // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+          
         // and an output of <root project dir>/manualTestOutput.txt, with a delimiter of ',' 
         //
         //

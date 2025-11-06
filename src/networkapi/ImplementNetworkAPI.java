@@ -13,14 +13,27 @@ import processapi.ProcessorAPI;
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
 	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer> values) {
+		List<Integer> responses = new ArrayList<>();
+		try {
 	    if (!isInit) {
 	        throw new IllegalArgumentException("User Request is invalid, please try again!");
 	    }
+	    
+	    if(concept == null) {
+	    	throw new IllegalArgumentException("Compute component is missing!");
+	    }
+	    
+	    if(values == null || values.isEmpty()) {
+	    	throw new InvalidRequestException("Provided values does not exist!");
+	    }
 
-		List<Integer> responses = new ArrayList<>();
+		
 		
 		for (int valueA : new ArrayList<>(values)) {
     	responses.add(concept.computeValue(valueA));
+		}
+		}catch(Exception e) {
+			throw new IllegalArgumentException();
 		}
 		return responses;
 	}
@@ -47,13 +60,19 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		return values;
 	}
 	
-	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws IOException, InvalidRequestException {
+	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) {
 		String output = request.getOutputDestination(); //gets the output path from user request
+		
 		if(output == null || output.isEmpty()) {
 			throw new InvalidRequestException("Output location is invalid or null!");
 		}
-		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
 		
+		try {
+		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
+		}catch(IOException e) {
+			System.err.println("Error writing request to output"+e.getMessage());
+			throw new RuntimeException("Failed to write to output");
+		}
 	}
 	
 

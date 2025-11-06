@@ -20,6 +20,7 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	// this method reads all the lines on the input file specified by the user
 	public List<Integer> read(String filePath) throws IOException {
 		Path path = Paths.get(filePath);
+		//validation check on filepath
 		if (!Files.exists(path)) {
 			throw new FileNotFoundException("File not found: " + filePath);
 		}
@@ -33,18 +34,29 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	@Override
 	// this method will write the data from the given equation into a file with the
 	// specified location
-	public void write(String output, List<Integer> data, String delimiter) throws IOException {
+	public void write(String output, List<Integer> data, String delimiter)  {
 		if(data == null || data.isEmpty()) {
 			//create an empty file instead of throwing a null pointer exception
+			//output does not need validation as it will be creating a new directory if does not exist
+			//delimiter will use default "," if not assigned
+			try {
 			Files.write(Paths.get(output), List.of());
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		//this part will join the integers to a single line
 		String line = data.stream()
 				.map(Object::toString)
 				.collect(Collectors.joining(delimiter));
 		//this part will write the file
+		try {
 		Files.write(Paths.get(output), List.of(line));
-		
+		}catch(IOException e) {
+			System.err.println("Error writing file to output");
+			throw new RuntimeException("Failed to write output");
+			
+		}
 	}
 
 }
