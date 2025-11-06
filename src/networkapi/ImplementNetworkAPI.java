@@ -17,11 +17,9 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		int result = 0;
 		List<Integer> responses = new ArrayList<>();
 		if(isInit) {
-			while(!values.isEmpty()) {
-				valueA = values.remove(0);
-				result =concept.computeValue(valueA);
-				responses.add(result);
-			}
+		for (int valueA : new ArrayList<>(values)) {
+    	responses.add(concept.computeValue(valueA));
+		}
 			
 		}else {
 			//if false will cause integration test to purposefully fail by giving wrong numbers
@@ -66,3 +64,4 @@ return responses;
 
 
 }
+
