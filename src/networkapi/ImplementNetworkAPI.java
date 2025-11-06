@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import assets.InvalidRequestException;
 import assets.UserRequest;
 import assets.UserRequestCode;
 import conceptapi.ComputeComponent;
@@ -11,24 +12,17 @@ import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
-	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer>values) {
-		int valueA = 0;
-		//may not be necessary but using boolean to check if initialization has started if it has then call conceptAPi to start calculation
-		int result = 0;
+	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer> values) {
+	    if (!isInit) {
+	        throw new IllegalArgumentException("User Request is invalid, please try again!");
+	    }
+
 		List<Integer> responses = new ArrayList<>();
-		if(isInit) {
-			while(!values.isEmpty()) {
-				valueA = values.remove(0);
-				result =concept.computeValue(valueA);
-				responses.add(result);
-			}
-			
-		}else {
-			//if false will cause integration test to purposefully fail by giving wrong numbers
-			//could possibly add an exception instead if isInit is false or if the List is empty or null
-			throw new IllegalArgumentException("User Request is invalid please try again!");
+		
+		for (int valueA : new ArrayList<>(values)) {
+    	responses.add(concept.computeValue(valueA));
 		}
-return responses;
+		return responses;
 	}
 
 	@Override
@@ -37,8 +31,12 @@ return responses;
 	}
 	
 //this method will request the processorAPI to read through the userrequest input location
-	public List<Integer> readRequest(ProcessorAPI storage, UserRequest request) {
+	public List<Integer> readRequest(ProcessorAPI storage, UserRequest request) throws InvalidRequestException {
+		
 		String filePath = request.getInputSource();
+		if(filePath == null || filePath.isEmpty()) {
+			throw new InvalidRequestException("This request is invalid or empty.");
+		}
 		List<Integer> values= new ArrayList<>();
 		try {
 			values = storage.read(filePath);
@@ -49,8 +47,11 @@ return responses;
 		return values;
 	}
 	
-	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws IOException {
+	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws IOException, InvalidRequestException {
 		String output = request.getOutputDestination(); //gets the output path from user request
+		if(output == null || output.isEmpty()) {
+			throw new InvalidRequestException("Output location is invalid or null!");
+		}
 		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
 		
 	}

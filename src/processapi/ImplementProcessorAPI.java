@@ -34,23 +34,17 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	// this method will write the data from the given equation into a file with the
 	// specified location
 	public void write(String output, List<Integer> data, String delimiter) throws IOException {
-		// this part will join the integers to a single line
-		Path parentPath = Paths.get(output);
-
-		String line = data.stream().map(Object::toString).collect(Collectors.joining(delimiter));
-		// this part will write the file
-		try {
-			//check if the parent directory exists if not create the directory
-			Files.createDirectories(parentPath.getParent());
-			if (!Files.exists(parentPath)) { // check if file already exists 
-				Files.write(Paths.get(output), List.of(line));
-				System.out.println("File written successfully!");
-			} 
-
-		} catch (IOException e) { // if file already exists throw exception
-			System.out.println("File already exists!");
-			e.printStackTrace();
+		if(data == null || data.isEmpty()) {
+			//create an empty file instead of throwing a null pointer exception
+			Files.write(Paths.get(output), List.of());
 		}
+		//this part will join the integers to a single line
+		String line = data.stream()
+				.map(Object::toString)
+				.collect(Collectors.joining(delimiter));
+		//this part will write the file
+		Files.write(Paths.get(output), List.of(line));
+		
 	}
 
 }
