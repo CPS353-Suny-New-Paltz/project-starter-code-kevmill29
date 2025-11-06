@@ -42,10 +42,10 @@ public class IntegrationFuzzTest {
 		//List will take the data and use the integrated api to create new list
 		List<Integer> actualData = testAPI.respond(true, computer, actual);
 		//check if the size is same
-		assertEquals(expected.size(), actualData.size());
+		assertEquals(expected.size(), actualData.size(), "Error: List size differs");
 
 		for(int i = 0; i< expected.size(); i++) {
-			assertEquals(expected.get(i), actualData.get(i));
+			assertEquals(expected.get(i), actualData.get(i), "Index mismatch or calculation error at: "+i);
 		}
 	}
 	
