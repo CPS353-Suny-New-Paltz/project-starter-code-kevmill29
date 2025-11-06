@@ -11,17 +11,13 @@ import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
-	public List<Integer> respond(boolean isInit, int valueA, ComputeComponent concept, List<Integer>values) {
-		
-		//may not be necessary but using boolean to check if initialization has started if it has then call conceptAPi to start calculation
-		int result = 0;
+	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer>values) {
+	//method starts the response to a request after initialization
 		List<Integer> responses = new ArrayList<>();
 		if(isInit) {
-			while(!values.isEmpty()) {
-				valueA = values.remove(0);
-				result =concept.computeValue(valueA);
-				responses.add(result);
-			}
+		for (int valueA : new ArrayList<>(values)) {
+    	responses.add(concept.computeValue(valueA));
+		}
 			
 		}else {
 			//if false will cause integration test to purposefully fail by giving wrong numbers
@@ -66,3 +62,5 @@ return responses;
 
 
 }
+
+
