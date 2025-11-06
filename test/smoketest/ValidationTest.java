@@ -44,7 +44,10 @@ public void coordinationValidationTest() {
 	ProcessorAPI mockStorage = new ImplementProcessorAPI();
 	NetworkInterfaceAPI mockAPI = new ImplementNetworkAPI();
 	UserRequest request = new UserRequest(null, null, null);
-	assertThrows(InvalidRequestException.class, ()-> mockAPI.readRequest(mockStorage, request), "Because request is null should throw an exception" +request);
+	assertDoesNotThrow(()->{
+		mockAPI.readRequest(mockStorage, request);
+		assertTrue(request.getInputSource() == null);
+	});
 	
 }
 

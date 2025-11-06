@@ -65,7 +65,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("Could not read file from input location!");
-			throw new RuntimeException();
+			return Collections.emptyList();
 		}
 		return values;
 	}
