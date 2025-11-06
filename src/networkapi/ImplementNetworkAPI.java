@@ -2,6 +2,7 @@ package networkapi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import assets.InvalidRequestException;
@@ -33,7 +34,8 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
     	responses.add(concept.computeValue(valueA));
 		}
 		}catch(Exception e) {
-			throw new IllegalArgumentException();
+			System.err.println("Error!: "+e.getMessage());
+			return Collections.emptyList();
 		}
 		return responses;
 	}
@@ -45,7 +47,9 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	
 //this method will request the processorAPI to read through the userrequest input location
 	public List<Integer> readRequest(ProcessorAPI storage, UserRequest request){
+		List<Integer> values= new ArrayList<>();
 		//check if storage component is initialized
+		try {
 		if(storage == null) {
 			throw new IllegalArgumentException("Storage is empty or null!");
 		}
@@ -55,8 +59,8 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		if(filePath == null || filePath.isEmpty()) {
 			throw new InvalidRequestException("This request is invalid or empty.");
 		}
-		List<Integer> values= new ArrayList<>();
-		try {
+	
+		
 			values = storage.read(filePath);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -66,9 +70,10 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		return values;
 	}
 	
-	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) {
+	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws InvalidRequestException {
 		String output = request.getOutputDestination(); //gets the output path from user request
-		
+
+		try {
 		if(results == null || results.isEmpty()) {
 			throw new InvalidRequestException("Results is empty or null!");
 		}
@@ -83,11 +88,9 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 			throw new InvalidRequestException("Output location is invalid or null!");
 		}
 		
-		try {
 		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
 		}catch(Exception e) {
 			System.err.println("Error writing request to output"+e.getMessage());
-			throw new RuntimeException("Failed to write to output");
 		}
 	}
 	

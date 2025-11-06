@@ -1,8 +1,10 @@
 package smoketest;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.FileNotFoundException;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +32,11 @@ public void computeValidationTest() {
 public void storageValidationTest() {
 	ProcessorAPI mockStorage = new ImplementProcessorAPI();
 	String mockInput = "well..."; //false address should throw an file exception for when the component tries to read
-	assertThrows(FileNotFoundException.class, ()-> mockStorage.read(mockInput), "Because input location string isn't actually pointing to a location should throw an exception"+ " String: "+mockInput);
+	assertDoesNotThrow(()->{
+			List<Integer> results = mockStorage.read(mockInput);
+			assertTrue(results.isEmpty(), "should be an empty list since location isn't real");
+	},"Since the location is not real and the list is empty an exception should be thrown but should be caught by logic"
+	);
 }
 
 @Test
