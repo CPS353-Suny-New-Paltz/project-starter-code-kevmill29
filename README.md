@@ -8,17 +8,17 @@
 -[API](#API)
 
 
-##Features
+# Features
 - Read integers from (for now!)text, (coming soon)JSON, or CSV files
 - Write computation results back to files with optional delimiters
 - Simple API method to start comuation and return results
 
-##Installation
+# Installation
 -Requires Java 21
 -Requires Gradle 8.6 for building and running
 build project with gradle build
 
-##Usage
+# Usage
 1. Prepare a text file with integers on each line
 2. Call the 3 APIs and methods on network api to start process
 3. check the output file for results
@@ -26,12 +26,12 @@ call networkAPI, processorAPI, and ComputeComponent
 networkAPI api = new ImplementNetworkAPI();
 api.respond(takes in user request that has input location, output location, and delimiter(will assign default if null))
 
-##File-Formats
+# File-Formats
 -TXT
 -JSON(TBA)
 -CSV(TBA)
 
-##API
+# API
 -Coordination(NetworkAPI) This review the user request and provide instructions to the other API
 -Storage(ProcessorAPI) This will read the input file, stream the integers found and create a list, pass the list to the computation component, wait for the computation component to complete the computations and write an output file. 
 -Computation(ComputeComponent) This is responsible for creating a new list with the answers for the Storage component to create the file. 
