@@ -22,6 +22,9 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	// this method reads all the lines on the input file specified by the user
 	public List<Integer> read(String filePath) {
 		List<Integer> results = new ArrayList<>();
+		if(filePath == null || filePath.isEmpty()) {
+			throw new IllegalArgumentException("File path cannot be empty!");
+		}
 		Path path = Paths.get(filePath);
 		//validation check on filepath
 		try {
@@ -46,6 +49,9 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	// this method will write the data from the given equation into a file with the
 	// specified location
 	public void write(String output, List<Integer> data, String delimiter)  {
+		if(output == null || output.isEmpty()) {
+			throw new IllegalArgumentException("File path cannot be empty!");
+		}
 	
 			//create an empty file instead of throwing a null pointer exception
 			//output does not need validation as it will be creating a new directory if does not exist
