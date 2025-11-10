@@ -17,7 +17,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		List<Integer> responses = new ArrayList<>();
 		try {
 	    if (!isInit) {
-	        throw new IllegalArgumentException("User Request is invalid, please try again!");
+	        throw new InvalidRequestException("User Request is invalid, please try again!");
 	    }
 	    
 	    if(concept == null) {
@@ -42,6 +42,9 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 
 	@Override
 	public boolean initialize(UserRequest request) {
+		if(request == null ) {
+			return false;
+		}
 		return request.validation() == UserRequestCode.SUCCESS_RESPONSE;
 	}
 	
@@ -50,6 +53,9 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		List<Integer> values= new ArrayList<>();
 		//check if storage component is initialized
 		try {
+		if(request == null) {
+			throw new InvalidRequestException("Request is invalid please try again!");
+		}
 		if(storage == null) {
 			throw new IllegalArgumentException("Storage is empty or null!");
 		}
@@ -71,9 +77,14 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	}
 	
 	public void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws InvalidRequestException {
+		if(request == null) {
+			throw new InvalidRequestException("Request is invalid, request cannot be invalid!");
+		}
 		String output = request.getOutputDestination(); //gets the output path from user request
 
 		try {
+			
+	
 		if(results == null || results.isEmpty()) {
 			throw new InvalidRequestException("Results is empty or null!");
 		}
@@ -87,6 +98,8 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		if(output == null || output.isEmpty()) {
 			throw new InvalidRequestException("Output location is invalid or null!");
 		}
+		
+		
 		
 		storage.write(output, results, request.getDelimiter()); // method writes converts results into String list and create a file using results
 		}catch(Exception e) {
