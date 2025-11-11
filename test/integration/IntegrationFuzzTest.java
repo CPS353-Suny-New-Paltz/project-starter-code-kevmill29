@@ -50,8 +50,13 @@ public class IntegrationFuzzTest {
 	}
 	
 	public static void main(String[]args) {
+		if(args.length == 0) {
+			System.out.println("Usage: Integration Fuzz Test <seed>");
+			return; //so test does not crash early
+		}
 		long seed = Long.parseLong(args[0]);
 		Random random = new Random(seed);
+		System.out.println("Running test with seed: ${seed}");
 		NetworkInterfaceAPI testAPI = new ImplementNetworkAPI();
 		ProcessorAPI storage = new ImplementProcessorAPI();
 		ComputeComponent computer = new ImplementConceptAPI();

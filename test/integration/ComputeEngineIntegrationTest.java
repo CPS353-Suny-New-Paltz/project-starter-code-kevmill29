@@ -52,7 +52,7 @@ public class ComputeEngineIntegrationTest {
         }
 
         // Expected output
-        List<String> expected = new ArrayList();
+        List<String> expected = new ArrayList<>();
         expected.add("204");
         expected.add("177");
         expected.add("174");

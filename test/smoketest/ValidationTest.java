@@ -1,5 +1,6 @@
 package smoketest;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import assets.InvalidRequestException;
 import assets.InvalidValueException;
 import assets.UserRequest;
 import conceptapi.ComputeComponent;
@@ -48,7 +48,7 @@ public void coordinationValidationTest() {
 		//read throught the request and get the integers but should be null
 		mockAPI.readRequest(mockStorage, request);
 		//check if input source from request is null
-		assertTrue(request.getInputSource() == null);
+		assertNull(request.getInputSource());
 	},"API is given null request so it should throw an error but should have been caught");
 	
 }
