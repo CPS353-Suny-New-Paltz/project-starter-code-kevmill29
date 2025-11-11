@@ -22,15 +22,16 @@ public class IntegrationFuzzTest {
 	public void integrationFuzzTest() {
 		long seed = System.currentTimeMillis();
 		Random random = new Random(seed);
-		NetworkInterfaceAPI testAPI = new ImplementNetworkAPI();
+		
 		ProcessorAPI storage = new ImplementProcessorAPI();
 		ComputeComponent computer = new ImplementConceptAPI();
-		runFuzzyTest(seed, random, testAPI,storage, computer);
+		runFuzzyTest(seed, random, storage, computer);
 
 	}
 
-	private static void runFuzzyTest(long seed, Random random, NetworkInterfaceAPI testAPI, ProcessorAPI storage,
+	private static void runFuzzyTest(long seed, Random random, ProcessorAPI storage,
 			ComputeComponent computer) {
+		ImplementNetworkAPI testAPI = new ImplementNetworkAPI();
 		System.out.println("Running test with seed " + seed);
 		List<Integer> actual = new ArrayList<>();
 		List<Integer>expected = new ArrayList<>();
@@ -52,9 +53,9 @@ public class IntegrationFuzzTest {
 	public static void main(String[]args) {
 		long seed = Long.parseLong(args[0]);
 		Random random = new Random(seed);
-		NetworkInterfaceAPI testAPI = new ImplementNetworkAPI();
+	
 		ProcessorAPI storage = new ImplementProcessorAPI();
 		ComputeComponent computer = new ImplementConceptAPI();
-		runFuzzyTest(seed, random, testAPI,storage, computer);
+		runFuzzyTest(seed, random, storage, computer);
 	}
 }

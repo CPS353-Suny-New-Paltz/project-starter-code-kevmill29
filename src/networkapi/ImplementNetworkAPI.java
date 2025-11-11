@@ -9,19 +9,26 @@ import assets.InvalidRequestException;
 import assets.UserRequest;
 import assets.UserRequestCode;
 import conceptapi.ComputeComponent;
+import conceptapi.ImplementConceptAPI;
+import processapi.ImplementProcessorAPI;
 import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
-	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer> values) {
+	public List<Integer> respond(boolean isInit, UserRequest request) {
+		if(request == null) {
+			throw new InvalidRequestException("The request cannot be null!");
+		}
+		//call the components 
+		ComputeComponent concept = new ImplementConceptAPI();
+		ProcessorAPI storage = new ImplementProcessorAPI();
+		
+		//create list of empty list to respond with and list of values given by user input
 		List<Integer> responses = new ArrayList<>();
+		List<Integer>values = readRequest(storage, request);
 		try {
 	    if (!isInit) {
 	        throw new InvalidRequestException("User Request is invalid, please try again!");
-	    }
-	    
-	    if(concept == null) {
-	    	throw new IllegalArgumentException("Compute component is missing!");
 	    }
 	    
 	    if(values == null || values.isEmpty()) {
@@ -29,14 +36,18 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	    }
 
 		
-		
+		//iterate over arraylist from readrequest
 		for (int valueA : new ArrayList<>(values)) {
     	responses.add(concept.computeValue(valueA));
 		}
+		
+		//after responses are created in list use as parameter in write request
+		writeRequest(storage, responses, request);
 		}catch(Exception e) {
 			System.err.println("Error!: "+e.getMessage());
 			return Collections.emptyList();
 		}
+		
 		return responses;
 	}
 
@@ -113,10 +124,36 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		// TODO Auto-generated method stub
 		return concept.computeValue(valueA);
 	}
+	
+	//this is for fuzz testing purposes as it does not take in a built request, a null request will return an empty list due to the 
+	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer> values) {
+		List<Integer> responses = new ArrayList<>();
+		try {
+	    if (!isInit) {
+	        throw new InvalidRequestException("User Request is invalid, please try again!");
+	    }
+	    
+	    if(concept == null) {
+	    	throw new IllegalArgumentException("Compute component is missing!");
+	    }
+	    
+	    if(values == null || values.isEmpty()) {
+	    	throw new InvalidRequestException("Provided values does not exist!");
+	    }
 
+		
+		
+		for (int valueA : new ArrayList<>(values)) {
+    	responses.add(concept.computeValue(valueA));
+		}
+		}catch(Exception e) {
+			System.err.println("Error!: "+e.getMessage());
+			return Collections.emptyList();
+		}
+		return responses;
+	}
 
-
+	
+	
 
 }
-
-
