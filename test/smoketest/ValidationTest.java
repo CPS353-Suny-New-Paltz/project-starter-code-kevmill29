@@ -45,7 +45,7 @@ public void coordinationValidationTest() {
 	NetworkInterfaceAPI mockAPI = new ImplementNetworkAPI();
 	UserRequest request = new UserRequest(null, null, null);
 	assertDoesNotThrow(()->{
-		//read throught the request and get the integers but should be null
+		//read through the request and get the integers but should be null
 		mockAPI.readRequest(mockStorage, request);
 		//check if input source from request is null
 		assertNull(request.getInputSource());
