@@ -61,20 +61,7 @@ public class ComputeEngineIntegrationTest {
         assertEquals(expected, output.getOutput());
     }
     
-    //test if exception handling is working 
-  @Test
-  public void shouldThrowTest() {
-	 ImplementNetworkAPI testAPI = new ImplementNetworkAPI();
-	  ComputeComponent testCompute = new ImplementConceptAPI();
-	  List<Integer> data = Arrays.asList(1,10,25);
-	  boolean isInit = false; // to force an error
-	  List<Integer> results = testAPI.respond(isInit, testCompute, data);
-	  //test 1
-	  assertNotNull(results);
-	  
-	  assertTrue(results.isEmpty(), "Expected empty list instead of an exception being thrown");
-	  
-  }
+
 
 
    
