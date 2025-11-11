@@ -18,7 +18,7 @@ import project.annotations.NetworkAPIPrototype;
 	
 		public void prototype(NetworkInterfaceAPI api) {
 			// Step 1: Build the user request
-		UserRequest request = new UserRequest("input", "output", ";");
+		UserRequest request = new UserRequest("input", "output", ';');
 		List<Integer>results = new ArrayList<>();
 		//Network API implementation
 		api = new ImplementNetworkAPI();

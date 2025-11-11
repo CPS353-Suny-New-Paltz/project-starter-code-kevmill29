@@ -13,9 +13,11 @@ import project.annotations.NetworkAPI;
 public interface NetworkInterfaceAPI {
 	List<Integer> respond(boolean isInit, UserRequest request);
 	boolean initialize(UserRequest request);
-	List<Integer> readRequest(ProcessorAPI storage, UserRequest request);
+	List<String> readRequest( UserRequest request);
 	int respond(boolean isInit, int valueA, ComputeComponent concept) ; //using for integration test
-	void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) ;
+	void writeRequest(List<Integer> results, UserRequest request) ;
+	void shutdown();
+	UserRequest buildRequest(String input, String output,char delimiter);
 	
 	
 }
