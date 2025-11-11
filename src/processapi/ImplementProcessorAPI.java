@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import conceptapi.ComputeComponent;
+import conceptapi.ImplementConceptAPI;
+
 public class ImplementProcessorAPI implements ProcessorAPI {
 
 	@Override
@@ -44,11 +47,40 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 		
 		return results;
 	}
+	
+	//overloading method for testing harness
+	public List<String> read(List<String> values, String output) {
+		ComputeComponent computer = new ImplementConceptAPI();
+		List<String> results = new ArrayList<>();
+		if(values == null || values.isEmpty()) {
+			throw new IllegalArgumentException("Cannot parse empty list!");
+		}
+		if(output == null || output.isEmpty()) {
+			throw new IllegalArgumentException("Output is null!");
+		}
+		
+	try {
+		results= values.stream()// streams through the strings within the file
+				.map(String::trim) // shortens the string if there are empty spaces in the line
+				.filter(s -> !s.isEmpty())// checks if line is empty and will skip if the line is not
+				.map(Integer::parseInt)// converts String into integer
+				.map(computer::computeValue)
+				.map(String::valueOf)
+				.collect(Collectors.toList()); // creates new list and collects all found integers
+		}catch(Exception e) {
+			System.err.println("File cannot be read!");
+			return Collections.emptyList();
+		}
+
+		
+		return results;
+	}
+
 
 	@Override
 	// this method will write the data from the given equation into a file with the
 	// specified location
-	public void write(String output, List<Integer> data, String delimiter)  {
+	public void write(String output, List<Integer> data, char delimiter)  {
 		if(output == null || output.isEmpty()) {
 			throw new IllegalArgumentException("File path cannot be empty!");
 		}
@@ -65,7 +97,7 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 		//this part will join the integers to a single line
 		String line = data.stream()
 				.map(Object::toString)
-				.collect(Collectors.joining(delimiter));
+				.collect(Collectors.joining(String.valueOf(delimiter)));
 		//this part will write the file
 		try {
 			

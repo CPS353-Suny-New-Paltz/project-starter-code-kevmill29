@@ -26,12 +26,12 @@ public class ManualTestingFramework {
         //
         // TODO 2:
         // Run a computation with an input file of <root project dir>/manualTestInput.txt
-        UserRequest request = new UserRequest(INPUT,OUTPUT, ",");
+        UserRequest request = new UserRequest(INPUT,OUTPUT, ',');
         List<Integer> newData;
         //next write new data to a file in designated location
         
         	newData =  netAPI.respond(netAPI.initialize(request), request); // create a list of integers from the data inside the request
-            netAPI.writeRequest(processor, newData, request);
+            netAPI.writeRequest(newData, request);
        
             // TODO Auto-generated catch block
           

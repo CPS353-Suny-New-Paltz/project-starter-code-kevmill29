@@ -3,7 +3,7 @@ package assets;
 public class UserRequest {
     private final String inputSource;
     private final String outputDestination;
-    private final String delimiter;
+    private final char delimiter;
     private static UserRequest instance;
    
 
@@ -16,7 +16,7 @@ public class UserRequest {
 //     
 //    }
     
-    public UserRequest(String inputSource, String outputDestination, String delimiter) {
+    public UserRequest(String inputSource, String outputDestination, char delimiter) {
     	super();
     	this.delimiter= delimiter;
     	this.inputSource= inputSource;
@@ -32,7 +32,7 @@ public class UserRequest {
         return outputDestination;
     }
 
-    public String getDelimiter() {
+    public char getDelimiter() {
         return delimiter;
     }
     

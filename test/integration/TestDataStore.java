@@ -45,7 +45,7 @@ public class TestDataStore implements ProcessorAPI{
 	
 
 		@Override
-		public void write(String output, List<Integer> data, String delimiter) throws IOException {
+		public void write(String output, List<Integer> data, char delimiter) throws IOException {
 			// TODO Auto-generated method stub
 			
 		}
