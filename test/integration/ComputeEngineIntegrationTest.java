@@ -64,7 +64,7 @@ public class ComputeEngineIntegrationTest {
     //test if exception handling is working 
   @Test
   public void shouldThrowTest() {
-	  NetworkInterfaceAPI testAPI = new ImplementNetworkAPI();
+	  ImplementNetworkAPI testAPI = new ImplementNetworkAPI();
 	  ComputeComponent testCompute = new ImplementConceptAPI();
 	  List<Integer> data = Arrays.asList(1,10,25);
 	  boolean isInit = false; // to force an error
