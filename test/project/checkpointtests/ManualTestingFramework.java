@@ -1,8 +1,8 @@
 package project.checkpointtests;
 
-import java.io.IOException;
 import java.util.List;
 
+import assets.InvalidRequestException;
 import assets.UserRequest;
 import conceptapi.ComputeComponent;
 import conceptapi.ImplementConceptAPI;
@@ -29,13 +29,12 @@ public class ManualTestingFramework {
         UserRequest request = new UserRequest(INPUT,OUTPUT, ",");
         List<Integer> newData;
         //next write new data to a file in designated location
-        try {
+        
         	newData =  netAPI.respond(netAPI.initialize(request), computer, netAPI.readRequest(processor, request)); // create a list of integers from the data inside the request
             netAPI.writeRequest(processor, newData, request);
-        } catch (IOException e) {
+       
             // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+          
         // and an output of <root project dir>/manualTestOutput.txt, with a delimiter of ',' 
         //
         //

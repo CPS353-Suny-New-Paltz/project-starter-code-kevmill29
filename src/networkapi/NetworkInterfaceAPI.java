@@ -2,7 +2,6 @@ package networkapi;
 
 
 
-import java.io.IOException;
 import java.util.List;
 
 import assets.UserRequest;
@@ -16,7 +15,7 @@ public interface NetworkInterfaceAPI {
 	boolean initialize(UserRequest request);
 	List<Integer> readRequest(ProcessorAPI storage, UserRequest request);
 	int respond(boolean isInit, int valueA, ComputeComponent concept) ; //using for integration test
-	void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) throws IOException;
+	void writeRequest(ProcessorAPI storage, List<Integer> results, UserRequest request) ;
 	
 }
 
