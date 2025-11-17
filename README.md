@@ -48,5 +48,5 @@ Number of consecutive primes starting from n = 0 :  40
 The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations so that 
 
 
-![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/KevinEmileDiagram.png?raw=true)
+![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
 
