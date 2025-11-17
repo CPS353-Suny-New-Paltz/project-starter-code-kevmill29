@@ -26,13 +26,15 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	public List<Integer> read(String filePath) {
 		List<Integer> results = new ArrayList<>();
 		if(filePath == null || filePath.isEmpty()) {
-			throw new IllegalArgumentException("File path cannot be empty!");
+			System.err.println("File path cannot be empty!");
+			return Collections.emptyList();
 		}
 		Path path = Paths.get(filePath);
 		//validation check on filepath
 		try {
 		if (!Files.exists(path)) {
-			throw new FileNotFoundException("File not found: " + filePath);
+			System.err.println("File not found: " + filePath);
+			return Collections.emptyList();
 		}
 		results= Files.readAllLines(path).stream()// streams through the strings within the file
 				.map(String::trim) // shortens the string if there are empty spaces in the line
@@ -53,10 +55,12 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 		ComputeComponent computer = new ImplementConceptAPI();
 		List<String> results = new ArrayList<>();
 		if(values == null || values.isEmpty()) {
-			throw new IllegalArgumentException("Cannot parse empty list!");
+			System.err.println("Cannot parse empty list!");
+			Collections.emptyList();
 		}
 		if(output == null || output.isEmpty()) {
-			throw new IllegalArgumentException("Output is null!");
+			System.err.println("Output is null!");
+			Collections.emptyList();
 		}
 		
 	try {
@@ -82,7 +86,8 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	// specified location
 	public void write(String output, List<Integer> data, char delimiter)  {
 		if(output == null || output.isEmpty()) {
-			throw new IllegalArgumentException("File path cannot be empty!");
+			System.err.println("File path cannot be empty!");
+			return;
 		}
 	
 			//create an empty file instead of throwing a null pointer exception
@@ -102,7 +107,8 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 		try {
 			
 			if(data == null || data.isEmpty()) {
-				throw new IllegalArgumentException("Data is empty or null!");
+				System.err.println("Data is empty or null!");
+				return;
 			}
 			
 		Files.write(Paths.get(output), List.of(line));
