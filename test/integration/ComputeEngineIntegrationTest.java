@@ -32,7 +32,7 @@ public class ComputeEngineIntegrationTest {
 
         // Empty implementations
         //create a static code response for initialize method in userInterface
-        UserRequest request = new UserRequest("here","outhere",",");
+        UserRequest request = new UserRequest("here","outhere",',');
       
         NetworkInterfaceAPI userInterface = new ImplementNetworkAPI();
         boolean isInit = userInterface.initialize(request); //checks if the enum is giving a true response 
