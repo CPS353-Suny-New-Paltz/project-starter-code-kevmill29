@@ -41,12 +41,12 @@ public void storageValidationTest() {
 
 @Test
 public void coordinationValidationTest() {
-	ProcessorAPI mockStorage = new ImplementProcessorAPI();
+
 	NetworkInterfaceAPI mockAPI = new ImplementNetworkAPI();
-	UserRequest request = new UserRequest(null, null, null);
+	UserRequest request = mockAPI.buildRequest(null, null, ',');
 	assertDoesNotThrow(()->{
 		//read through the request and get the integers but should be null
-		mockAPI.readRequest(mockStorage, request);
+		mockAPI.readRequest( request);
 		//check if input source from request is null
 		assertNull(request.getInputSource());
 	},"API is given null request so it should throw an error but should have been caught");
