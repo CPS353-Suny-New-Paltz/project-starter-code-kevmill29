@@ -69,7 +69,8 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		try {
 			if (request == null) {
 				System.err.println("Request is null! Please try again!");
-				return Collections.emptyList();			}
+				return Collections.emptyList();			
+				}
 
 			// check if request input path is valid
 			String filePath = request.getInputSource();
@@ -169,12 +170,8 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 			        }
 			    })
 			    .collect(Collectors.toList());
-		try {
 
-		} catch (InvalidRequestException e) {
-			System.err.println("Error!: " + e.getMessage());
-			return Collections.emptyList();
-		}
+		
 		return responses;
 	}
 
