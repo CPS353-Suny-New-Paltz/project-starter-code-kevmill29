@@ -1,14 +1,21 @@
 package networkapi;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import assets.UserRequest;
 import conceptapi.ComputeComponent;
+import conceptapi.ImplementConceptAPI;
+import processapi.ImplementProcessorAPI;
+import processapi.ProcessorAPI;
 
+//300 error codes come from here
 public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	//creating wrapper/decorator implementation
 	private final ImplementNetworkAPI delegator;
@@ -28,9 +35,88 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 
 	@Override
 	public List<Integer> respond(String input, String output, char delimiter) {
+		
+		//call components
+		ProcessorAPI storage = new ImplementProcessorAPI();
+		ComputeComponent concept = new ImplementConceptAPI();
 		UserRequest request = buildRequest(input, output, delimiter);
-
-		return null;
+		// validate parameters and check if buildRequest is successful
+		if(input == null || output == null) {
+			System.err.println("E300: Request is null! Please try again!");
+			return Collections.emptyList();
+		}
+		
+		if(!delegator.initialize(request)) {
+			System.err.println("E310: Request is incomplete! Please try again!");
+			return Collections.emptyList();
+		}
+		
+		String filePath = request.getInputSource();
+		if(filePath == null || filePath.isEmpty()) {
+			System.err.println("E301: File or filepath does not exist!");
+			return Collections.emptyList();
+		}
+		
+		
+		//create list to be computed from raw data in file
+		List<String>data;
+		try {
+			data = delegator.readRequest(request);
+		}catch(Exception e) {
+			System.err.println("E303: Could not read file location!");
+			return Collections.emptyList();
+		}
+		
+		
+		//processed data into an Integer List after parsing
+		List<Integer>processedData = data.stream()
+									.map(s-> {
+										try {
+											return Integer.parseInt(s.trim());
+										}catch(Exception e) {
+											System.err.println("E313: Could not parse integer from list!");
+											return 0;
+										}
+										
+									})
+									.collect(Collectors.toList());
+		
+	
+		
+		//multithreading the computation
+		List<Future<Integer>>futures = new ArrayList<>();
+		
+		for(Integer value: processedData) {
+			futures.add(pool.submit(()->{
+				try {
+					return concept.computeValue(value);
+				}catch(Exception e) {
+					System.err.println("E304: Error calculating values!");
+					return 0;
+				}
+			}));
+		}
+		
+		List<Integer>results = new ArrayList<>();
+		
+		for(Future<Integer>f : futures) {
+			try {
+				results.add(f.get());
+			}catch(Exception e) {
+				System.err.println("E305: Error adding to futures list!");
+				results.add(0);
+			}
+		}
+		
+		//write the results to a file
+		try {
+			storage.write(output, results, delimiter);
+		} catch (IOException e) {
+			System.err.println("E306: Could not write file in location!");
+			
+		}
+		
+		return results;
 	}
 
 	@Override
@@ -54,7 +140,7 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 
 	@Override
 	public void shutdown() {
-		// TODO Auto-generated method stub
+		pool.shutdown();
 		
 	}
 
@@ -82,6 +168,12 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	    }
 
 	    return results;
+	}
+
+	@Override
+	public void writeRequest(List<Integer> newData, UserRequest request) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
