@@ -15,10 +15,10 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	private final ExecutorService pool;
 	
 	
-	public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator, int nThreads) {
+	public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator, int nthreads) {
 		super();
 		this.delegator = delegator;
-		this.pool = Executors.newFixedThreadPool(nThreads);
+		this.pool = Executors.newFixedThreadPool(nthreads);
 	}
 	
 	public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator) {
