@@ -13,6 +13,7 @@ import conceptapi.ImplementConceptAPI;
 import processapi.ImplementProcessorAPI;
 import processapi.ProcessorAPI;
 
+//200 error codes come from here
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
 	public List<Integer> respond(String input, String output, char delimiter ) {
@@ -20,13 +21,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		UserRequest request = buildRequest(input,output, delimiter); 
 		// call the components
 		ComputeComponent concept = new ImplementConceptAPI();
-		ProcessorAPI storage = new ImplementProcessorAPI();
 		
-		//validation check
-		if(!initialize(request)) {
-			System.err.println("User Request is invalid!");
-			return Collections.emptyList();
-		}
 		// create list of empty list to respond with and list of values given by user
 		// input
 		List<Integer> responses;
@@ -41,16 +36,16 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 						try {
 							return concept.computeValue(i);
 						}catch (Exception e) {
-							System.err.println("Could not compute value, skipping current index ${i}!");
+							System.err.println("E200:Could not compute value, skipping current index ${i}!");
 							return 0;
 						}
 					}).
 					collect(Collectors.toList());
 
 			// after responses are created in list use as parameter in write request
-			storage.write(output, responses, delimiter);
+			writeRequest(responses, request);
 		} catch (Exception e) {
-			System.err.println("Error!: " + e.getMessage());
+			System.err.println("E201: " + e.getMessage());
 			return Collections.emptyList();
 		}
 
@@ -66,33 +61,63 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	}
 
 //this method will request the processorAPI to read through the userrequest input location
+	@Override
 	public List<String> readRequest(UserRequest request) {
-		ImplementProcessorAPI storage = new ImplementProcessorAPI();
-		List<String> values = new ArrayList<>();
-		// check if storage component is initialized
-		try {
-			if (request == null) {
-				System.err.println("Request is null! Please try again!");
-				return Collections.emptyList();			
-				}
 
-			// check if request input path is valid
-			String filePath = request.getInputSource();
-			if (filePath == null || filePath.isEmpty()) {
-				System.err.println("File path does not exist!");
-				return Collections.emptyList();
-			}
+	    ProcessorAPI storage = new ImplementProcessorAPI();
 
-			values = storage.read(values, filePath);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.err.println("Could not read file from input location!");
-			return Collections.emptyList();
-		}
-		return values;
+	    if (request == null) {
+	        System.err.println("E200: Request is null");
+	        return Collections.emptyList();
+	    }
+
+	    String filePath = request.getInputSource();
+	    if (filePath == null || filePath.isEmpty()) {
+	        System.err.println("E201: Input path invalid");
+	        return Collections.emptyList();
+	    }
+
+	    try {
+	        List<Integer> nums = storage.read(filePath);
+
+	        return nums.stream()
+	                   .map(String::valueOf)
+	                   .collect(Collectors.toList());
+
+	    } catch (Exception e) {
+	        System.err.println("E204: Could not read file from input location!");
+	        return Collections.emptyList();
+	    }
 	}
 
+	public void writeRequest(List<Integer> results, UserRequest request) throws InvalidRequestException {
+		ProcessorAPI storage = new ImplementProcessorAPI();
+		if (request == null) {
+			System.err.println("E205:The request is null or does not exist!");
+			return;
+		}
+		String output = request.getOutputDestination(); // gets the output path from user request
 
+		try {
+
+			if (results == null ) {
+				System.err.println("E206:Results is empty, computation was not performed!");
+				return;
+			}
+
+			// check if given output location is there
+			if (output == null || output.isEmpty()) {
+				System.err.println("E207:Output location was not given in request!");
+				return;
+			}
+
+			storage.write(output, results, request.getDelimiter()); // method writes converts results into String list
+																	// and create a file using results
+		} catch (Exception e) {
+			System.err.println("E208:Error writing request to output" + e.getMessage());
+			return;
+		}
+	}
 
 	@Override // leave for integration test
 	public int respond(boolean isInit, int valueA, ComputeComponent concept) {
@@ -107,7 +132,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		ComputeComponent concept = new ImplementConceptAPI();
 		try {
 			if (!isInit || values == null) {
-				System.err.println("Could not be initialized as there was an error!");
+				System.err.println("E209:Could not be initialized as there was an error!");
 				return Collections.emptyList();
 			}
 
@@ -116,7 +141,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 				responses.add(concept.computeValue(valueA));
 			}
 		} catch (Exception e) {
-			System.err.println("Error!: " + e.getMessage());
+			System.err.println("E210: " + e.getMessage());
 			return Collections.emptyList();
 		}
 		return responses;
@@ -125,7 +150,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	// overloading method for testing harness
 	public List<String> respond(List<String> values) {
 	    if (values == null) {
-	        System.err.println("List was null!");
+	        System.err.println("E211:List was null!");
 	        return Collections.emptyList();
 	    }
 
@@ -158,10 +183,10 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 
 	            responses.add(String.valueOf(result));
 	        } catch (NumberFormatException e) {
-	            System.err.println("Invalid number: '" + rawData + "', returning default 0");
+	            System.err.println("E212:Invalid number: '" + rawData + "', returning default 0");
 	            responses.add("0");
 	        } catch (Exception e) {
-	            System.err.println("Could not compute value for '" + rawData + "': " + e.getMessage());
+	            System.err.println("E213:Could not compute value for '" + rawData + "': " + e.getMessage());
 	            responses.add("0");
 	        }
 	    }

@@ -17,6 +17,7 @@ public interface NetworkInterfaceAPI {
 	int respond(boolean isInit, int valueA, ComputeComponent concept) ; //using for integration test
 	void shutdown();
 	UserRequest buildRequest(String input, String output,char delimiter);
+	void writeRequest(List<Integer> newData, UserRequest request);
 	
 	
 }
