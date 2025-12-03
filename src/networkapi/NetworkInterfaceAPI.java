@@ -15,7 +15,6 @@ public interface NetworkInterfaceAPI {
 	boolean initialize(UserRequest request);
 	List<String> readRequest( UserRequest request);
 	int respond(boolean isInit, int valueA, ComputeComponent concept) ; //using for integration test
-	void writeRequest(List<Integer> results, UserRequest request) ;
 	void shutdown();
 	UserRequest buildRequest(String input, String output,char delimiter);
 	

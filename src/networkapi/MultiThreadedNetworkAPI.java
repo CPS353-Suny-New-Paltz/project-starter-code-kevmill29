@@ -51,11 +51,6 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		return 0;
 	}
 
-	@Override
-	public void writeRequest(List<Integer> results, UserRequest request) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void shutdown() {

@@ -20,6 +20,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		UserRequest request = buildRequest(input,output, delimiter); 
 		// call the components
 		ComputeComponent concept = new ImplementConceptAPI();
+		ProcessorAPI storage = new ImplementProcessorAPI();
 		
 		//validation check
 		if(!initialize(request)) {
@@ -47,7 +48,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 					collect(Collectors.toList());
 
 			// after responses are created in list use as parameter in write request
-			writeRequest(responses, request);
+			storage.write(output, responses, delimiter);
 		} catch (Exception e) {
 			System.err.println("Error!: " + e.getMessage());
 			return Collections.emptyList();
@@ -91,34 +92,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 		return values;
 	}
 
-	public void writeRequest(List<Integer> results, UserRequest request) throws InvalidRequestException {
-		ProcessorAPI storage = new ImplementProcessorAPI();
-		if (request == null) {
-			System.err.println("The request is null or does not exist!");
-			return;
-		}
-		String output = request.getOutputDestination(); // gets the output path from user request
 
-		try {
-
-			if (results == null || results.isEmpty()) {
-				System.err.println("Results is empty, computation was not performed!");
-				return;
-			}
-
-			// check if given output location is there
-			if (output == null || output.isEmpty()) {
-				System.err.println("Output location was not given in request!");
-				return;
-			}
-
-			storage.write(output, results, request.getDelimiter()); // method writes converts results into String list
-																	// and create a file using results
-		} catch (Exception e) {
-			System.err.println("Error writing request to output" + e.getMessage());
-			return;
-		}
-	}
 
 	@Override // leave for integration test
 	public int respond(boolean isInit, int valueA, ComputeComponent concept) {
