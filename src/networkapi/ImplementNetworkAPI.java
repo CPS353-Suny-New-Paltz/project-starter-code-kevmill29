@@ -15,14 +15,17 @@ import processapi.ProcessorAPI;
 
 public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	@Override
-	public List<Integer> respond(boolean isInit, UserRequest request) {
-		if (request == null || !isInit) {
-			System.err.println("Invalid request or component no initialized!");
-			return Collections.emptyList();
-		}
+	public List<Integer> respond(String input, String output, char delimiter ) {
+		//build request inside of respond instead of taking UserRequest as parameter
+		UserRequest request = buildRequest(input,output, delimiter); 
 		// call the components
 		ComputeComponent concept = new ImplementConceptAPI();
-
+		
+		//validation check
+		if(!initialize(request)) {
+			System.err.println("User Request is invalid!");
+			return Collections.emptyList();
+		}
 		// create list of empty list to respond with and list of values given by user
 		// input
 		List<Integer> responses;
@@ -125,15 +128,12 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 
 	// this is for fuzz testing purposes as it does not take in a built request, a
 	// null request will return an empty list due to the
-	public List<Integer> respond(boolean isInit, ComputeComponent concept, List<Integer> values) {
+	public List<Integer> respond(boolean isInit,  List<Integer> values) {
 		List<Integer> responses = new ArrayList<>();
+		ComputeComponent concept = new ImplementConceptAPI();
 		try {
 			if (!isInit || values == null) {
 				System.err.println("Could not be initialized as there was an error!");
-				return Collections.emptyList();
-			}
-		if (concept == null) {
-				System.err.println("Computation component was not initialized!");
 				return Collections.emptyList();
 			}
 
@@ -149,30 +149,50 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	}
 
 	// overloading method for testing harness
-	public List<String> respond(List<String> values, UserRequest request) {
-		if (values == null || values.isEmpty()) {
-			System.err.println("No values were given or list was null!");
-			return Collections.emptyList();
-		}
-		ImplementProcessorAPI storage = new ImplementProcessorAPI();
-		ComputeComponent concept = new ImplementConceptAPI();
-		List<String> responses = readRequest(request).stream()
-			    .map(String::trim)
-			    .filter(s -> !s.isEmpty())
-			    .map(Integer::parseInt)
-			    .map(i -> {
-			        try {
-			            int result = concept.computeValue(i);
-			            return String.valueOf(result);
-			        } catch (Exception e) {
-			            System.err.println("Could not compute value, skipping index " + i);
-			            return "0";
-			        }
-			    })
-			    .collect(Collectors.toList());
+	public List<String> respond(List<String> values) {
+	    if (values == null) {
+	        System.err.println("List was null!");
+	        return Collections.emptyList();
+	    }
 
-		
-		return responses;
+	    ImplementProcessorAPI storage = new ImplementProcessorAPI();
+	    ComputeComponent concept = new ImplementConceptAPI();
+
+	    List<String> responses = new ArrayList<>();
+
+	    for (String rawData : values) {
+	        if (rawData == null) {
+	            
+	            responses.add("0");
+	            continue;
+	        }
+
+	        String trimmed = rawData.trim();
+
+	        if (trimmed.isEmpty()) {
+	            
+	            responses.add("0");
+	            continue;
+	        }
+
+	        try {
+	            int input = Integer.parseInt(trimmed);   // may throw
+	            int result = concept.computeValue(input); // may throw
+
+	         
+	            // storage.writeResult(result);
+
+	            responses.add(String.valueOf(result));
+	        } catch (NumberFormatException e) {
+	            System.err.println("Invalid number: '" + rawData + "', returning default 0");
+	            responses.add("0");
+	        } catch (Exception e) {
+	            System.err.println("Could not compute value for '" + rawData + "': " + e.getMessage());
+	            responses.add("0");
+	        }
+	    }
+
+	    return responses;
 	}
 
 	@Override
@@ -184,5 +204,7 @@ public class ImplementNetworkAPI implements NetworkInterfaceAPI {
 	public UserRequest buildRequest(String input, String output, char delimiter) {
 		return new UserRequest(input, output, delimiter);
 	}
+
+	
 
 }

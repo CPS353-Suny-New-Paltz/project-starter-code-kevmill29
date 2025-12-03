@@ -65,10 +65,10 @@ public class ComputeEngineIntegrationTest {
   @Test
   public void shouldThrowTest() {
 	  ImplementNetworkAPI testAPI = new ImplementNetworkAPI();
-	  ComputeComponent testCompute = new ImplementConceptAPI();
+	
 	  List<Integer> data = Arrays.asList(1,10,25);
 	  boolean isInit = false; // to force an error
-	  List<Integer> results = testAPI.respond(isInit, testCompute, data);
+	  List<Integer> results = testAPI.respond(isInit, data);
 	  //test 1
 	  assertNotNull(results);
 	  

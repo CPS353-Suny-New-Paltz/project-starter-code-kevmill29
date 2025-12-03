@@ -30,7 +30,7 @@ public class ManualTestingFramework {
         List<Integer> newData;
         //next write new data to a file in designated location
         
-        	newData =  netAPI.respond(netAPI.initialize(request), request); // create a list of integers from the data inside the request
+        	newData =  netAPI.respond(INPUT, OUTPUT, ','); // create a list of integers from the data inside the request
             netAPI.writeRequest(newData, request);
        
             // TODO Auto-generated catch block
