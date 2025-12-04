@@ -95,6 +95,13 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 					return 0;
 				}
 			}));
+			 //Wait 1 minute between dispatches
+		    try {
+		        Thread.sleep(60_000);  // 60 seconds
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		    }
+			
 		}
 		
 		List<Integer>results = new ArrayList<>();
