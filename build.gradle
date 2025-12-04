@@ -32,8 +32,7 @@ testImplementation 'junit:junit:4.13.2'
 test {
 
     useJUnitPlatform()
-  filter {
-        excludeTestsMatching "TestMultiUser.smokeTest"
-    }
+  
     
 }
+
