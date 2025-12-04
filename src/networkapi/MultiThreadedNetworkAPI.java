@@ -39,7 +39,7 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		//call components
 		ProcessorAPI storage = new ImplementProcessorAPI();
 		ComputeComponent concept = new ImplementConceptAPI();
-		UserRequest request = buildRequest(input, output, delimiter);
+		UserRequest request = delegator.buildRequest(input, output, delimiter);
 		// validate parameters and check if buildRequest is successful
 		if(input == null || output == null) {
 			System.err.println("E300: Request is null! Please try again!");
@@ -118,6 +118,8 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		
 		return results;
 	}
+	
+	//methods are being pulled from ImplementNetworkAPI so leave these methods blank from implementation requirement
 
 	@Override
 	public boolean initialize(UserRequest request) {
@@ -150,7 +152,14 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		return null;
 	}
 	
+	@Override
+	public void writeRequest(List<Integer> newData, UserRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
+	//added this method from TestMultiUser To allow the smoke test to run
 	public List<String> processRequests(List<String> requests) {
 	    if (requests == null) {
 	        return Collections.emptyList();
@@ -170,10 +179,5 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	    return results;
 	}
 
-	@Override
-	public void writeRequest(List<Integer> newData, UserRequest request) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }
