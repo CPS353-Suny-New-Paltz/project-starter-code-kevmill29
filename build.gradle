@@ -1,5 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'com.google.protobuf' version '0.9.4'
+}
 
 eclipse.project.name = 'Consecutive Quadratic Prime Number Calculator' 
 
@@ -27,6 +31,10 @@ testImplementation 'junit:junit:4.13.2'
 	implementation('com.google.code.gson:gson:2.13.1')
      	implementation 'fr.inria.gforge.spoon:spoon-core:11.2.0'
      	implementation 'com.opencsv:opencsv:5.7.1'
+     	    // gRPC
+    implementation 'io.grpc:grpc-netty-shaded:1.63.0'
+    implementation 'io.grpc:grpc-protobuf:1.63.0'
+    implementation 'io.grpc:grpc-stub:1.63.0'
 }
 
 test {
@@ -34,5 +42,23 @@ test {
     useJUnitPlatform()
   
     
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.0"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.63.0"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
 }
 

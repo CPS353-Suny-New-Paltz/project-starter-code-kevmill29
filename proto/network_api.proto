@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package networkapi;
+
+
+message ComputeFileRequest{
+required string input_path = 1;
+required string output_path = 2;
+optional string delimiter = 3 [default=","]
+}
+
+message ComputeFileResponse{
+repeated int32 results = 1;
+optional string error = 2;
+}
+
+service NetworkAPIService{
+rpc ProcessFile (ComputeFileRequest) returns (ComputeFileResponse);
+}
