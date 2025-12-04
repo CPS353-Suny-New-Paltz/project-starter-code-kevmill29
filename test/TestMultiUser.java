@@ -12,6 +12,7 @@ import java.util.concurrent.Future;
 import org.junit.Assert;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import networkapi.ImplementNetworkAPI;
@@ -100,4 +101,5 @@ public class TestMultiUser {
         Assert.assertEquals(requests.size(), results.size());
     }
 }
+
 
