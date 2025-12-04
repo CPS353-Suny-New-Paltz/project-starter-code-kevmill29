@@ -6,16 +6,19 @@
 -[Usage](#usage)
 -[File Formats](#file-formats)
 -[API](#API)
+-[Multithreaded Implementation](#MultiThreading)
 
 
 # Features
 - Read integers from (for now!)text, (coming soon)JSON, or CSV files
 - Write computation results back to files with optional delimiters
 - Simple API method to start comuation and return results
+- Multi-threaded execution for improved performance and concurrency testing
 
 # Installation
 -Requires Java 21
 -Requires Gradle 8.6 for building and running
+-Requires JUNIT 5 & Junit 4
 build project with gradle build
 
 # Usage
@@ -45,7 +48,10 @@ The program takes in two locations: the input source where a text file containin
 
 Number of consecutive primes starting from n = 0 :  40    
 
-The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations so that 
+The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations.
+
+# Multithreaded Implementation
+Added multi threading for performance and scalability. Threading is limited to 4 threads and waits 1 minute between each dispatch to make sure that system does not overload. 
 
 
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
