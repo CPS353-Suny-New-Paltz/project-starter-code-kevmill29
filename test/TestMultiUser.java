@@ -33,6 +33,7 @@ public class TestMultiUser {
 		// Store it in the 'coordinator' instance variable
 		 networkAPI = new MultiThreadedNetworkAPI((ImplementNetworkAPI)coordinator);
 	}
+	@AfterEach
 	public void cleanup() {
         if (networkAPI != null) {
             networkAPI.shutdown();
@@ -99,3 +100,4 @@ public class TestMultiUser {
         Assert.assertEquals(requests.size(), results.size());
     }
 }
+
