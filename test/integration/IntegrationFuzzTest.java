@@ -40,7 +40,7 @@ public class IntegrationFuzzTest {
 			actual.add(a);	
 		}
 		//List will take the data and use the integrated api to create new list
-		List<Integer> actualData = testAPI.respond(true, computer, actual);
+		List<Integer> actualData = testAPI.respond(true, actual);
 		//check if the size is same
 		assertEquals(expected.size(), actualData.size(), "Error: List size differs");
 
