@@ -6,16 +6,20 @@
 -[Usage](#usage)
 -[File Formats](#file-formats)
 -[API](#API)
+-[Multithreaded Implementation](#MultiThreading)
+-[gRPC Setup](#gRPC)
 
 
 # Features
 - Read integers from (for now!)text, (coming soon)JSON, or CSV files
 - Write computation results back to files with optional delimiters
 - Simple API method to start comuation and return results
+- Multi-threaded execution for improved performance and concurrency testing
 
 # Installation
 -Requires Java 21
 -Requires Gradle 8.6 for building and running
+-Requires JUNIT 5 & Junit 4
 build project with gradle build
 
 # Usage
@@ -45,7 +49,43 @@ The program takes in two locations: the input source where a text file containin
 
 Number of consecutive primes starting from n = 0 :  40    
 
-The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations so that 
+The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations.
+
+# gRPC / Proto Setup
+2. Generating Java Classes from .proto Files
+
+The project automatically generates protobuf and gRPC Java classes when you run:
+
+./gradlew build
+
+
+or manually:
+
+./gradlew generateProto
+
+
+Generated files will appear in:
+
+build/generated/source/proto/main/java/
+build/generated/source/proto/main/grpc/
+
+
+These folders are already added to the Gradle sourceSets so the generated classes compile automatically.
+
+4. Build Requirements for Protobuf & gRPC
+
+The project uses the following versions, configured in build.gradle:
+
+protoc: 3.24.x
+
+gRPC Java generator: 1.63.x
+
+javax.annotation-api: added as compileOnly so @Generated compiles on Java 17+ without affecting runtime
+
+No additional setup is required — simply run the Gradle build and the gRPC stubs will be generated and compiled automatically.
+
+# Multithreaded Implementation
+Added multi threading for performance and scalability. Threading is limited to 4 threads and waits 1 minute between each dispatch to make sure that system does not overload. 
 
 
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
