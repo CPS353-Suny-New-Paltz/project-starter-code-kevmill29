@@ -18,7 +18,7 @@ import processapi.ProcessorAPI;
 //300 error codes come from here
 public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	//creating wrapper/decorator implementation
-	private final ImplementNetworkAPI delegator;
+	private final ImplementNetworkAPI delegator; //will be used to call methods from ImplementNetworkAPI in the wrapper class
 	private final ExecutorService pool;
 	
 	
@@ -95,6 +95,13 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 					return 0;
 				}
 			}));
+			 //Wait 1 minute between dispatches
+		    try {
+		        Thread.sleep(60_000);  // 60 seconds
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		    }
+			
 		}
 		
 		List<Integer>results = new ArrayList<>();
@@ -118,6 +125,8 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		
 		return results;
 	}
+	
+	//methods are being pulled from ImplementNetworkAPI so leave these methods blank from implementation requirement
 
 	@Override
 	public boolean initialize(UserRequest request) {
@@ -150,7 +159,14 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		return null;
 	}
 	
+	@Override
+	public void writeRequest(List<Integer> newData, UserRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
+	//added this method from TestMultiUser To allow the smoke test to run
 	public List<String> processRequests(List<String> requests) {
 	    if (requests == null) {
 	        return Collections.emptyList();
@@ -170,10 +186,5 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	    return results;
 	}
 
-	@Override
-	public void writeRequest(List<Integer> newData, UserRequest request) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }
