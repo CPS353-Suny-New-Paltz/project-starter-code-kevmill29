@@ -5,9 +5,9 @@
 -[Installation](#installation)
 -[Usage](#usage)
 -[File Formats](#file-formats)
--[API](#API)
--[Multithreaded Implementation](#MultiThreading)
--[gRPC Setup](#gRPC)
+-[API](#api)
+-[Multithreaded Implementation](#multithreading)
+-[gRPC Setup](#grpc)
 
 
 # Features

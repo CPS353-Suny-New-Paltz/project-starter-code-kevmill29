@@ -28,11 +28,12 @@ public class TestMultiUser {
 	
 	@BeforeEach
 	public void initializeComputeEngine() {
-		coordinator = new ImplementNetworkAPI();
+		ImplementNetworkAPI thread = new ImplementNetworkAPI();
+		networkAPI = new MultiThreadedNetworkAPI(thread);
 		//TODO 2: create an instance of the implementation of your @NetworkAPI; this is the component
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
-		 networkAPI = new MultiThreadedNetworkAPI((ImplementNetworkAPI)coordinator);
+		 coordinator = networkAPI;
 	}
 	@AfterEach
 	public void cleanup() {
