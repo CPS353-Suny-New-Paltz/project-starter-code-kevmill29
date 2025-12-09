@@ -24,6 +24,7 @@ public class ImplementNetworkAPI extends NetworkAPIServiceGrpc.NetworkAPIService
 implements NetworkInterfaceAPI {
 	@Override
 	public void processFile(ComputeFileRequest request, StreamObserver<ComputeFileResponse> responseObserver) {
+		//added a new method to bridge client with engine
 		ComputeFileResponse.Builder responseBuilder = ComputeFileResponse.newBuilder();
 		
 		
@@ -45,7 +46,7 @@ implements NetworkInterfaceAPI {
 				if(request.hasDelimiter()) {
 					scanner.useDelimiter(request.getDelimiter());
 				}
-				
+				//scans through lines of the file and parses for integers
 				while(scanner.hasNext()) {
 					if(scanner.hasNextInt()) {
 						computedResults.add(scanner.nextInt());
