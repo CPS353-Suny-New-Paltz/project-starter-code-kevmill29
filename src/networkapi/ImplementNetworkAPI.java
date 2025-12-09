@@ -1,8 +1,10 @@
 package networkapi;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import assets.InvalidRequestException;
@@ -10,11 +12,61 @@ import assets.UserRequest;
 import assets.UserRequestCode;
 import conceptapi.ComputeComponent;
 import conceptapi.ImplementConceptAPI;
+import io.grpc.stub.StreamObserver;
+import networkapi.grpc.ComputeFileRequest;
+import networkapi.grpc.ComputeFileResponse;
+import networkapi.grpc.NetworkAPIServiceGrpc;
 import processapi.ImplementProcessorAPI;
 import processapi.ProcessorAPI;
 
 //200 error codes come from here
-public class ImplementNetworkAPI implements NetworkInterfaceAPI {
+public class ImplementNetworkAPI extends NetworkAPIServiceGrpc.NetworkAPIServiceImplBase
+implements NetworkInterfaceAPI {
+	@Override
+	public void processFile(ComputeFileRequest request, StreamObserver<ComputeFileResponse> responseObserver) {
+		ComputeFileResponse.Builder responseBuilder = ComputeFileResponse.newBuilder();
+		
+		
+			//setup input to allow file reading
+			File inputFile = new File(request.getInputPath());
+			if(!inputFile.exists()) {
+				//set error message instead of throwing
+				responseBuilder.setError("File does not exist: " + request.getInputPath());
+				// send response and close connection immediate to prevent crashing
+				responseObserver.onNext(responseBuilder.build());
+				responseObserver.onCompleted();
+				//stops here and returns
+				return;
+			}
+			try {
+				List<Integer>computedResults = new ArrayList<>();
+				Scanner scanner = new Scanner(inputFile);
+				//check for delimiter in file
+				if(request.hasDelimiter()) {
+					scanner.useDelimiter(request.getDelimiter());
+				}
+				
+				while(scanner.hasNext()) {
+					if(scanner.hasNextInt()) {
+						computedResults.add(scanner.nextInt());
+					}else {
+						scanner.next();
+					}
+				}
+				scanner.close();
+			//add only if successful
+				responseBuilder.addAllResults(computedResults);
+			}catch (Exception e) {
+				//error handling
+				responseBuilder.setError("Unexpected: "+e.getMessage());
+			}
+			
+			//finally send 
+			responseObserver.onNext(responseBuilder.build());
+			responseObserver.onCompleted();
+		
+	}
+	
 	@Override
 	public List<Integer> respond(String input, String output, char delimiter ) {
 		//build request inside of respond instead of taking UserRequest as parameter
