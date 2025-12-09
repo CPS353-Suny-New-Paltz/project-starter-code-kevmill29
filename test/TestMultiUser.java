@@ -9,15 +9,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.junit.Assert;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.Assert;
 import networkapi.ImplementNetworkAPI;
 import networkapi.MultiThreadedNetworkAPI;
 import networkapi.NetworkInterfaceAPI;
+
 
 public class TestMultiUser {
 	
@@ -28,11 +27,12 @@ public class TestMultiUser {
 	
 	@BeforeEach
 	public void initializeComputeEngine() {
-		coordinator = new ImplementNetworkAPI();
+		ImplementNetworkAPI thread = new ImplementNetworkAPI();
+		networkAPI = new MultiThreadedNetworkAPI(thread);
 		//TODO 2: create an instance of the implementation of your @NetworkAPI; this is the component
 		// that the user will make requests to
 		// Store it in the 'coordinator' instance variable
-		 networkAPI = new MultiThreadedNetworkAPI((ImplementNetworkAPI)coordinator);
+		 coordinator = networkAPI;
 	}
 	@AfterEach
 	public void cleanup() {
