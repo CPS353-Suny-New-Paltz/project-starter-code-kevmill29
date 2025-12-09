@@ -22,8 +22,7 @@ public class NetworkClient {
 		
 		//next create the blocking stub 
 		NetworkAPIServiceGrpc.NetworkAPIServiceBlockingStub stub = NetworkAPIServiceGrpc.newBlockingStub(channel);
-		
-		Scanner input = new Scanner (System.in);
+		Scanner input = new Scanner(System.in);
 		
 		try {
 			System.out.println("----Computation Engine Client----");
