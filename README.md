@@ -5,8 +5,9 @@
 -[Installation](#installation)
 -[Usage](#usage)
 -[File Formats](#file-formats)
--[API](#API)
--[Multithreaded Implementation](#MultiThreading)
+-[API](#api)
+-[Multithreaded Implementation](#multithreading)
+-[gRPC Setup](#grpc)
 
 
 # Features
@@ -49,6 +50,39 @@ The program takes in two locations: the input source where a text file containin
 Number of consecutive primes starting from n = 0 :  40    
 
 The Coordination component or NetworkAPI is in charge of calling the ProcessorAPI(Storage Component) after it validates the user request to be successful. Once this is done it ProcessorAPI will then read the integers from the location specified by the user given that it is in the proper format for the storage component to read. Once finished the Coordination component will then call the Computation Component to read the data in storage component and start the computations.
+
+# gRPC / Proto Setup
+2. Generating Java Classes from .proto Files
+
+The project automatically generates protobuf and gRPC Java classes when you run:
+
+./gradlew build
+
+
+or manually:
+
+./gradlew generateProto
+
+
+Generated files will appear in:
+
+build/generated/source/proto/main/java/
+build/generated/source/proto/main/grpc/
+
+
+These folders are already added to the Gradle sourceSets so the generated classes compile automatically.
+
+4. Build Requirements for Protobuf & gRPC
+
+The project uses the following versions, configured in build.gradle:
+
+protoc: 3.24.x
+
+gRPC Java generator: 1.63.x
+
+javax.annotation-api: added as compileOnly so @Generated compiles on Java 17+ without affecting runtime
+
+No additional setup is required — simply run the Gradle build and the gRPC stubs will be generated and compiled automatically.
 
 # Multithreaded Implementation
 Added multi threading for performance and scalability. Threading is limited to 4 threads and waits 1 minute between each dispatch to make sure that system does not overload. 

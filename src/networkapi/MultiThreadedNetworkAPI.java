@@ -18,7 +18,7 @@ import processapi.ProcessorAPI;
 //300 error codes come from here
 public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	//creating wrapper/decorator implementation
-	private final ImplementNetworkAPI delegator;
+	private final ImplementNetworkAPI delegator; //will be used to call methods from ImplementNetworkAPI in the wrapper class
 	private final ExecutorService pool;
 	
 	
