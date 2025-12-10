@@ -18,7 +18,7 @@ import processapi.ProcessorAPI;
 //300 error codes come from here
 public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 	//creating wrapper/decorator implementation
-	private final ImplementNetworkAPI delegator;
+	private final ImplementNetworkAPI delegator; //will be used to call methods from ImplementNetworkAPI in the wrapper class
 	private final ExecutorService pool;
 	
 	
@@ -96,12 +96,7 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 				}
 			}));
 			 //Wait 1 minute between dispatches
-		    try {
-		        Thread.sleep(60_000);  // 60 seconds
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		    }
-			
+		  
 		}
 		
 		List<Integer>results = new ArrayList<>();
@@ -118,7 +113,7 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		//write the results to a file
 		try {
 			storage.write(output, results, delimiter);
-		} catch (IOException e) {
+		} catch(Exception e) {
 			System.err.println("E306: Could not write file in location!");
 			
 		}

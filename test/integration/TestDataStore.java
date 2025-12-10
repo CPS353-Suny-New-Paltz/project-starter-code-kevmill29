@@ -2,6 +2,7 @@ package integration;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,19 +34,24 @@ public class TestDataStore implements ProcessorAPI{
 
 
 		@Override
-		public List<Integer> read(String filePath) throws IOException {
+		public List<Integer> read(String filePath)  {
 			
-			return Files.readAllLines(Paths.get(filePath)).stream()//streams through the strings within the file
-					.map(String::trim) // shortens the string if there are empty spaces in the line
-					.filter(s->!s.isEmpty())// checks if line is empty and will skip if the line is not
-					.map(Integer::parseInt)// converts String into integer
-					.collect(Collectors.toList()); // creates new list and collects all found integers
+			try {
+				return Files.readAllLines(Paths.get(filePath)).stream()//streams through the strings within the file
+						.map(String::trim) // shortens the string if there are empty spaces in the line
+						.filter(s->!s.isEmpty())// checks if line is empty and will skip if the line is not
+						.map(Integer::parseInt)// converts String into integer
+						.collect(Collectors.toList());
+			} catch (IOException e) {
+			System.err.println("System error for test: "+e.getMessage());
+			return Collections.emptyList();
+			} // creates new list and collects all found integers
 		}
 
 	
 
 		@Override
-		public void write(String output, List<Integer> data, char delimiter) throws IOException {
+		public void write(String output, List<Integer> data, char delimiter) {
 			// TODO Auto-generated method stub
 			
 		}
