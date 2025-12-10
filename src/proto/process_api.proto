@@ -1,0 +1,37 @@
+syntax ="proto2";
+
+package processapi;
+
+option java_multiple_files = true;
+option java_package = "processapi.grpc";
+option java_outer_classname="ProcessApiProto";
+
+service ProcessorService{
+
+	//rpc for the read method
+	rpc ReadData(ReadRequest) returns (ReadResponse) {}
+
+	//rpc for write method
+	rpc WriteData(WriteRequest) returns (WriteResponse) {}
+}
+
+//Messages
+message ReadRequest {
+	required string file_Path = 1;
+}
+	
+message ReadResponse{
+	repeated int32 values=1;
+	optional string error_message = 2;
+}
+
+message WriteRequest{
+	required string file_path = 1;
+	repeated int32 values = 2;
+	required string delimiter = 3[default = ","];
+}
+
+message WriteResponse{
+	required bool is_success = 1;
+	optional string message = 2;
+}	

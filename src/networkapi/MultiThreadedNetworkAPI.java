@@ -113,7 +113,7 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
 		//write the results to a file
 		try {
 			storage.write(output, results, delimiter);
-		} catch (IOException e) {
+		} catch(Exception e) {
 			System.err.println("E306: Could not write file in location!");
 			
 		}
