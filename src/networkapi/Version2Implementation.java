@@ -23,19 +23,25 @@ import processapi.ProcessorAPI;
 /*
 
  
- * The primary CPU-based bottleneck was found in the .respond() method 
- * within the data processing pipeline. The computation-heavy operation, 
- * `concept.computeValue(i)`, was being executed sequentially using a 
- * standard Java Stream (`.stream()`), underutilizing the available 
- * multi-core CPU resources for a large dataset..
- * * 3. Fix/Improvement: 
- * The sequential stream was changed to a parallel stream (`.parallelStream()`)
- * in the `respond` method. This allows the Java Virtual Machine to automatically 
- * distribute the computationally intensive `computeValue` calls across the 
- * system's available CPU cores/threads using the ForkJoinPool.
+  The primary CPU-based bottleneck was found in the .respond() method 
+  within the data processing pipeline. Because the computation-heavy operation, 
+  concept.computeValue() was being executed sequentially using a 
+  standard Java Stream (.stream()), underutilizing the available 
+  multi-core CPU resources for a large dataset..
+  
+  .stream()-Core Utilization: A sequential stream processes all elements of the source data on a single thread.
+  .parallelStream() -Core Utilization: A parallel stream is designed to divide the source data into multiple segments. It processes these segments concurrently across multiple threads.
+  Best For: CPU-bound operations on large data sets, where the work can be easily and safely broken down while .stream() is best for small data sets. 
+  
+   
+   Fix/Improvement: 
+  The sequential stream was changed to a parallel stream (`.parallelStream()`)
+  in the `respond` method. This allows the Java Virtual Machine to automatically 
+  distribute the computationally intensive `computeValue` calls across the 
+  system's available CPU cores/threads using the ForkJoinPool.
 
  */
-public class ImplementNetworkAPI_V2 extends NetworkAPIServiceGrpc.NetworkAPIServiceImplBase
+public class Version2Implementation extends NetworkAPIServiceGrpc.NetworkAPIServiceImplBase
 implements NetworkInterfaceAPI {
 
 	@Override
