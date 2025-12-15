@@ -102,19 +102,29 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI {
 
     // These are required by the interface but not used in this specific flow
     @Override
-    public boolean initialize(UserRequest request) { return false; }
+    public boolean initialize(UserRequest request){ 
+    	return false; 
+    	}
 
     @Override
-    public List<String> readRequest(UserRequest request) { return null; }
+    public List<String> readRequest(UserRequest request){ 
+    	return null; 
+    	}
 
     @Override
-    public int respond(boolean isInit, int valueA, ComputeComponent concept) { return 0; }
+    public int respond(boolean isInit, int valueA, ComputeComponent concept){ 
+    	return 0; 
+    	}
 
     @Override
-    public UserRequest buildRequest(String input, String output, char delimiter) { return null; }
+    public UserRequest buildRequest(String input, String output, char delimiter){ 
+    	return null; 
+    	}
     
     @Override
-    public void writeRequest(List<Integer> newData, UserRequest request) { }
+    public void writeRequest(List<Integer> newData, UserRequest request) { 
+    	
+    }
 
     // Helper for testing
     public List<String> processRequests(List<String> requests) {
