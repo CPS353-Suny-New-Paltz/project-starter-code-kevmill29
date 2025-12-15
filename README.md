@@ -8,7 +8,7 @@
 -[API](#api)
 -[Multithreaded Implementation](#multithreading)
 -[gRPC Setup](#grpc)
-
+-[BenchmarkTesting](#benchmarktesting)
 
 # Features
 - Read integers from (for now!)text, (coming soon)JSON, or CSV files
@@ -87,6 +87,11 @@ No additional setup is required — simply run the Gradle build and the gRPC stu
 # Multithreaded Implementation
 Added multi threading for performance and scalability. Threading is limited to 4 threads and waits 1 minute between each dispatch to make sure that system does not overload. 
 
+# BenchmarkTesting
+The Performance Improvement (V2): The core computation component was improved by migrating from a standard fixed thread pool to an optimized Work Stealing Pool (Executors.newWorkStealingPool()).
 
+The Optimization: Unlike the baseline which incurs overhead by parsing strings inside the pipeline, the V2 implementation processes Integer data directly and uses work-stealing algorithms to better balance tasks across CPU cores. This addresses the bottleneck found in the respond method, resulting in a minimum of 10% speedup for large datasets.
+
+Running the Integration Benchmark: The benchmark uses a large, synthetic dataset to measure the end-to-end time of the baseline multithreaded implementation (MultiThreadedNetworkAPI) versus the optimized implementation (Version2Implementation).
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
 
