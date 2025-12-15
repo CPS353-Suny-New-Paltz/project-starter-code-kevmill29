@@ -8,6 +8,8 @@
 -[API](#api)
 -[Multithreaded Implementation](#multithreading)
 -[gRPC Setup](#grpc)
+-[BenchmarkTesting](#benchmarktesting)
+-[Visualization](#visualization)
 
 
 # Features
@@ -87,6 +89,28 @@ No additional setup is required — simply run the Gradle build and the gRPC stu
 # Multithreaded Implementation
 Added multi threading for performance and scalability. Threading is limited to 4 threads and waits 1 minute between each dispatch to make sure that system does not overload. 
 
+# Visualization
+Open your Terminal or Command Prompt.
+
+Navigate to the project root directory (the folder containing viz_client.html, viz_client.css, and the newly created .json file).
+
+Start the simple HTTP server using Python:
+
+Bash
+
+python -m http.server 8000
+(Leave this terminal window running.)
+
+Step 3.2: Open the Client
+Open your web browser (Chrome, Firefox, Edge, etc.).
+
+Navigate to the following URL:
+
+http://localhost:8000/viz_client.html
+You should now see the "Computation Job Summary" page, displaying the Min, Max, and Average results, along with a dynamic histogram showing the frequency of the computed values.
+
+Step 3.3: Stop the Server
+When finished, return to the terminal window running the Python server and press Ctrl + C to stop the process.
 
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
 
