@@ -46,7 +46,9 @@ public class NetworkClient {
 			}
 				//output path logic
 				
-				System.out.println("Enter an ouput file path: ");
+				System.out.println("Enter an output file path: ");
+				System.out.println("Example for Windows: C:/Users/YourName/Desktop/output.csv\nExample for Mac: /Users/yourname/Desktop/output.csv");
+				
 				String outputPath = input.nextLine().trim();
 				
 				//delimiter
@@ -76,8 +78,12 @@ public class NetworkClient {
 							System.out.println("Results received: "+ response.getResultsList());
 						}
 						
-			}catch(Exception e) {
-				System.err.println("An error has occurred! :"+ e.getMessage());
+			} catch(Exception e) {
+			    System.err.println("!!! CLIENT ERROR !!!");
+			    e.printStackTrace(); // This prints the line number and exact cause
+			    if (e instanceof io.grpc.StatusRuntimeException) {
+			        System.err.println("gRPC Status: " + ((io.grpc.StatusRuntimeException) e).getStatus());
+			    }
 				
 			}finally {
 				channel.shutdown();

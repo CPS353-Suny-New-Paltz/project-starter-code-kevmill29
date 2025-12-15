@@ -12,14 +12,21 @@ public class NetworkServer {
 	
 	//build the server 
 	public static void main(String[] args)throws IOException, InterruptedException{
-		Server server = ServerBuilder.forPort(PORT)
-				.addService(new ImplementNetworkAPI())
-				.build()
-				.start();
-		
-		System.out.println("Server initiated, listening on PORT: "+ PORT);
-		server.awaitTermination();
-	}
+int port = 50051;
+        
+        System.out.println("DEBUG: Attempting to start Network Server on port " + port + "...");
+        
+        // This starts the server using the NEW NetworkServerImpl logic
+        Server server = ServerBuilder.forPort(port)
+                .addService(new NetworkServerImpl())
+                .build()
+                .start();
+
+        // This is the message you should look for in the console to confirm it's the new code
+        System.out.println("Network Compute Server started on port " + port);
+        
+        server.awaitTermination();
+    }
 	
 
 	

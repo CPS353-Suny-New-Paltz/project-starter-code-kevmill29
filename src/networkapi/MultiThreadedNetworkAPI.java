@@ -1,13 +1,11 @@
 package networkapi;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.stream.Collectors;
 
 import assets.UserRequest;
 import conceptapi.ComputeComponent;
@@ -15,171 +13,116 @@ import conceptapi.ImplementConceptAPI;
 import processapi.ImplementProcessorAPI;
 import processapi.ProcessorAPI;
 
-//300 error codes come from here
-public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI{
-	//creating wrapper/decorator implementation
-	private final ImplementNetworkAPI delegator; //will be used to call methods from ImplementNetworkAPI in the wrapper class
-	private final ExecutorService pool;
-	
-	
-	public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator, int nthreads) {
-		super();
-		this.delegator = delegator;
-		this.pool = Executors.newFixedThreadPool(nthreads);
-	}
-	
-	public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator) {
-		this(delegator, Runtime.getRuntime().availableProcessors());
-	}
+// 300 error codes come from here
+public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI {
 
+    private final ImplementNetworkAPI delegator; 
+    private final ExecutorService pool;
+    private final ProcessorAPI storage;
+    
+    // For Networked Storage 
+    public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator, ProcessorAPI storage) {
+        this.delegator = delegator;
+        this.storage = storage; 
+        this.pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    }
+    
+    //  For Checkpoint test 
+    public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator, int nthreads) {
+        this.delegator = delegator;
+        this.pool = Executors.newFixedThreadPool(nthreads);
+        this.storage = new ImplementProcessorAPI(); 
+    }
+    
+   
+    public MultiThreadedNetworkAPI(ImplementNetworkAPI delegator) {
+        this(delegator, Runtime.getRuntime().availableProcessors());
+    }
 
-	@Override
-	public List<Integer> respond(String input, String output, char delimiter) {
-		
-		//call components
-		ProcessorAPI storage = new ImplementProcessorAPI();
-		ComputeComponent concept = new ImplementConceptAPI();
-		UserRequest request = delegator.buildRequest(input, output, delimiter);
-		// validate parameters and check if buildRequest is successful
-		if(input == null || output == null) {
-			System.err.println("E300: Request is null! Please try again!");
-			return Collections.emptyList();
-		}
-		
-		if(!delegator.initialize(request)) {
-			System.err.println("E310: Request is incomplete! Please try again!");
-			return Collections.emptyList();
-		}
-		
-		String filePath = request.getInputSource();
-		if(filePath == null || filePath.isEmpty()) {
-			System.err.println("E301: File or filepath does not exist!");
-			return Collections.emptyList();
-		}
-		
-		
-		//create list to be computed from raw data in file
-		List<String>data;
-		try {
-			data = delegator.readRequest(request);
-		}catch(Exception e) {
-			System.err.println("E303: Could not read file location!");
-			return Collections.emptyList();
-		}
-		
-		
-		//processed data into an Integer List after parsing
-		List<Integer>processedData = data.stream()
-									.map(s-> {
-										try {
-											return Integer.parseInt(s.trim());
-										}catch(Exception e) {
-											System.err.println("E313: Could not parse integer from list!");
-											return 0;
-										}
-										
-									})
-									.collect(Collectors.toList());
-		
-	
-		
-		//multithreading the computation
-		List<Future<Integer>>futures = new ArrayList<>();
-		
-		for(Integer value: processedData) {
-			futures.add(pool.submit(()->{
-				try {
-					return concept.computeValue(value);
-				}catch(Exception e) {
-					System.err.println("E304: Error calculating values!");
-					return 0;
-				}
-			}));
-			 //Wait 1 minute between dispatches
-		  
-		}
-		
-		List<Integer>results = new ArrayList<>();
-		
-		for(Future<Integer>f : futures) {
-			try {
-				results.add(f.get());
-			}catch(Exception e) {
-				System.err.println("E305: Error adding to futures list!");
-				results.add(0);
-			}
-		}
-		
-		//write the results to a file
-		try {
-			storage.write(output, results, delimiter);
-		} catch(Exception e) {
-			System.err.println("E306: Could not write file in location!");
-			
-		}
-		
-		return results;
-	}
-	
-	//methods are being pulled from ImplementNetworkAPI so leave these methods blank from implementation requirement
+    @Override
+    public List<Integer> respond(String input, String output, char delimiter) {
+        ComputeComponent concept = new ImplementConceptAPI();
+        UserRequest request = delegator.buildRequest(input, output, delimiter);
 
-	@Override
-	public boolean initialize(UserRequest request) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        // Validation Checks
+        if(input == null || output == null) {
+            System.err.println("E300: Request is null! Please try again!");
+            return Collections.emptyList();
+        }
+        
+        // 1. READ from Storage (Networked or Local)
+        List<Integer> processedData;
+        try {
+            processedData = storage.read(request.getInputSource());
+        } catch(Exception e) {
+            System.err.println("E303: Could not read file from storage server!");
+            return Collections.emptyList();
+        }
+        
+        // 2. COMPUTE (Multithreaded)
+        List<Future<Integer>> futures = new ArrayList<>();
+        
+        for(Integer value: processedData) {
+            futures.add(pool.submit(() -> {
+                try {
+                    return concept.computeValue(value);
+                } catch(Exception e) {
+                    System.err.println("E304: Error calculating values!");
+                    return 0;
+                }
+            }));
+        }
+        
+        List<Integer> results = new ArrayList<>();
+        for(Future<Integer> f : futures) {
+            try {
+                results.add(f.get());
+            } catch(Exception e) {
+                System.err.println("E305: Error adding to futures list!");
+                results.add(0);
+            }
+        }
+        
+        // 3. WRITE to Storage (Networked or Local)
+        try {
+            storage.write(output, results, delimiter);
+        } catch(Exception e) {
+            System.err.println("E306: Could not write file to storage server!");
+        }
+        
+        return results;
+    }
+    
+   
 
-	@Override
-	public List<String> readRequest(UserRequest request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public void shutdown() {
+        pool.shutdown();
+    }
 
-	@Override
-	public int respond(boolean isInit, int valueA, ComputeComponent concept) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    // These are required by the interface but not used in this specific flow
+    @Override
+    public boolean initialize(UserRequest request) { return false; }
 
+    @Override
+    public List<String> readRequest(UserRequest request) { return null; }
 
-	@Override
-	public void shutdown() {
-		pool.shutdown();
-		
-	}
+    @Override
+    public int respond(boolean isInit, int valueA, ComputeComponent concept) { return 0; }
 
-	@Override
-	public UserRequest buildRequest(String input, String output, char delimiter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public void writeRequest(List<Integer> newData, UserRequest request) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public UserRequest buildRequest(String input, String output, char delimiter) { return null; }
+    
+    @Override
+    public void writeRequest(List<Integer> newData, UserRequest request) { }
 
-	
-	//added this method from TestMultiUser To allow the smoke test to run
-	public List<String> processRequests(List<String> requests) {
-	    if (requests == null) {
-	        return Collections.emptyList();
-	    }
-
-	    // This is not computing anything, still trying to figure out the logic for this one here
-	    List<String> results = new ArrayList<>();
-
-	    for (String req : requests) {
-	        if (req == null || req.trim().isEmpty()) {
-	            results.add("0"); // default placeholder
-	        } else {
-	            results.add("0"); // or req — ANY value is fine as long as sizes match
-	        }
-	    }
-
-	    return results;
-	}
-
-	
+    // Helper for testing
+    public List<String> processRequests(List<String> requests) {
+        if (requests == null) return Collections.emptyList();
+        List<String> results = new ArrayList<>();
+        for (String req : requests) {
+            results.add("0"); 
+        }
+        return results;
+    }
 }

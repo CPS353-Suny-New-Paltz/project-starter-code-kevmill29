@@ -16,13 +16,14 @@ import processapi.grpc.WriteResponse;
 public class ProcessAPIServer {
 	
 	private static final int PORT = 50052;
-	public static void main(String []args) throws IOException {
+	public static void main(String []args) throws IOException, InterruptedException {
 		Server server = ServerBuilder.forPort(PORT)
 				.addService(new ProcessorServiceImpl())
 				.build()
 				.start();
 		
 		System.out.println("Database Server started on port: "+ PORT);
+		server.awaitTermination();
 	}
 	
 	static class ProcessorServiceImpl extends ProcessorServiceGrpc.ProcessorServiceImplBase{
@@ -30,6 +31,7 @@ public class ProcessAPIServer {
 		private final ImplementProcessorAPI controller = new ImplementProcessorAPI();
 		@Override
 		public void readData(ReadRequest request , StreamObserver<ReadResponse> responseObserver) {
+			System.out.println("Storage: Received read request for -> " + request.getFilePath());
 			ReadResponse.Builder response = ReadResponse.newBuilder();
 			
 			try {
@@ -39,7 +41,7 @@ public class ProcessAPIServer {
 				//pack results into proto
 				response.addAllValues(results);
 			}catch(Exception e) {
-				response.setErrorMessage("Server Read failed: "+ e.getMessage());
+				response.setErrorMessage("Server Read failed: "+ e.getMessage()); 	
 			}
 			
 			responseObserver.onNext(response.build());
@@ -48,6 +50,7 @@ public class ProcessAPIServer {
 		
 		@Override
 		public void writeData(WriteRequest request, StreamObserver<WriteResponse>responseObserver) {
+			System.out.println("Storage: Received write request for -> " + request.getFilePath());
 			WriteResponse.Builder response = WriteResponse.newBuilder();
 			
 			try {
@@ -68,6 +71,8 @@ public class ProcessAPIServer {
 			responseObserver.onNext(response.build());
 			responseObserver.onCompleted();
 		}
+		
+		
 	}
 
 }

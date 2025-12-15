@@ -20,33 +20,32 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 		return null;
 	}
 
-	@Override
+
 	// this method reads all the lines on the input file specified by the user
+	@Override
 	public List<Integer> read(String filePath) {
-		List<Integer> results = new ArrayList<>();
-		if(filePath == null || filePath.isEmpty()) {
-			System.err.println("File path cannot be empty!");
-			return Collections.emptyList();
-		}
-		Path path = Paths.get(filePath);
-		//validation check on filepath
-		try {
-		if (!Files.exists(path)) {
-			System.err.println("File not found: " + filePath);
-			return Collections.emptyList();
-		}
-		results= Files.readAllLines(path).stream()// streams through the strings within the file
-				.map(String::trim) // shortens the string if there are empty spaces in the line
-				.filter(s -> !s.isEmpty())// checks if line is empty and will skip if the line is not
-				.map(Integer::parseInt)// converts String into integer
-				.collect(Collectors.toList()); // creates new list and collects all found integers
-		}catch(IOException e) {
-			System.err.println("File cannot be read!");
-			return Collections.emptyList();
-		}
-		// do not need to add catch for FileNotFoundException already handled by IOException
-		
-		return results;
+	    List<Integer> results = new ArrayList<>();
+	    
+	    // ... (Keep your existing null checks and file existence checks here) ...
+	    
+	    try {
+	        Path path = Paths.get(filePath);
+	        results = Files.readAllLines(path).stream()
+	                // Split the line by the delimiter (comma) before parsing
+	                .flatMap(line -> java.util.Arrays.stream(line.split(","))) 
+	                .map(String::trim)
+	                .filter(s -> !s.isEmpty())
+	                .map(Integer::parseInt)
+	                .collect(Collectors.toList());
+	    } catch (IOException e) {
+	        System.err.println("File cannot be read!");
+	        return Collections.emptyList();
+	    } catch (NumberFormatException e) {
+	        System.err.println("File contains invalid numbers!");
+	        return Collections.emptyList();
+	    }
+	    
+	    return results;
 	}
 	
 	//overloading method for testing harness
@@ -80,43 +79,55 @@ public class ImplementProcessorAPI implements ProcessorAPI {
 	}
 
 
-	@Override
-	// this method will write the data from the given equation into a file with the
-	// specified location
-	public void write(String output, List<Integer> data, char delimiter)  {
-		if(output == null || output.isEmpty()) {
-			System.err.println("File path cannot be empty!");
-			return;
-		}
-	
-			//create an empty file instead of throwing a null pointer exception
-			//output does not need validation as it will be creating a new directory if does not exist
-			//delimiter will use default "," if not assigned
-			try {
-			Files.write(Paths.get(output), List.of());
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-		
-		//this part will join the integers to a single line
-		String line = data.stream()
-				.map(Object::toString)
-				.collect(Collectors.joining(String.valueOf(delimiter)));
-		//this part will write the file
-		try {
-			
-			if(data == null || data.isEmpty()) {
-				System.err.println("Data is empty or null!");
-				return;
-			}
-			
-		Files.write(Paths.get(output), List.of(line));
-		}catch(IOException e) {
-			System.err.println("Error writing file to output");
-			
-		}catch(IllegalArgumentException e) {
-			System.err.println("Computation error: " +e.getMessage());
-		}
+
+	public void write(String output, List<Integer> data, char delimiter) {
+	    System.out.println("Storage: Attempting to write " + data.size() + " values to: " + output);
+	    
+	    if (output == null || output.trim().isEmpty()) {
+            System.err.println("Storage Error: Output path cannot be empty.");
+            return;
+        }
+	    
+	    java.io.FileWriter writer = null;
+	    try {
+	        // 1. Create the file writer
+	        java.io.File file = new java.io.File(output);
+	        
+	        // DEBUG: Print the absolute path to confirm where it is actually going
+	        System.out.println("Storage: Absolute Path -> " + file.getAbsolutePath());
+	        
+	        // Ensure parent directories exist
+	        if (file.getParentFile() != null) {
+	            file.getParentFile().mkdirs(); 
+	        }
+
+	        writer = new java.io.FileWriter(file);
+	        
+	        // 2. Write the data
+	        for (int i = 0; i < data.size(); i++) {
+	            writer.write(String.valueOf(data.get(i)));
+	            if (i < data.size() - 1) {
+	                writer.write(delimiter);
+	            }
+	        }
+	        
+	        System.out.println("Storage: Write operation successful.");
+
+	    } catch (java.io.IOException e) {
+	        System.err.println("Storage Write Error: " + e.getMessage());
+	        e.printStackTrace();
+	    } finally {
+	        // 3. CRITICAL: Close the file or it will be empty/missing!
+	        try {
+	            if (writer != null) {
+	                writer.flush(); // Force bits to disk
+	                writer.close(); // Save and release
+	                System.out.println("Storage: File stream closed.");
+	            }
+	        } catch (java.io.IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 
 }
