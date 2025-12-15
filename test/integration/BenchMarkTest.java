@@ -1,4 +1,4 @@
-package integration;
+package integration; 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,74 +9,68 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import networkapi.ImplementNetworkAPI;
+import networkapi.MultiThreadedNetworkAPI; // Import your Baseline
 import networkapi.NetworkInterfaceAPI;
-import networkapi.Version2Implementation;
+import networkapi.Version2Implementation; // Import your Optimized Version
 import processapi.TestOnlyDataStore;
 
 public class BenchMarkTest {
 
     private static String INPUT_PATH;
     private static final String OUTPUT_PATH = "benchmark_output.txt";
-    private static final char DELIMITER = ','; // Assuming the component uses a delimiter
-
+    private static final char DELIMITER = ','; 
+   
     private static final double MINIMUM_IMPROVEMENT_PERCENTAGE = 10.0;
-
-
 
     @BeforeAll
     static void setup() throws IOException {
-        // Create the large, consistent dataset for both runs
         INPUT_PATH = TestOnlyDataStore.setupInputFile();
     }
 
     @AfterAll
     static void cleanup() {
-        // Ensure temporary files are deleted after the test runs
         TestOnlyDataStore.cleanupFiles();
     }
 
-    // --- The Core Benchmark Test ---
-
     @Test
     void fasterVersionMeetsMinimumPerformanceImprovement() {
-        //  Setup both versions of the API
-        NetworkInterfaceAPI originalAPI = new ImplementNetworkAPI();
+        //  Setup Baseline: MultiThreadedNetworkAPI
+        ImplementNetworkAPI delegator = new ImplementNetworkAPI();
+        NetworkInterfaceAPI baselineAPI = new MultiThreadedNetworkAPI(delegator);
+
+        // Setup Challenger: Version2Implementation (Optimized)
         NetworkInterfaceAPI fasterAPI = new Version2Implementation();
 
-        //  Measure Original (V1) Performance
-        System.out.println("--- Starting Benchmark (V1 vs V2) ---");
+        System.out.println("--- Starting Benchmark (MultiThreaded V1 vs Version 2) ---");
+
+        // baseline
         long startTimeV1 = System.nanoTime();
-        
-        //  running the full pipeline
-        originalAPI.respond(INPUT_PATH, OUTPUT_PATH, DELIMITER);
-        
+        baselineAPI.respond(INPUT_PATH, OUTPUT_PATH, DELIMITER);
         long endTimeV1 = System.nanoTime();
-        double durationSecondsV1 = (endTimeV1 - startTimeV1) / 1_000_000_000.0; // since i'm using nanoseconds divide by 1 billion to get the time in seconds. 1 second == 1 billion nanoseconds
-        
-        //  Measure Faster (V2) Performance
+        double durationSecondsV1 = (endTimeV1 - startTimeV1) / 1_000_000_000.0;
+
+        //optimized
         long startTimeV2 = System.nanoTime();
-        // running the full pipeline (V2)
         fasterAPI.respond(INPUT_PATH, OUTPUT_PATH, DELIMITER);
-        
         long endTimeV2 = System.nanoTime();
         double durationSecondsV2 = (endTimeV2 - startTimeV2) / 1_000_000_000.0;
-        
-      
-        
-       
-        // Calculate percentage improvement: ((V1 Time - V2 Time) / V1 Time) * 100
+
+        // Shutdown Pools 
+        baselineAPI.shutdown();
+        fasterAPI.shutdown();
+
+        // Calculate Results 
         double improvementPercentage = ((durationSecondsV1 - durationSecondsV2) / durationSecondsV1) * 100.0;
-        
-        System.out.printf("Original (V1) Time: %.3f seconds%n", durationSecondsV1);
-        System.out.printf("Faster (V2) Time:   %.3f seconds%n", durationSecondsV2);
-        System.out.printf("Improvement:        %.2f%%%n", improvementPercentage);
-        
-        //In case new version is not an improvement report the failure
+
+        System.out.printf("Baseline (MultiThreaded) Time: %.4f seconds%n", durationSecondsV1);
+        System.out.printf("Optimized (Version 2) Time:    %.4f seconds%n", durationSecondsV2);
+        System.out.printf("Improvement:                   %.2f%%%n", improvementPercentage);
+
         String failureMessage = String.format(
             "Performance target not met. Required improvement: %.2f%%, Actual improvement: %.2f%%",
             MINIMUM_IMPROVEMENT_PERCENTAGE, improvementPercentage
         );
-        
+
         assertTrue(improvementPercentage >= MINIMUM_IMPROVEMENT_PERCENTAGE, failureMessage);
     }
 }
