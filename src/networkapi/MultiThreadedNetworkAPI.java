@@ -128,7 +128,9 @@ public class MultiThreadedNetworkAPI implements NetworkInterfaceAPI {
 
     // Helper for testing
     public List<String> processRequests(List<String> requests) {
-        if (requests == null) return Collections.emptyList();
+        if (requests == null) {
+        	return Collections.emptyList();
+        }
         List<String> results = new ArrayList<>();
         for (String req : requests) {
             results.add("0"); 
