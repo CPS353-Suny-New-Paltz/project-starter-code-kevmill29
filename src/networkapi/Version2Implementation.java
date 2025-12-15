@@ -95,15 +95,28 @@ implements NetworkInterfaceAPI {
     }
     
     @Override
-    public void shutdown() { pool.shutdown(); }
+    public void shutdown() {
+    	pool.shutdown(); 
+    	}
     @Override
-    public boolean initialize(UserRequest request) { return true; }
+    public boolean initialize(UserRequest request){
+    	return true; 
+    	}
     @Override
-    public List<String> readRequest(UserRequest request) { return null; }
+    public List<String> readRequest(UserRequest request){ 
+    	return null; 
+    	}
     @Override
-    public int respond(boolean isInit, int valueA, ComputeComponent concept) { return 0; }
+    
+    public int respond(boolean isInit, int valueA, ComputeComponent concept){
+    	return 0; 
+    	}
     @Override
-    public UserRequest buildRequest(String input, String output, char delimiter) { return null; }
+    public UserRequest buildRequest(String input, String output, char delimiter){ 
+    	return null; 
+    	}
     @Override
-    public void writeRequest(List<Integer> newData, UserRequest request) { }
+    public void writeRequest(List<Integer> newData, UserRequest request){ 
+    	
+    }
 }
