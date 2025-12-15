@@ -54,6 +54,8 @@ implements NetworkInterfaceAPI {
                 try {
                     return concept.computeValue(value);
                 } catch (Exception e) {
+                	System.err.println("Error:"+ e.getMessage());
+                	e.printStackTrace();
                     return 0;
                 }
             }));
@@ -64,6 +66,8 @@ implements NetworkInterfaceAPI {
             try {
                 results.add(f.get());
             } catch (Exception e) {
+            	System.err.println("Error:"+ e.getMessage());
+            	e.printStackTrace();
                 results.add(0);
             }
         }
