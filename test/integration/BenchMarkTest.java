@@ -32,7 +32,7 @@ public class BenchMarkTest {
         TestOnlyDataStore.cleanupFiles();
     }
 
-
+    @Test
     void fasterVersionMeetsMinimumPerformanceImprovement() {
     	//MultiThreadedNetworkAPI
         ImplementNetworkAPI delegator = new ImplementNetworkAPI();
