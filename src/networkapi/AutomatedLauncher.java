@@ -11,7 +11,11 @@ public class AutomatedLauncher {
 
         // 1. Start Storage Server
         Thread storageThread = new Thread(() -> {
-            try { ProcessAPIServer.main(args); } catch (Exception e) { e.printStackTrace(); }
+            try { 
+            	ProcessAPIServer.main(args); 
+            	}catch (Exception e){ 
+            		e.printStackTrace();
+            		}
         });
         storageThread.setDaemon(true); 
         storageThread.start();
@@ -19,7 +23,11 @@ public class AutomatedLauncher {
 
         // 2. Start Network Server
         Thread networkThread = new Thread(() -> {
-            try { NetworkServer.main(args); } catch (Exception e) { e.printStackTrace(); }
+            try { 
+            	NetworkServer.main(args); 
+            	} catch (Exception e) {
+            		e.printStackTrace(); 
+            }
         });
         networkThread.setDaemon(true);
         networkThread.start();
