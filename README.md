@@ -103,6 +103,22 @@ Open a terminal and navigate to the project folder.
  For Python 3
 python -m http.server 8000
 
+Your visualization is now live at: http://localhost:8000/viz_client.html
+
+Run the AutomatedLauncher class (as a Java Application).
+
+Follow the console prompts to enter your input file path (e.g., input.txt) and output location.
+
+The system will automatically detect the viz_client folder and update the graph data immediately after computation finishes.
+
+Refresh your browser at http://localhost:8000/viz_client.html.
+
+X-Axis: The Input Coefficients (a) from your file.
+
+Y-Axis: The calculated Maximum Consecutive Primes (n).
+
+Hover: detailed tooltips showing exact values.
+
  
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
 
