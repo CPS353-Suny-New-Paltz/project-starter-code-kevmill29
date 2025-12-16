@@ -57,12 +57,12 @@ The Coordination component or NetworkAPI is in charge of calling the ProcessorAP
 
 The project automatically generates protobuf and gRPC Java classes when you run:
 
-./gradlew build
+     ./gradlew build
 
 
 or manually:
 
-./gradlew generateProto
+     ./gradlew generateProto
 
 
 Generated files will appear in:
@@ -101,7 +101,7 @@ Make sure you have python installed on your PC. The setup either requires Live S
 Open a terminal and navigate to the project folder.
 
  For Python 3
-python -m http.server 8000
+      python -m http.server 8000
 
 Your visualization is now live at: http://localhost:8000/viz_client.html
 
