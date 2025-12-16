@@ -100,9 +100,9 @@ Make sure you have python installed on your PC. The setup either requires Live S
 
 Open a terminal and navigate to the project folder.
 
- For Python 3
+```For Python 3
            python -m http.server 8000
-
+```
 Your visualization is now live at: http://localhost:8000/viz_client.html
 
 Run the AutomatedLauncher class (as a Java Application).
