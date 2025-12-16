@@ -9,6 +9,7 @@
 -[Multithreaded Implementation](#multithreading)
 -[gRPC Setup](#grpc)
 -[BenchmarkTesting](#benchmarktesting)
+-[Visualization](#visualization)
 
 # Features
 - Read integers from (for now!)text, (coming soon)JSON, or CSV files
@@ -93,5 +94,15 @@ The Performance Improvement (V2): The core computation component was improved by
 The Optimization: Unlike the baseline which incurs overhead by parsing strings inside the pipeline, the V2 implementation processes Integer data directly and uses work-stealing algorithms to better balance tasks across CPU cores. This addresses the bottleneck found in the respond method, resulting in a minimum of 10% speedup for large datasets.
 
 Running the Integration Benchmark: The benchmark uses a large, synthetic dataset to measure the end-to-end time of the baseline multithreaded implementation (MultiThreadedNetworkAPI) versus the optimized implementation (Version2Implementation).
+
+# Visualization
+Make sure you have python installed on your PC. The setup either requires Live Server or Python to host the server. 
+
+Open a terminal and navigate to the project folder.
+
+ For Python 3
+python -m http.server 8000
+
+ 
 ![Diagram for APIs](https://github.com/CPS353-Suny-New-Paltz/project-starter-code-kevmill29/blob/feature/DesignDiagram.png?raw=true)
 
