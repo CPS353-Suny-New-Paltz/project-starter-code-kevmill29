@@ -57,7 +57,7 @@ The Coordination component or NetworkAPI is in charge of calling the ProcessorAP
 
 The project automatically generates protobuf and gRPC Java classes when you run:
 
-     ./gradlew build
+     ./gradlew clean build
 
 
 or manually:
