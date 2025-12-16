@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,14 +19,14 @@ public class VizDataPrep {
         try {
             // 1. Read Inputs
             List<String> inputs = Files.readAllLines(Paths.get(inputPath)).stream()
-                    .flatMap(line -> java.util.Arrays.stream(line.split(",")))
+                    .flatMap(line -> Arrays.stream(line.split(",")))
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
 
             // 2. Read Results
             List<String> results = Files.readAllLines(Paths.get(resultPath)).stream()
-                    .flatMap(line -> java.util.Arrays.stream(line.split(",")))
+                    .flatMap(line -> Arrays.stream(line.split(",")))
                     .map(String::trim)
                     .filter(s -> !s.isEmpty())
                     .collect(Collectors.toList());
